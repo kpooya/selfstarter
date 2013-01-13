@@ -10,17 +10,17 @@ project_goal: 100
 # If you want to edit the FAQ, head over to app/views/preorder/homepage/_faqs.html.erb
 
 # This'll be both the page title (<title></title>) and the name in the header
-product_name: "Selfstarter"
+product_name: "Linquet"
 
 # An image showcasing your product -- it'll show up when you pin your product
 # It should be in app/assets/images
 product_image_path: "my-product-image.png"
 
 # The message on the preorder page, Lockitron's 
-value_proposition: "Roll your own crowdfunding"
+value_proposition: "Never Lose Your Phone Or Valuables Again"
 
 # YouTube or Vimeo Video URL (The embed URL, without the query string options)
-video_embed_url: "https://www.youtube.com/v/D1L3o88GKew"
+video_embed_url: "https://www.youtube.com/v/tQJVxk7ggK0"
 
 # Amazon settings -- you'll need an Amazon Payments account, sign up here --> http://bit.ly/SGksTv
 
