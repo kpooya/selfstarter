@@ -7,6 +7,9 @@ class PreorderController < ApplicationController
   def checkout
   end
 
+  def select_perk
+  end
+
   def prefill
     @user  = User.find_or_create_by_email!(params[:email])
     @order = Order.prefill!(:name => Settings.product_name, :price => Settings.price, :user_id => @user.id)

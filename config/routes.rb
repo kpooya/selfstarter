@@ -1,7 +1,8 @@
 Selfstarter::Application.routes.draw do
   root :to => 'preorder#index'
   match '/preorder'               => 'preorder#index'
-  get 'preorder/checkout'
+  get 'preorder/select_perk'
+  match 'preorder/checkout'
   match '/preorder/share/:uuid'   => 'preorder#share', :via => :get
   match '/preorder/ipn'           => 'preorder#ipn', :via => :post
   match '/preorder/prefill'       => 'preorder#prefill'
