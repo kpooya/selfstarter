@@ -10,6 +10,53 @@ class PreorderController < ApplicationController
   def select_perk
   end
 
+  def shipping
+    session[:pledge] = params[:pledge]
+    logger.info(session[:pledge])
+  end
+
+ def stripe
+    session[:shipping] = params[:shipping]
+    logger.info(session.inspect)
+
+    @pledge = Pledge.new()
+  end
+
+ def pledged
+   logger.info("session: " + session.inspect)
+    user = User.new()
+    user.update_attributes(session[:pledge])
+    Stripe.api_key = STRIPE_API_KEY
+    token = params[:user_stripe_token]
+
+    customer = Stripe::Customer.create(
+        :card => token,
+        :description => user.email
+    )
+
+# charge the Customer instead of the card
+   Stripe::Charge.create(
+       :amount => 1000, # in cents
+       :currency => "usd",
+       :customer => customer.id
+   )
+
+# save the customer ID in your database so you can use it later
+   save_stripe_customer_id(user, customer.id)
+
+# later
+   customer_id = get_stripe_customer_id(user)
+
+   Stripe::Charge.create(
+       :amount => 1500, # $15.00 this time
+       :currency => "usd",
+       :customer => customer_id
+   )
+
+
+   session.clear
+ end
+
   def prefill
     @user  = User.find_or_create_by_email!(params[:email])
     @order = Order.prefill!(:name => Settings.product_name, :price => Settings.price, :user_id => @user.id)

@@ -1,0 +1,88 @@
+<style>
+  .alert-error {
+      color: red;
+  }
+</style>
+
+<div class="gray_background">
+  <div class="wrapper clearfix">
+    <div class="main_content">
+      <h3>Check out</h3>
+      <%= form_for @pledge, :url => "/preorder/pledged" do |f| %>
+          <% if @pledge.errors.any? %>
+              <div class="error_messages">
+                <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+                <ul>
+                  <% @pledge.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.text_field :email %>
+          </div>
+          <div class="field">
+            <%= label_tag :card_number, "Credit Card Number " %>
+            <%= text_field_tag :card_number, "4242424242424242", name: nil %>
+          </div>
+          <div class="field">
+            <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+            <%= text_field_tag :card_code, "123", name: nil %>
+          </div>
+          <div class="field">
+            <%= label_tag :card_month, "Card Expiration" %>
+            <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"} %>
+            <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+          </div>
+          <%= hidden_field_tag "user_stripe_token", "" %>
+          <div id="stripe_error" class="alert alert-error" style="display:none"> </div>
+          <div class="actions"><input id="pledge_submit" type="submit" value="Pledge"></div>
+      <% end %>
+      </div>
+</div>
+
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        Stripe.setPublishableKey("<%=STRIPE_PUBLIC_KEY %>");
+        var subscription = {
+            setupForm:function () {
+                $('#new_pledge').submit(function () {
+                    $('input[type=submit]').prop('disabled', true);
+                    if ($('#card_number').length) {
+                        subscription.processCard();
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+            },
+            processCard:function () {
+                var card;
+                card = {
+                    name:$('#user_name').val(),
+                    number:$('#card_number').val(),
+                    cvc:$('#card_code').val(),
+                    expMonth:$('#card_month').val(),
+                    expYear:$('#card_year').val()
+                };
+                return Stripe.createToken(card, subscription.handleStripeResponse);
+            },
+            handleStripeResponse:function (status, response) {
+                if (status === 200) {
+                    $('#user_stripe_token').val(response.id)
+                    alert(response.id)
+                    $('#new_pledge')[0].submit()
+                } else {
+                    $('#stripe_error').text(response.error.message).show();
+                    return $('input[type=submit]').prop('disabled', false);
+                }
+            }
+        };
+        subscription.setupForm();
+    });
+</script>

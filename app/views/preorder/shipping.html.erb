@@ -1,0 +1,53 @@
+<div class="gray_background">
+  <div class="wrapper clearfix">
+    <div class="main_content">
+      <h3>Check out</h3>
+      <%= form_tag "/preorder/stripe", :id => "checkout" do %>
+          <div id="_shipping" style="width: 100%;">
+            <span class="formLabel">Shipping Details</span>
+
+            <div class="gift_field">
+              <div class="field fill_parent">
+                <input id="ship_name" name="shipping[name]" size="40" value="Full Name" type="text" onfocus="analyticsFocus(this,'Full Name',false);" onblur="formElementBlur(this,'Full Name',false);" autocapitalize="on"/>
+              </div>
+
+              <div class="field fill_parent">
+                <input id="ship_email" name="shipping[email]" size="40" value="E-mail" type="text" onfocus="analyticsFocus(this,'E-mail',false);" onblur="formElementBlur(this,'E-mail',false);" autocapitalize="on"/>
+              </div>
+            </div>
+
+            <div class="field fill_parent">
+              <input id="ship_phone" name="shipping[phone]" size="40" value="Phone Number" type="text" onfocus="analyticsFocus(this,'Phone Number',false);" onblur="formElementBlur(this,'Phone Number',false);" autocapitalize="on"/>
+            </div>
+
+            <div class="field fill_parent">
+              <input id="ship_address" name="shipping[address]" size="40" value="Address" type="text" onfocus="analyticsFocus(this,'Address',false);" onblur="formElementBlur(this,'Address',false);" autocapitalize="on"/>
+            </div>
+
+            <div class="field fill_parent">
+              <input id="ship_city" name="shipping[city]" size="40" value="City" type="text" onfocus="analyticsFocus(this,'City',false);" onblur="formElementBlur(this,'City',false);" autocapitalize="on"/>
+            </div>
+
+            <div class="field fill_parent">
+              <input id="ship_state" name="shipping[state]" size="40" value="State / Province" type="text" onfocus="analyticsFocus(this,'State / Province',false);" onblur="formElementBlur(this,'State / Province',false);" autocapitalize="on"/>
+            </div>
+
+            <div class="field fill_parent">
+              <input id="ship_postal" name="shipping[zipcode]" size="40" value="Zip Code / Postal Code" type="text" onfocus="analyticsFocus(this,'Zip Code / Postal Code',false);" onblur="formElementBlur(this,'Zip Code / Postal Code',false);" autocapitalize="on"/>
+            </div>
+
+            <div class="field">
+              <select id="ship_country" name="shipping[country]">
+                <option>Country:</option>
+                <option>Canada</option>
+                <option>USA</option>
+              </select>
+            </div>
+            <%= hidden_field_tag "quantity", params[:quantity] %>
+            <%= submit_tag "Continue", :class => "blue_button", :id => "amazon_button" %>
+      <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
