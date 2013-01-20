@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @pledge.email %>
+</p>
+
+<p>
+  <b>Stripe customer token:</b>
+  <%= @pledge.stripe_customer_token %>
+</p>
+
+
+<%= link_to 'Edit', edit_pledge_path(@pledge) %> |
+<%= link_to 'Back', pledges_path %>
