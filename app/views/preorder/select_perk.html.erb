@@ -21,6 +21,13 @@
 
     .dynamic_bg {
         margin-bottom: 20px;
+        background: #d2d2d2;
+    }
+    .shadow {
+        box-shadow: 1px 1px 2px #888;
+    }
+    .rounded {
+        border-radius: 6px;
     }
 
 </style>
@@ -32,36 +39,36 @@
 
       <form action="/preorder/shipping" method="post">
       <div id="perk-menu" class="group perks-selection"><!--graybox -->
-        <div class='dynamic_bg' id='tier_0'>
-          <input checked="checked" class="fl select-no-perk" data-perk-title="No Perk" id="pledge_tier_0" name="pledge[plan]" type="radio" value="0"/>
+        <div class='dynamic_bg shadow rounded' id='tier_0'>
+          <input checked="checked" id="pledge_tier_0" name="pledge[plan]" type="radio" value="0"/>
           <label for="pledge_tier_0">
             <div class="">$19 + Registration & Shipping : One free linquet + One year service</div>
           </label>
         </div>
 
-        <div class='dynamic_bg' id='tier_1'>
-          <input checked="checked" class="fl select-no-perk" data-perk-title="No Perk" id="pledge_tier_1" name="pledge[plan]" type="radio" value="1"/>
+        <div class='dynamic_bg shadow rounded' id='tier_1'>
+          <input checked="checked" id="pledge_tier_1" name="pledge[plan]" type="radio" value="1"/>
           <label for="pledge_tier_1">
             <div class="">$25 + Registration & Shipping : Two free linquet + One year service</div>
           </label>
         </div>
 
-        <div class='dynamic_bg' id='tier_2'>
-          <input checked="checked" class="fl select-no-perk" data-perk-title="No Perk" id="pledge_tier_2" name="pledge[plan]" type="radio" value="2"/>
+        <div class='dynamic_bg shadow rounded' id='tier_2'>
+          <input checked="checked" id="pledge_tier_2" name="pledge[plan]" type="radio" value="2"/>
           <label for="pledge_tier_2">
             <div class="">$45 + Registration & Shipping : Two free linquet + One year service</div>
           </label>
         </div>
 
-        <div class='dynamic_bg' id='tier_4'>
-          <input checked="checked" class="fl select-no-perk" data-perk-title="No Perk" id="pledge_tier_4" name="pledge[plan]" type="radio" value="4"/>
+        <div class='dynamic_bg shadow rounded' id='tier_4'>
+          <input checked="checked" id="pledge_tier_4" name="pledge[plan]" type="radio" value="4"/>
           <label for="pledge_tier_4">
             <div class="">$85 + Registration & Shipping : Four free linquet + One year service</div>
           </label>
         </div>
 
-        <div class='dynamic_bg' id='tier_10'>
-          <input checked="checked" class="fl select-no-perk" data-perk-title="No Perk" id="pledge_tier_10" name="pledge[plan]" type="radio" value="10"/>
+        <div class='dynamic_bg shadow rounded' id='tier_10'>
+          <input checked="checked" id="pledge_tier_10" name="pledge[plan]" type="radio" value="10"/>
           <label for="pledge_tier_10">
             <div class="">$195 + Registration & Shipping : Ten free linquet + One year service</div>
           </label>
