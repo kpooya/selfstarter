@@ -2,7 +2,7 @@
   <div class="wrapper clearfix">
     <div class="main_content">
       <h3>Check out</h3>
-      <%= form_tag "/reward/prefill", :id => "checkout" do %>
+      <%= form_tag "/rewards/prefill", :id => "checkout" do %>
         <div id="_shipping" style="width: 100%;">
           <span class="formLabel">Shipping Details</span>
 
@@ -44,7 +44,7 @@
                 <option>USA</option>
               </select>
             </div>
-        <%= hidden_field_tag "reward", true %>
+        <%= hidden_field_tag "rewards", true %>
         <%= hidden_field_tag "quantity", params[:quantity] %>
         <%= submit_tag "Checkout", :class => "blue_button disabled", :id => "amazon_button" %>
       <% end %>
