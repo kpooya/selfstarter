@@ -48,7 +48,7 @@
 
 <script>
     $(document).ready(function () {
-        Stripe.setPublishableKey("<%=STRIPE_PUBLIC_KEY %>");
+        Stripe.setPublishableKey("<%=STRIPE_PUBLISHABLE_KEY %>");
         var subscription = {
             setupForm:function () {
                 $('#new_pledge').submit(function () {
