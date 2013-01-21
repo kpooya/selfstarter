@@ -29,12 +29,56 @@
     .rounded {
         border-radius: 6px;
     }
+    .perks-selection input {
+        margin-left: 60px;
+        margin-top: 15px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .perks-selection label {
+        display: inline-block;
+        width: auto;
+        line-height: normal;
+        margin: 0;
+    }
+    .perks-selection .perk {
+        width: 380px;
+        font-size: 20px;
+        margin-left: 170px;
+        padding-bottom: 20px;
+        margin-top: -20px;
+    }
+
+    .perks-selection .claimed {
+        font-size: 17px;
+    }
+    .perks-selection .money {
+        background: none;
+        color: #222;
+        font-family: SecondaSoft-Bold,Arial,sans-serif;
+        font-size: 22px;
+        line-height: 18px;
+        margin: 15px 10px 0px 9px;
+        padding: 0px;
+        display: inline-block;
+        word-wrap: break-word;
+    }
+    .dynamic_bg:hover {
+        background-color: #abd7db !important;
+        -webkit-transition: 500ms linear 0s;
+        -moz-transition: 500ms linear 0s;
+        -o-transition: 500ms linear 0s;
+        transition: 500ms linear 0s;
+        outline: 0 none;
+        transition: .5s;
+        cursor: pointer;
+    }
 
 </style>
 
 <div class="gray_background">
   <div class="wrapper clearfix">
-    <div class="main_content">
+    <div class="main_content" style="width:700px">
       <h3>Select your contribution</h3>
 
       <form action="/preorder/shipping" method="post">
@@ -42,41 +86,64 @@
         <div class='dynamic_bg shadow rounded' id='tier_0'>
           <input checked="checked" id="pledge_tier_0" name="pledge[plan]" type="radio" value="0"/>
           <label for="pledge_tier_0">
-            <div class="">$19 + Registration & Shipping : One free linquet + One year service</div>
+            <div class="money">$19+</div>
+              <div class="perk">
+                One free linquet + One year service
+                <div class="claimed"> 0 claimed</div>
+              </div>
           </label>
         </div>
 
         <div class='dynamic_bg shadow rounded' id='tier_1'>
-          <input checked="checked" id="pledge_tier_1" name="pledge[plan]" type="radio" value="1"/>
+          <input checked="checked" id="pledge_tier_1" name="pledge[plan]" type="radio" value="0"/>
           <label for="pledge_tier_1">
-            <div class="">$25 + Registration & Shipping : Two free linquet + One year service</div>
+            <div class="money">$25+</div>
+              <div class="perk">
+                One free linquet + One year service
+                <div class="claimed"> 0 claimed</div>
+              </div>
           </label>
         </div>
 
         <div class='dynamic_bg shadow rounded' id='tier_2'>
-          <input checked="checked" id="pledge_tier_2" name="pledge[plan]" type="radio" value="2"/>
+          <input checked="checked" id="pledge_tier_2" name="pledge[plan]" type="radio" value="0"/>
           <label for="pledge_tier_2">
-            <div class="">$45 + Registration & Shipping : Two free linquet + One year service</div>
+            <div class="money">$45+</div>
+              <div class="perk">
+                Two free linquets + One year service
+                <div class="claimed"> 0 claimed</div>
+              </div>
           </label>
         </div>
 
         <div class='dynamic_bg shadow rounded' id='tier_4'>
-          <input checked="checked" id="pledge_tier_4" name="pledge[plan]" type="radio" value="4"/>
+          <input checked="checked" id="pledge_tier_4" name="pledge[plan]" type="radio" value="0"/>
           <label for="pledge_tier_4">
-            <div class="">$85 + Registration & Shipping : Four free linquet + One year service</div>
+            <div class="money">$85+</div>
+              <div class="perk">
+                Four free linquets + One year service
+                <div class="claimed"> 0 claimed</div>
+              </div>
           </label>
         </div>
 
         <div class='dynamic_bg shadow rounded' id='tier_10'>
-          <input checked="checked" id="pledge_tier_10" name="pledge[plan]" type="radio" value="10"/>
+          <input checked="checked" id="pledge_tier_10" name="pledge[plan]" type="radio" value="0"/>
           <label for="pledge_tier_10">
-            <div class="">$195 + Registration & Shipping : Ten free linquet + One year service</div>
+            <div class="money">$195+</div>
+              <div class="perk">
+                Ten free linquets + One year service
+                <div class="claimed"> 0 claimed</div>
+              </div>
           </label>
         </div>
 
-        <INPUT TYPE="submit" VALUE="Continue" style="font-weight: bolder;">
+         <INPUT TYPE="submit" VALUE="Continue" style="font-weight: bolder;">
       </div>
       </form>
+
     </div>
+
   </div>
+
 </div>
