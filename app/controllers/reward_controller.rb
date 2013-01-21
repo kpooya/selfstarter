@@ -1,4 +1,4 @@
-class PreorderController < ApplicationController
+class RewardController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :ipn
 
   def index
@@ -7,7 +7,7 @@ class PreorderController < ApplicationController
   def checkout
   end
 
-  def select_perk
+  def select_reward
   end
 
   def shipping
@@ -66,7 +66,7 @@ class PreorderController < ApplicationController
     # Then, if they confirm the payment, Amazon POSTs us their shipping details and phone number
     # From there, we save it, and voila, we got ourselves a preorder!
     @pipeline = AmazonFlexPay.multi_use_pipeline(@order.uuid, :transaction_amount => Settings.price, :global_amount_limit => Settings.charge_limit, :collect_shipping_address => "True", :payment_reason => Settings.payment_description)
-    redirect_to @pipeline.url("#{request.scheme}://#{request.host}/preorder/postfill")
+    redirect_to @pipeline.url("#{request.scheme}://#{request.host}/reward/postfill")
   end
 
   def postfill

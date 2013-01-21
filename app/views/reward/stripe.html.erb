@@ -8,7 +8,7 @@
   <div class="wrapper clearfix">
     <div class="main_content">
       <h3>Check out</h3>
-      <%= form_for @pledge, :url => "/preorder/pledged" do |f| %>
+      <%= form_for @pledge, :url => "/reward/pledged" do |f| %>
           <% if @pledge.errors.any? %>
               <div class="error_messages">
                 <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this subscription from being saved:</h2>
