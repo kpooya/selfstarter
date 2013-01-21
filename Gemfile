@@ -30,7 +30,12 @@ end
 gem 'jquery-rails'
 
 # Kickstarter's awesome Amazon Flexible Payments gem
-gem 'amazon_flex_pay'
+# gem 'amazon_flex_pay'
 
 # Configuration File
 gem 'rails_config'
+
+gem "stripe", ">= 1.7.4"
+gem "stripe_event", ">= 0.4.0"
+
+

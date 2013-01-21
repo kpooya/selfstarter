@@ -26,10 +26,9 @@ class PreorderController < ApplicationController
    logger.info("session: " + session.inspect)
     user = User.new()
     user.update_attributes(session[:pledge])
-    Stripe.api_key = STRIPE_API_KEY
     token = params[:user_stripe_token]
 
-    customer = Stripe::Customer.create(
+    stripe_customer = Stripe::Customer.create(
         :card => token,
         :description => user.email
     )
@@ -38,19 +37,21 @@ class PreorderController < ApplicationController
    Stripe::Charge.create(
        :amount => 1000, # in cents
        :currency => "usd",
-       :customer => customer.id
+       :customer => stripe_customer.id
    )
 
+   logger.info("Stripe_customer_id: " + stripe_customer.id);
+
 # save the customer ID in your database so you can use it later
-   save_stripe_customer_id(user, customer.id)
+   user.update_attributes(:stripe_customer_id => stripe_customer.id)
 
 # later
-   customer_id = get_stripe_customer_id(user)
+   stripe_customer_id = user.stripe_customer_id
 
    Stripe::Charge.create(
        :amount => 1500, # $15.00 this time
        :currency => "usd",
-       :customer => customer_id
+       :customer => stripe_customer_id
    )
 
 
