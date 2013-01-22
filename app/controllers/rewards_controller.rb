@@ -11,8 +11,8 @@ class RewardsController < ApplicationController
   end
 
   def shipping
-    session[:pledge] = params[:pledge]
-    logger.info(session[:pledge])
+    session[:reward_tier] = params[:reward_tier]
+    logger.info(session[:reward_tier])
   end
 
  def stripe

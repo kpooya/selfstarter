@@ -1,25 +1,92 @@
-<div class="gray_background" id='share_container'>
-  <div class="wrapper center" id="congrats">
-    <h2>
-      Hooray! You've just reserved a <%= Settings.product_name %>!
-    </h2>
-    <p>Congratulations, you're <%= Settings.primary_stat_verb %> number <span id="backer_number"><%= number_with_delimiter @order.number, :delimiter => "," %></span>,  in supporting <%= Settings.product_name %>. Share the great news!</p>
-    <br />
-    <br />
-    <div id="share" class="clearfix">
-      <div id='pin_button_container'>
-        <%= pin_it_button %>
-      </div>
-      <div id='tweet_button_container'>
-        <%= tweet_button %>
-      </div>
-      <div id='facebook_button_container'>
-        <%= like_button(450, true) %>
-      </div>
-    </div>
-     <div id="order_id">Reservation ID: <%= @order.uuid %>. You can bookmark or print this page for your records.</div>
+<% content_for :page_css do %>
+<style>
+#social-icons td.facebook {
+width: 36px;
+height: 36px;
+background-image: url("/images/social-icons/facebook-on.png");
+    background-size: cover;
+float: left;
+display: inline;
+}
+#social-icons td.twitter {
+width: 36px;
+height: 36px;
+background-image: url("/images/social-icons/twitter-on.png");
+    background-size: cover;
+float: left;
+display: inline;
+}
+#social-icons td.google {
+width: 36px;
+height: 36px;
+background-image: url("/images/social-icons/google-on.png");
+    background-size: cover;
+float: left;
+display: inline;
+}
+.fl {
+float: left;
+}
+.fr {
+float: right;
+}
+#social-icons ul {
+list-style: none outside;
+}
+#share_page ol li {
+  list-style-type: decimal;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+#share_page {
+  background-color: white;
+}
+</style>
+<% end %>
+
+
+<div id="share_page">
+  <div style="margin:auto;width:600px;position:relative;top:38px;font-size: 14px;text-align: center;">
+    <p style="font-size:48px;font-weight: bold;">Thanks for your order!</p>
+  </div>
+
+  <div style="margin:auto;margin-bottom:80px;width:600px;position:relative;top:45px;font-size: 14px;text-align: center;">
+      <table id="social-icons" style="font-size:24px;margin:auto;">
+        <tr>
+          <td><span>Please spread the love&nbsp;&nbsp;&nbsp;</span></td>
+          <td class="facebook"><a target="_blank" href="http://www.facebook.com/Linquet" title="facebook">&nbsp;</a></td>
+          <td class="twitter"><a target="_blank" href="http://twitter.com/linquet" title="twitter">&nbsp;&nbsp;</a></td>
+          <td class="google"><a target="_blank" href="https://plus.google.com/113925221180296859058/" title="google plus">&nbsp;</a></td>
+        </tr>
+      </table>
+  </div>
+
+  <div style="margin:auto;width:600px;position:relative;top:45px;font-size: 22px;text-align: left;">
+
+    <h4 style="font-size:26px; font-weight: bolder;fl">Want FREE Linquets? Here’s how to get them: </h4>
+
+    <ol>
+      <li><span style="font-weight: bolder;"> Invite Your Friends</span><br>
+
+        Get 1 additional Linquet for every 3 friends who pre-order Linquet
+
+      <li><span style="font-weight: bolder;"> Share Linquet Mini With The Press </span><br>
+
+        Get press coverage for Linquet Mini on a popular news/tech blog or channel like:
+        NBC News, BBC, MSNBC, CNN, NYTimes and etc. Just <a href="mailto:mini@linquet.com?Subject=Press coverage for Linquet Mini">
+        email us at mini@linquet.com </a> your communication with the respected blog/channel along with the link to the article/video, and
+        we’ll confirm your FREE Linquet.
+    </ol>
+
+    <!-- TODO
+      <div id="order_id">Reservation ID: <%= "123321123321" %> <%# TODO, order uuid %>. You can bookmark or print this page for your records.</div>
+      -->
   </div>
 </div>
 
-<%= render 'rewards/share/twitter_js' %>
-<%= render 'rewards/share/facebook_js' %>
+
+
+
+
+
+
