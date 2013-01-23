@@ -19,7 +19,7 @@ class RewardsController < ApplicationController
     session[:shipping] = params[:shipping]
     logger.info(session.inspect)
 
-    @pledge = Pledge.new()
+    @order = Order.new()
   end
 
  def pledged
@@ -82,7 +82,41 @@ class RewardsController < ApplicationController
   end
 
   def share
-    @order = Order.find_by_uuid(params[:uuid])
+    #@order = Order.find_by_uuid(params[:uuid])
+    logger.info("session: " + session.inspect)
+    user = User.new()
+    user.update_attributes(session[:pledge])
+    token = params[:user_stripe_token]
+
+    stripe_customer = Stripe::Customer.create(
+        :card => token,
+        :description => user.email
+    )
+
+# charge the Customer instead of the card
+    Stripe::Charge.create(
+        :amount => 1000, # in cents
+        :currency => "usd",
+        :customer => stripe_customer.id
+    )
+
+    logger.info("Stripe_customer_id: " + stripe_customer.id);
+
+# save the customer ID in your database so you can use it later
+    order = Order.new
+    order.update_attributes(:stripe_customer_id => stripe_customer.id)
+
+# later
+    stripe_customer_id = order.stripe_customer_id
+
+    Stripe::Charge.create(
+        :amount => 1500, # $15.00 this time
+        :currency => "usd",
+        :customer => stripe_customer_id
+    )
+
+
+    session.clear
   end
 
   def ipn

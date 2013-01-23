@@ -37,6 +37,7 @@ class CreateTables < ActiveRecord::Migration
     end
 
     create_table :orders, :id => false do |t|
+      t.string  :uuid
       t.string  :stripe_customer_id
       t.string  :transaction_id
       t.integer :billing_address_id

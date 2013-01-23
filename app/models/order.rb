@@ -1,7 +1,8 @@
 class Order < ActiveRecord::Base
-  attr_accessible :address_one, :address_two, :city, :country, :number, :state, :status, :token, :transaction_id, :zip, :shipping, :tracking_number, :name, :price, :phone, :expiration
+  attr_accessible :stripe_customer_id, :address, :address_additional, :city, :country, :number, :state, :status, :token, :transaction_id, :zip, :shipping, :tracking_number, :price, :phone, :expiration
   attr_readonly :uuid
   before_validation :generate_uuid!, :on => :create
+  validates_presence_of :price, :user_id
   belongs_to :user
   self.primary_key = 'uuid'
 
@@ -69,5 +70,4 @@ class Order < ActiveRecord::Base
     Order.current.to_f * Settings.price
   end
 
-  validates_presence_of :name, :price, :user_id
 end
