@@ -1,28 +1,7 @@
 <% content_for :page_css do %>
 <style>
-#social-icons td.facebook {
-width: 36px;
-height: 36px;
-background-image: url("/images/social-icons/facebook-on.png");
-    background-size: cover;
-float: left;
-display: inline;
-}
-#social-icons td.twitter {
-width: 36px;
-height: 36px;
-background-image: url("/images/social-icons/twitter-on.png");
-    background-size: cover;
-float: left;
-display: inline;
-}
-#social-icons td.google {
-width: 36px;
-height: 36px;
-background-image: url("/images/social-icons/google-on.png");
-    background-size: cover;
-float: left;
-display: inline;
+#social-icons td a:hover {
+  text-decoration: none;
 }
 .fl {
 float: left;
@@ -45,7 +24,7 @@ list-style: none outside;
 <% end %>
 
 
-<div id="share_page">
+<div id="share_page" style="height:600px">
   <div style="margin:auto;width:600px;position:relative;top:38px;font-size: 14px;text-align: center;">
     <p style="font-size:48px;font-weight: bold;">Thanks for your order!</p>
   </div>
@@ -53,10 +32,10 @@ list-style: none outside;
   <div style="margin:auto;margin-bottom:80px;width:600px;position:relative;top:45px;font-size: 14px;text-align: center;">
       <table id="social-icons" style="font-size:24px;margin:auto;">
         <tr>
-          <td><span>Please spread the love&nbsp;&nbsp;&nbsp;</span></td>
-          <td class="facebook"><a target="_blank" href="http://www.facebook.com/Linquet" title="facebook">&nbsp;</a></td>
-          <td class="twitter"><a target="_blank" href="http://twitter.com/linquet" title="twitter">&nbsp;&nbsp;</a></td>
-          <td class="google"><a target="_blank" href="https://plus.google.com/113925221180296859058/" title="google plus">&nbsp;</a></td>
+          <td><span style="text-align:c;">Please spread the love&nbsp;&nbsp;</span></td>
+          <td class="facebook"><a target="_blank" href="http://www.facebook.com/Linquet" title="facebook"> <img src="/images/social-icons/facebook-on.png" style="width: 36px;height: 36px;"/></a></td>
+          <td class="twitter"><a target="_blank" href="http://twitter.com/linquet" title="twitter"><img src="/images/social-icons/twitter-on.png" style="width: 36px;height: 36px;"/></a>&nbsp;</td>
+          <td class="google"><a target="_blank" href="https://plus.google.com/113925221180296859058/" title="google plus"><img src="/images/social-icons/google-on.png" style="width: 36px;height: 36px;"/></a></td>
         </tr>
       </table>
   </div>

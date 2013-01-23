@@ -11,57 +11,59 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121064536) do
+ActiveRecord::Schema.define(:version => 20130124000000) do
 
-  create_table "orders", :id => false, :force => true do |t|
-    t.string   "token"
-    t.string   "transaction_id"
-    t.string   "address_one"
-    t.string   "address_two"
+  create_table "addresses", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "address"
+    t.string   "address_additional"
     t.string   "city"
     t.string   "state"
-    t.string   "zip"
     t.string   "country"
-    t.string   "status"
-    t.string   "number"
-    t.string   "uuid"
+    t.string   "zip"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "orders", :id => false, :force => true do |t|
+    t.string   "stripe_customer_id"
+    t.string   "transaction_id"
+    t.integer  "billing_address_id"
+    t.integer  "shipping_address_id"
     t.string   "user_id"
     t.decimal  "price"
+    t.integer  "plan_id"
     t.decimal  "shipping"
     t.string   "tracking_number"
     t.string   "phone"
-    t.string   "name"
     t.date     "expiration"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
-  create_table "pledges", :force => true do |t|
-    t.string   "email"
-    t.string   "stripe_customer_token"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+  create_table "plans", :force => true do |t|
+    t.string   "description"
+    t.integer  "price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  create_table "stripes", :force => true do |t|
-    t.string   "email"
-    t.string   "customer_token"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "referrals", :force => true do |t|
+    t.integer  "referrer_id"
+    t.integer  "referee_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
     t.string   "name"
-    t.string   "phone"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.string   "plan"
-    t.string   "stripe_customer_id"
+    t.integer  "shipping_address_id"
+    t.integer  "billing_address_id"
+    t.string   "inviting_code"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
 end
