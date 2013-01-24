@@ -19,7 +19,7 @@ class RewardsController < ApplicationController
     logger.info(session[:reward_tier])
   end
 
- def stripe
+  def stripe
     session[:shipping] = params[:shipping]
     logger.info(session.inspect)
 
@@ -27,7 +27,7 @@ class RewardsController < ApplicationController
   end
 
   def prefill
-    @user  = User.find_or_create_by_email!(params[:email])
+    @user = User.find_or_create_by_email!(params[:email])
     @order = Order.prefill!(:name => Settings.product_name, :price => Settings.price, :user_id => @user.id)
 
     # This is where all the magic happens. We create a multi-use token with Amazon, letting us charge the user's Amazon account
@@ -56,15 +56,8 @@ class RewardsController < ApplicationController
     user.update_attributes(params[:user])
     user.save!
 
-    if session[:referring_code]
-      referrer = User.find_by_referring_code(session[:referring_code])
-      if referrer
-        Referral.create(:referrer_id => referrer.id, :referee_id => user.id )
-      end
-    end
-
     shipping_address = Address.new(params[:shipping])
-    billing_address  = Address.new(params[:billing])
+    billing_address = Address.new(params[:billing])
 
     shipping_address.save!
     billing_address.save!
@@ -73,7 +66,9 @@ class RewardsController < ApplicationController
 
 
     plan_id = (session[:reward_tier] && session[:reward_tier].to_i) || 1;
-    order.update_attributes(:plan_id => plan_id, :price => Plan.find(plan_id).price, :user_id => user.id)
+
+    plan = Plan.find(plan_id)
+    order.update_attributes(:plan_id => plan_id, :price => plan.price, :user_id => user.id)
 
     token = params[:user_stripe_token]
     stripe_customer = Stripe::Customer.create(
@@ -83,15 +78,17 @@ class RewardsController < ApplicationController
 
     order.save!
 
+    if session[:referring_code]
+      referrer = User.find_by_referring_code(session[:referring_code])
+      if referrer
+        Referral.create(:referrer_id => referrer.id, :referee_id => user.id, :order_id => order.id)
+      end
+    end
+
     logger.info("Stripe_customer: " + stripe_customer.inspect);
+    logger.info("Order: " + order.inspect);
 
-# charge the Customer instead of the card
-    Stripe::Charge.create(
-        :amount => 1000, # in cents
-        :currency => "usd",
-        :customer => stripe_customer.id
-    )
-
+    amount_in_cents = (order.price * 100).to_i
 
 # save the customer ID in your database so you can use it later
     order.update_attributes(:stripe_customer_id => stripe_customer.id)
@@ -99,12 +96,14 @@ class RewardsController < ApplicationController
 # later
     stripe_customer_id = order.stripe_customer_id
 
-    Stripe::Charge.create(
-        :amount => 1500, # $15.00 this time
-        :currency => "usd",
-        :customer => stripe_customer_id
-    )
-
+    if Rails.env.development?
+# charge the Customer instead of the card
+      Stripe::Charge.create(
+          :amount => amount_in_cents, # $15.00 this time
+          :currency => "usd",
+          :customer => stripe_customer_id
+      )
+    end
 
     session.clear
     session[:user] = user.id

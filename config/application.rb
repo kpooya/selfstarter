@@ -35,7 +35,7 @@ class SetLinuqetUrl
       rails_server_name = "localhost"
       rails_server_port = "3000"
     else
-      raise "Server name is not set. Use rails_server= rails_server_protocol= rails_server_port="
+      raise "Server name is not set. Use export rails_server= ; export rails_server_protocol= ; export rails_server_port=;"
     end
   end
 

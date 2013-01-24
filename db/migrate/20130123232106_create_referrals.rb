@@ -3,6 +3,7 @@ class CreateReferrals < ActiveRecord::Migration
     create_table :referrals do |t|
       t.string :referrer_id
       t.string :referee_id
+      t.integer :order_id
 
       t.timestamps
     end

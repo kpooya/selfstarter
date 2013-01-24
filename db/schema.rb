@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20130124000042) do
   create_table "referrals", :force => true do |t|
     t.string   "referrer_id"
     t.string   "referee_id"
+    t.integer  "order_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
