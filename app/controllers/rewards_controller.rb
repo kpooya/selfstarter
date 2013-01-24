@@ -2,6 +2,10 @@ class RewardsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :ipn
 
   def index
+    referring_code = params[:r]
+    if referring_code
+      session[:referring_code] = referring_code
+    end
   end
 
   def checkout
@@ -21,42 +25,6 @@ class RewardsController < ApplicationController
 
     @order = Order.new()
   end
-
- def pledged
-   logger.info("session: " + session.inspect)
-    user = User.new()
-    user.update_attributes(session[:pledge])
-    token = params[:user_stripe_token]
-
-    stripe_customer = Stripe::Customer.create(
-        :card => token,
-        :description => user.email
-    )
-
-# charge the Customer instead of the card
-   Stripe::Charge.create(
-       :amount => 1000, # in cents
-       :currency => "usd",
-       :customer => stripe_customer.id
-   )
-
-   logger.info("Stripe_customer_id: " + stripe_customer.id);
-
-# save the customer ID in your database so you can use it later
-   user.update_attributes(:stripe_customer_id => stripe_customer.id)
-
-# later
-   stripe_customer_id = user.stripe_customer_id
-
-   Stripe::Charge.create(
-       :amount => 1500, # $15.00 this time
-       :currency => "usd",
-       :customer => stripe_customer_id
-   )
-
-
-   session.clear
- end
 
   def prefill
     @user  = User.find_or_create_by_email!(params[:email])
@@ -81,17 +49,41 @@ class RewardsController < ApplicationController
     end
   end
 
-  def share
+  def pledge
     #@order = Order.find_by_uuid(params[:uuid])
     logger.info("session: " + session.inspect)
     user = User.new()
-    user.update_attributes(session[:pledge])
-    token = params[:user_stripe_token]
+    user.update_attributes(params[:user])
+    user.save!
 
+    if session[:referring_code]
+      referrer = User.find_by_referring_code(session[:referring_code])
+      if referrer
+        Referral.create(:referrer_id => referrer.id, :referee_id => user.id )
+      end
+    end
+
+    shipping_address = Address.new(params[:shipping])
+    billing_address  = Address.new(params[:billing])
+
+    shipping_address.save!
+    billing_address.save!
+
+    order = Order.new(params[:order])
+
+
+    plan_id = (session[:reward_tier] && session[:reward_tier].to_i) || 1;
+    order.update_attributes(:plan_id => plan_id, :price => Plan.find(plan_id).price, :user_id => user.id)
+
+    token = params[:user_stripe_token]
     stripe_customer = Stripe::Customer.create(
         :card => token,
         :description => user.email
     )
+
+    order.save!
+
+    logger.info("Stripe_customer: " + stripe_customer.inspect);
 
 # charge the Customer instead of the card
     Stripe::Charge.create(
@@ -100,10 +92,8 @@ class RewardsController < ApplicationController
         :customer => stripe_customer.id
     )
 
-    logger.info("Stripe_customer_id: " + stripe_customer.id);
 
 # save the customer ID in your database so you can use it later
-    order = Order.new
     order.update_attributes(:stripe_customer_id => stripe_customer.id)
 
 # later
@@ -117,6 +107,16 @@ class RewardsController < ApplicationController
 
 
     session.clear
+    session[:user] = user.id
+    redirect_to :action => "share"
+  end
+
+  def share
+    logger.info("session: " + session.inspect)
+    user = User.find_by_id(session[:user])
+    if user
+      @referring_url = user.get_referring_url
+    end
   end
 
   def ipn

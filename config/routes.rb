@@ -1,4 +1,14 @@
 Selfstarter::Application.routes.draw do
+  resources :users
+
+  resources :orders
+
+  resources :referrals
+
+  resources :plans
+
+  resources :addresses
+
   resources :pledges
 
   resources :stripes
@@ -9,7 +19,7 @@ Selfstarter::Application.routes.draw do
   match 'rewards/checkout'
   match 'rewards/shipping'
   match 'rewards/stripe'
-  match 'rewards/pledged'
+  match 'rewards/pledge'
   match 'rewards/share'
   match '/rewards/share/:uuid'   => 'rewards#share', :via => :get
   match '/rewards/ipn'           => 'rewards#ipn', :via => :post

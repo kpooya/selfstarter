@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Uuid:</b>
+  <%= @order.uuid %>
+</p>
+
+<p>
+  <b>Stripe customer:</b>
+  <%= @order.stripe_customer_id %>
+</p>
+
+<p>
+  <b>Transaction:</b>
+  <%= @order.transaction_id %>
+</p>
+
+<p>
+  <b>Billing address:</b>
+  <%= @order.billing_address_id %>
+</p>
+
+<p>
+  <b>Shipping address:</b>
+  <%= @order.shipping_address_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @order.user_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @order.price %>
+</p>
+
+<p>
+  <b>Plan:</b>
+  <%= @order.plan_id %>
+</p>
+
+<p>
+  <b>Tracking number:</b>
+  <%= @order.tracking_number %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @order.phone %>
+</p>
+
+<p>
+  <b>Expiration:</b>
+  <%= @order.expiration %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

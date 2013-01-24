@@ -1,50 +1,10 @@
 class Order < ActiveRecord::Base
-  attr_accessible :stripe_customer_id, :address, :address_additional, :city, :country, :number, :state, :status, :token, :transaction_id, :zip, :shipping, :tracking_number, :price, :phone, :expiration
-  attr_readonly :uuid
+  belongs_to :plan
+  belongs_to :user
+  attr_accessible :billing_address_id, :expiration, :phone, :plan_id, :price, :shipping_address_id, :stripe_customer_id, :tracking_number, :transaction_id, :user_id
+
   before_validation :generate_uuid!, :on => :create
   validates_presence_of :price, :user_id
-  belongs_to :user
-  self.primary_key = 'uuid'
-
-  # This is where we create our Caller Reference for Amazon Payments, and prefill some other information.
-  def self.prefill!(options = {})
-    @order          = Order.new
-    @order.name     = options[:name]
-    @order.user_id  = options[:user_id]
-    @order.price    = options[:price]
-    @order.number   = Order.next_order_number
-    @order.save!
-
-    @order
-  end
-
-  # After authenticating with Amazon, we get the rest of the details
-  def self.postfill!(options = {})
-    @order = Order.find_by_uuid!(options[:callerReference])
-    @order.token             = options[:tokenID]
-    if @order.token.present?
-      @order.address_one     = options[:addressLine1]
-      @order.address_two     = options[:addressLine2]
-      @order.city            = options[:city]
-      @order.state           = options[:state]
-      @order.status          = options[:status]
-      @order.zip             = options[:zip]
-      @order.phone           = options[:phoneNumber]
-      @order.country         = options[:country]
-      @order.expiration      = Date.parse(options[:expiry])
-      @order.save!
-
-      @order
-    end
-  end
-
-  def self.next_order_number
-    if Order.count > 0
-      Order.order("number DESC").limit(1).first.number.to_i + 1
-    else
-      1
-    end
-  end
 
   def generate_uuid!
     begin
@@ -52,7 +12,14 @@ class Order < ActiveRecord::Base
     end while Order.find_by_uuid(self.uuid).present?
   end
 
-  # Implement these three methods to
+  def self.current
+    Order.where("stripe_customer_id != ? OR stripe_customer_id != ?", "", nil).count
+  end
+
+  def self.revenue
+    Order.all.inject(0) { |amount, order| amount + order.plan.price}
+  end
+
   def self.goal
     Settings.project_goal
   end
@@ -60,14 +27,4 @@ class Order < ActiveRecord::Base
   def self.percent
     (Order.current.to_f / Order.goal.to_f) * 100.to_f
   end
-
-  # See what it looks like when you have some backers! Drop in a number instead of Order.count
-  def self.current
-    Order.where("stripe_customer_id != ? OR stripe_customer_id != ?", "", nil).count
-  end
-
-  def self.revenue
-    Order.current.to_f * Settings.price
-  end
-
 end

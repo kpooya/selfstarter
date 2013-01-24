@@ -75,7 +75,11 @@
   <div class="wrapper clearfix">
     <div class="main_content">
       <h3>Check out</h3>
-    <form accept-charset="UTF-8" action="/rewards/share" class="edit_pledge" id="new_pledge" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="5RDNw2QpmxQKBYsiAK1Cvy3rngpAxHtfTxYXjdjs+Cw="></div>
+    <form accept-charset="UTF-8" action="/rewards/pledge" class="edit_pledge" id="new_pledge" method="post">
+      <div style="margin:0;padding:0;display:inline">
+        <input name="utf8" type="hidden" value="✓">
+        <input name="_method" type="hidden" value="put">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"></div>
       <input id="current_page" name="current_page" type="hidden" value="pay">
       <input id="next_path" name="next_path" type="hidden" value="/projects/303586/contributions/1812107/thank_you">
       <input id="pledge_process" name="pledge[process]" type="hidden" value="true">
@@ -88,11 +92,17 @@
         <fieldset class="group ajax">
           <div class="input-item-text">
             <label for="pledge_email">Email</label>
-            <input class="very-long rounded no-ajax" id="pledge_email" name="pledge[email]" size="30" type="text">
+            <% if Rails.env.development? ; user_email = 'qiang8701+' + Random.new.rand(10000).to_s + '@gmail.com' ; end %>
+
+            <input class="very-long rounded no-ajax" id="pledge_email" name="user[email]" size="30" type="text"
+                   value="<%= if Rails.env.development? ; user_email ; end %>"
+            >
           </div>
           <div class="input-item-text">
             <label for="pledge_email_again">Email Again</label>
-            <input class="very-long rounded no-ajax" id="pledge_email_again" name="pledge[email_again]" size="30" type="text">
+            <input class="very-long rounded no-ajax" id="pledge_email_again" name="again[email]" size="30" type="text"
+                   value="<%= if Rails.env.development? ; user_email ; end %>"
+            >
           </div>
         </fieldset>
       </section>
@@ -106,12 +116,15 @@
 
       <div class="input-item-text">
         <label for="pledge_shipping_name">Name</label>
-        <input class="shorter-than-long rounded" id="pledge_shipping_name" name="pledge[shipping_name]" size="30" type="text">
+        <input class="shorter-than-long rounded" id="pledge_shipping_name" name="shipping[name]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "john dev" ; end %>"
+        >
       </div>
 
       <div class="input-item-select">
       <label for="pledge_shipping_country">Country</label>
-      <select id="pledge_shipping_country" name="pledge[shipping_country]"><option value=""></option>
+      <select id="pledge_shipping_country" name="shipping[country]">
+      <option value=""></option>
       <option value="CTRY_AF" data-alternative-spellings="AF" data-relevancy-booster="">Afghanistan</option>
       <option value="CTRY_AX" data-alternative-spellings="AX Aaland Aland" data-relevancy-booster="0.5">Aland Islands</option>
       <option value="CTRY_AL" data-alternative-spellings="AL" data-relevancy-booster="">Albania</option>
@@ -334,7 +347,9 @@
       <option value="CTRY_UA" data-alternative-spellings="UA Ukrayina" data-relevancy-booster="">Ukraine</option>
       <option value="CTRY_AE" data-alternative-spellings="AE UAE Emirates" data-relevancy-booster="">United Arab Emirates</option>
       <option value="CTRY_GB" data-alternative-spellings="GB Great Britain England UK Wales Scotland Northern Ireland" data-relevancy-booster="2.5">United Kingdom</option>
-      <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0">United States</option>
+      <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
+	    <%= if Rails.env.development? ; 'selected' ; end %>
+      >United States</option>
       <option value="CTRY_UM" data-alternative-spellings="UM" data-relevancy-booster="">United States Minor Outlying Islands</option>
       <option value="CTRY_UY" data-alternative-spellings="UY" data-relevancy-booster="">Uruguay</option>
       <option value="CTRY_UZ" data-alternative-spellings="UZ" data-relevancy-booster="">Uzbekistan</option>
@@ -352,23 +367,31 @@
 
       <div class="input-item-text">
         <label for="pledge_shipping_address">Street Address</label>
-        <input class="rounded shorter-than-long" id="pledge_shipping_address" name="pledge[shipping_address]" size="30" type="text">
+        <input class="rounded shorter-than-long" id="pledge_shipping_address" name="shipping[address]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "1 Infinite Loop" ; end %>"
+        >
       </div>
 
       <div class="clearfix">
         <div class="fl input-item-text">
           <label for="pledge_shipping_city">City</label>
-          <input class="longer-than-short rounded" id="pledge_shipping_city" name="pledge[shipping_city]" size="30" type="text">
+          <input class="longer-than-short rounded" id="pledge_shipping_city" name="shipping[city]" size="30" type="text"
+                 value="<%= if Rails.env.development? ; "Cupertino" ; end %>"
+          >
         </div>
 
-        <div class="fl input-item-select" id="shipping_state_div" style="display: none;">
-          <label for="pledge_shipping_state" id="label_shipping_state">State</label>
-          <select class="translate" id="pledge_shipping_state" name="pledge[shipping_state]"></select>
+        <div class="fl input-item-select" id="shipping_state_div">
+          <label for="pledge_shipping_state" id="label_shipping_state">State/Province</label>
+          <input class="longer-than-short rounded" id="pledge_shipping_state" name="shipping[state]" size="30" type="text"
+                 value="<%= if Rails.env.development? ; "CA" ; end %>"
+          >
         </div>
 
         <div class="fl input-item-text">
           <label for="pledge_shipping_zipcode" id="label_shipping_zipcode">Postal Code</label>
-          <input class="longer-than-short rounded zipcode-field" id="pledge_shipping_zipcode" name="pledge[shipping_zipcode]" size="30" type="text">
+          <input class="longer-than-short rounded zipcode-field" id="pledge_shipping_zipcode" name="shipping[zip]" size="30" type="text"
+                 value="<%= if Rails.env.development? ; "95014" ; end %>"
+          >
         </div>
       </div>
 
@@ -387,7 +410,9 @@
     <div class="clearfix">
       <div class="fl input-item-text">
         <label for="pledge_firstname">Name</label>
-        <input class="rounded ajax" id="order_user_name" name="order[name]" size="30" type="text">
+        <input class="rounded ajax" id="order_user_name" name="billing[name]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "John card" ; end %>"
+        >
       </div>
     </div>
 
@@ -465,14 +490,14 @@
     </div>
 
     <div class="input-item-checkbox clearfix">
-      <input checked="checked" class="fl no-ajax" id="same_as_my_shipping_address" name="same_as_my_shipping_address" type="checkbox" value="1">
+      <input class="fl no-ajax" id="same_as_my_shipping_address" name="same_as_my_shipping_address" type="checkbox" value="1">
       <label class="fl" for="same_as_my_shipping_address">Same as my shipping address</label>
     </div>
 
-    <div class="ajax" id="billing_address" style="'display:none;'">
+    <div class="ajax" id="billing_address">
     <div class="input-item-select">
     <label for="pledge_country">Country</label>
-    <select class="country-selector" id="pledge_country" name="pledge[country]"><option value=""></option>
+    <select class="country-selector" id="pledge_country" name="billing[country]"><option value=""></option>
     <option value="CTRY_AF" data-alternative-spellings="AF" data-relevancy-booster="">Afghanistan</option>
     <option value="CTRY_AX" data-alternative-spellings="AX Aaland Aland" data-relevancy-booster="0.5">Aland Islands</option>
     <option value="CTRY_AL" data-alternative-spellings="AL" data-relevancy-booster="">Albania</option>
@@ -695,7 +720,9 @@
     <option value="CTRY_UA" data-alternative-spellings="UA Ukrayina" data-relevancy-booster="">Ukraine</option>
     <option value="CTRY_AE" data-alternative-spellings="AE UAE Emirates" data-relevancy-booster="">United Arab Emirates</option>
     <option value="CTRY_GB" data-alternative-spellings="GB Great Britain England UK Wales Scotland Northern Ireland" data-relevancy-booster="2.5">United Kingdom</option>
-    <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0">United States</option>
+    <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
+            <%= if Rails.env.development? ; 'selected' ; end %>
+    >United States</option>
     <option value="CTRY_UM" data-alternative-spellings="UM" data-relevancy-booster="">United States Minor Outlying Islands</option>
     <option value="CTRY_UY" data-alternative-spellings="UY" data-relevancy-booster="">Uruguay</option>
     <option value="CTRY_UZ" data-alternative-spellings="UZ" data-relevancy-booster="">Uzbekistan</option>
@@ -713,23 +740,31 @@
 
     <div class="input-item-text">
       <label for="pledge_address">Street Address</label>
-      <input class="very-long rounded" id="pledge_address" name="pledge[address]" size="30" type="text">
+      <input class="very-long rounded" id="pledge_address" name="billing[address]" size="30" type="text"
+             value="<%= if Rails.env.development? ; '1600 Amphitheatre Pkwy' ; end %>"
+      >
     </div>
 
     <div class="clearfix">
       <div class="fl input-item-text">
         <label for="pledge_city">City</label>
-        <input class="longer-than-short rounded" id="pledge_city" name="pledge[city]" size="30" type="text">
+        <input class="longer-than-short rounded" id="pledge_city" name="billing[city]" size="30" type="text"
+               value="<%= if Rails.env.development? ; 'Mountain View' ; end %>"
+        >
       </div>
 
-      <div class="fl input-item-select" id="state_div" style="display: none;">
-        <label for="pledge_state" id="label_state" style="display: none;">State</label>
-        <select class="translate" id="pledge_state" name="pledge[state]" style="display: none;"></select>
+      <div class="fl input-item-select" id="state_div">
+        <label for="pledge_state" id="label_state">State/Province</label>
+        <input class="longer-than-short rounded" id="pledge_state" name="billing[state]" size="30" type="text"
+               value="<%= if Rails.env.development? ; 'CA' ; end %>"
+        >
       </div>
 
       <div class="fl input-item-text">
         <label for="pledge_zipcode" id="label_zipcode">Postal Code</label>
-        <input class="longer-than-short rounded zipcode-field" id="pledge_zipcode" name="pledge[zipcode]" size="30" type="text">
+        <input class="longer-than-short rounded zipcode-field" id="pledge_zipcode" name="billing[zip]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "94043" ; end %>"
+        >
       </div>
     </div>
     </div>
@@ -746,6 +781,8 @@
 
   </div>
 </div>
+
+<%= if Rails.env.development? ; "(dev_mode) current time: " + Time.now.to_s ; end %>
 
 <script>
     $(document).ready(function () {
@@ -771,7 +808,7 @@
                     expMonth:$('#card_month').val(),
                     expYear:$('#card_year').val()
                 };
-                return Stripe.createToken(card, subscription.handleStripeResponse);
+                Stripe.createToken(card, subscription.handleStripeResponse);
             },
             handleStripeResponse:function (status, response) {
                 if (status === 200) {
