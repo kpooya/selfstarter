@@ -25,27 +25,27 @@ end
 
 
 class SetLinuqetUrl
-  linquet_server_name = ENV['linquet_server']
-  linquet_server_protocol = (ENV['linquet_server_protocol'] && ENV['linquet_server_protocol'].downcase) || "http"
-  linquet_server_port = ENV['linquet_server_port'] || "80"
+  rails_server_name = ENV['rails_server']
+  rails_server_protocol = (ENV['rails_server_protocol'] && ENV['rails_server_protocol'].downcase) || "http"
+  rails_server_port = ENV['rails_server_port'] || "80"
 
-  if linquet_server_name.nil?
+  if rails_server_name.nil?
     require 'socket'
     if Socket.gethostname.downcase == "qiang-lin-mac.local"
-      linquet_server_name = "localhost"
-      linquet_server_port = "3000"
+      rails_server_name = "localhost"
+      rails_server_port = "3000"
     else
-      raise "Server name is not set. Use linquet_server= linquet_server_protocol= linquet_server_port="
+      raise "Server name is not set. Use rails_server= rails_server_protocol= rails_server_port="
     end
   end
 
-  LINQUET_SERVER_URL = linquet_server_protocol + "://" +
-      linquet_server_name +
-      if (linquet_server_port && !(linquet_server_protocol == "https" && linquet_server_port == "443") && !(linquet_server_protocol == "http" && linquet_server_port == "80"))
-        ":" + linquet_server_port
+  RAILS_SERVER_URL = rails_server_protocol + "://" +
+      rails_server_name +
+      if (rails_server_port && !(rails_server_protocol == "https" && rails_server_port == "443") && !(rails_server_protocol == "http" && rails_server_port == "80"))
+        ":" + rails_server_port
       else
         ""
       end
 end
 
-LINQUET_SERVER_URL = SetLinuqetUrl::LINQUET_SERVER_URL
+LINQUET_SERVER_URL = SetLinuqetUrl::RAILS_SERVER_URL
