@@ -786,6 +786,14 @@
 
 <script>
     $(document).ready(function () {
+	    $("#same_as_my_shipping_address").change(function(){
+		    if ($('#same_as_my_shipping_address').is(':checked')) {
+			    $("#billing_address").hide();
+		    } else {
+			    $("#billing_address").show();
+		    }
+	    })
+
         Stripe.setPublishableKey("<%=STRIPE_PUBLISHABLE_KEY %>");
         var subscription = {
             setupForm:function () {

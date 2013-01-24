@@ -57,10 +57,13 @@ class RewardsController < ApplicationController
     user.save!
 
     shipping_address = Address.new(params[:shipping])
-    billing_address = Address.new(params[:billing])
-
     shipping_address.save!
-    billing_address.save!
+    if (params[:same_as_my_shipping_address]=="1")
+      billing_address = Address.new(params[:billing])
+      billing_address.save!
+    else
+      billing_address = shipping_address
+    end
 
     order = Order.new(params[:order])
 
@@ -68,7 +71,11 @@ class RewardsController < ApplicationController
     plan_id = (session[:reward_tier] && session[:reward_tier].to_i) || 1;
 
     plan = Plan.find(plan_id)
-    order.update_attributes(:plan_id => plan_id, :price => plan.price, :user_id => user.id)
+    order.update_attributes(:plan_id => plan_id,
+                            :price => plan.price,
+                            :shipping_address_id => shipping_address.id,
+                            :billing_address_id => billing_address.id,
+                            :user_id => user.id)
 
     token = params[:user_stripe_token]
     stripe_customer = Stripe::Customer.create(
