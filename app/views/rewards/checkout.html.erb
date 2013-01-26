@@ -1,56 +1,846 @@
+<style>
+    .heading .title {
+        font-size: 24px;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+    form .group {
+        background: #e8e8e8;
+        border: 1px solid #d5d6d5;
+        width: 640px;
+        padding-top: 20px;
+        padding-left: 0;
+        padding-right: 20px;
+        margin-bottom: 20px;
+    }
+    input.shorter-than-long {
+        width: 370px!important;
+    }
+    .shipping-address .input-item-text input, .input-item-select select {
+        margin-bottom: 10px;
+    }
+    section .input-item-select, section .input-item-text, section .input-item-checkbox {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .shipping-address .group {
+        padding-bottom: 15px;
+    }
+    .heading h2 {
+        font-family:Arial,sans-serif;
+        font-weight: bold;
+    }
+    .fl {
+        float: left;
+    }
+    .fr {
+        float: right;
+    }
+    .box {
+        width: 680px;
+        padding: 20px;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+    .rounded {
+        border-radius: 6px;
+    }
+    .input-item-text input {
+        width: 276px;
+        max-width: 400px;
+        padding: 5px;
+        border: 1px solid #aeaeae;
+        font-size: 18px;
+    }
+    .input-item-checkbox{
+	    font-size: 18px;
+    }
+    .input-item-select option{
+	    font-size: 18px;
+    }
+    input.very-long {
+        width: 584px !important;
+    }
+    label {
+        cursor: pointer;
+        display: block;
+    }
+    fieldset {
+        display: block;
+    }
+    .main_content {
+        width: 680px;
+        float: left;
+    }
+  .alert-error {
+      color: red;
+  }
+  label {
+	margin-bottom: 5px;
+  }
+</style>
+
 <div class="gray_background">
   <div class="wrapper clearfix">
     <div class="main_content">
-      <h3>Check out</h3>
-      <%= form_tag "/rewards/prefill", :id => "checkout" do %>
-        <div id="_shipping" style="width: 100%;">
-          <span class="formLabel">Shipping Details</span>
+      <h3>Secure Checkout</h3>
+    <form accept-charset="UTF-8" action="pledge" class="edit_pledge" id="new_pledge" method="post">
+      <div style="margin:0;padding:0;display:inline">
+        <input name="utf8" type="hidden" value="✓">
+        <input name="_method" type="hidden" value="put">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"></div>
+      <input id="current_page" name="current_page" type="hidden" value="pay">
+      <input id="next_path" name="next_path" type="hidden" value="/projects/303586/contributions/1812107/thank_you">
+      <input id="pledge_process" name="pledge[process]" type="hidden" value="true">
+      <input id="pledge_pledge_type" name="pledge[pledge_type]" type="hidden" value="">
 
-          <div class="gift_field">
-            <div class="field fill_parent">
-              <input id="ship_name" name="name" size="40" value="Full Name" type="text" onfocus="analyticsFocus(this,'Full Name',false);"  onblur="formElementBlur(this,'Full Name',false);" autocapitalize="on"/>
-            </div>
+      <section class="shipping-address box rounded shadow">
+        <div class="heading clearfix">
+          <h2 class="fl title bold">Contact Information</h2><span class="fl instruction">(This is how we will communicate with you and it will be your user name as well.)</span>
+        </div>
+        <fieldset class="group ajax">
+          <div class="input-item-text">
+            <label for="pledge_email">Email</label>
+            <% if Rails.env.development? ; user_email = 'qiang8701+' + Random.new.rand(10000).to_s + '@gmail.com' ; end %>
 
-            <div class="field fill_parent">
-              <input id="ship_email" name="email" size="40" value="E-mail" type="text" onfocus="analyticsFocus(this,'E-mail',false);"  onblur="formElementBlur(this,'E-mail',false);" autocapitalize="on"/>
-            </div>
+            <input class="very-long rounded no-ajax" id="pledge_email" name="user[email]" size="30" type="text"
+                   value="<%= if Rails.env.development? ; user_email ; end %>"
+            >
           </div>
-
-          <div class="field fill_parent">
-            <input id="ship_phone" name="phone" size="40" value="Phone Number" type="text" onfocus="analyticsFocus(this,'Phone Number',false);"  onblur="formElementBlur(this,'Phone Number',false);" autocapitalize="on"/>
+          <div class="input-item-text">
+            <label for="pledge_email_again">Email Again</label>
+            <input class="very-long rounded no-ajax" id="pledge_email_again" name="again[email]" size="30" type="text"
+                   value="<%= if Rails.env.development? ; user_email ; end %>"
+            >
           </div>
+        </fieldset>
+      </section>
 
-          <div class="field fill_parent">
-            <input id="ship_address" name="address" size="40" value="Address" type="text" onfocus="analyticsFocus(this,'Address',false);"  onblur="formElementBlur(this,'Address',false);" autocapitalize="on"/>
-          </div>
+      <section class="shipping-address box rounded shadow">
+      <div class="heading clearfix">
+        <h2 class="fl title bold">Shipping Information</h2><span class="fl instruction">&nbsp;&nbsp;(This is where we will ship your linquets.)</span>
+      </div>
 
-          <div class="field fill_parent">
-            <input id="ship_city" name="city" size="40" value="City" type="text" onfocus="analyticsFocus(this,'City',false);"  onblur="formElementBlur(this,'City',false);" autocapitalize="on"/>
-          </div>
+      <fieldset class="group ajax">
 
-          <div class="field fill_parent">
-            <input id="ship_state" name="state" size="40" value="State / Province" type="text" onfocus="analyticsFocus(this,'State / Province',false);"  onblur="formElementBlur(this,'State / Province',false);" autocapitalize="on"/>
-          </div>
+      <div class="input-item-text">
+        <label for="pledge_shipping_name">Name</label>
+        <input class="shorter-than-long rounded" id="pledge_shipping_name" name="shipping[name]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "john dev" ; end %>"
+        >
+      </div>
 
-          <div class="field fill_parent">
-            <input id="ship_postal" name="postal" size="40" value="Zip Code / Postal Code" type="text" onfocus="analyticsFocus(this,'Zip Code / Postal Code',false);"  onblur="formElementBlur(this,'Zip Code / Postal Code',false);" autocapitalize="on"/>
-          </div>
+      <div class="input-item-select">
+      <label for="pledge_shipping_country">Country</label>
+      <select id="pledge_shipping_country" name="shipping[country]">
+      <option value=""></option>
+      <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
+              <%= if Rails.env.development? ; 'selected' ; end %>
+      >United States</option>
+      <option value="CTRY_CA" data-alternative-spellings="CA" data-relevancy-booster="2.0">Canada</option>
+      <option value="CTRY_AF" data-alternative-spellings="AF" data-relevancy-booster="">Afghanistan</option>
+      <option value="CTRY_AX" data-alternative-spellings="AX Aaland Aland" data-relevancy-booster="0.5">Aland Islands</option>
+      <option value="CTRY_AL" data-alternative-spellings="AL" data-relevancy-booster="">Albania</option>
+      <option value="CTRY_DZ" data-alternative-spellings="DZ" data-relevancy-booster="">Algeria</option>
+      <option value="CTRY_AS" data-alternative-spellings="AS" data-relevancy-booster="0.5">American Samoa</option>
+      <option value="CTRY_AD" data-alternative-spellings="AD" data-relevancy-booster="0.5">Andorra</option>
+      <option value="CTRY_AO" data-alternative-spellings="AO" data-relevancy-booster="">Angola</option>
+      <option value="CTRY_AI" data-alternative-spellings="AI" data-relevancy-booster="0.5">Anguilla</option>
+      <option value="CTRY_AQ" data-alternative-spellings="AQ" data-relevancy-booster="0.5">Antarctica</option>
+      <option value="CTRY_AG" data-alternative-spellings="AG" data-relevancy-booster="0.5">Antigua and Barbuda</option>
+      <option value="CTRY_AR" data-alternative-spellings="AR" data-relevancy-booster="">Argentina</option>
+      <option value="CTRY_AM" data-alternative-spellings="AM" data-relevancy-booster="">Armenia</option>
+      <option value="CTRY_AW" data-alternative-spellings="AW" data-relevancy-booster="0.5">Aruba</option>
+      <option value="CTRY_AU" data-alternative-spellings="AU" data-relevancy-booster="1.5">Australia</option>
+      <option value="CTRY_AT" data-alternative-spellings="AT Österreich Osterreich Oesterreich" data-relevancy-booster="">Austria</option>
+      <option value="CTRY_AZ" data-alternative-spellings="AZ" data-relevancy-booster="">Azerbaijan</option>
+      <option value="CTRY_BS" data-alternative-spellings="BS" data-relevancy-booster="">Bahamas</option>
+      <option value="CTRY_BH" data-alternative-spellings="BH" data-relevancy-booster="">Bahrain</option>
+      <option value="CTRY_BD" data-alternative-spellings="BD" data-relevancy-booster="2.0">Bangladesh</option>
+      <option value="CTRY_BB" data-alternative-spellings="BB" data-relevancy-booster="">Barbados</option>
+      <option value="CTRY_BY" data-alternative-spellings="BY" data-relevancy-booster="">Belarus</option>
+      <option value="CTRY_BE" data-alternative-spellings="BE België Belgie Belgien Belgique" data-relevancy-booster="1.5">Belgium</option>
+      <option value="CTRY_BZ" data-alternative-spellings="BZ" data-relevancy-booster="">Belize</option>
+      <option value="CTRY_BJ" data-alternative-spellings="BJ" data-relevancy-booster="">Benin</option>
+      <option value="CTRY_BM" data-alternative-spellings="BM" data-relevancy-booster="0.5">Bermuda</option>
+      <option value="CTRY_BT" data-alternative-spellings="BT" data-relevancy-booster="">Bhutan</option>
+      <option value="CTRY_BO" data-alternative-spellings="BO" data-relevancy-booster="">Bolivia</option>
+      <option value="CTRY_BA" data-alternative-spellings="BA" data-relevancy-booster="">Bosnia and Herzegovina</option>
+      <option value="CTRY_BW" data-alternative-spellings="BW" data-relevancy-booster="">Botswana</option>
+      <option value="CTRY_BV" data-alternative-spellings="BV" data-relevancy-booster="">Bouvet Island</option>
+      <option value="CTRY_BR" data-alternative-spellings="BR Brasil" data-relevancy-booster="2.0">Brazil</option>
+      <option value="CTRY_IO" data-alternative-spellings="IO" data-relevancy-booster="">British Indian Ocean Territory</option>
+      <option value="CTRY_BN" data-alternative-spellings="BN" data-relevancy-booster="">Brunei Darussalam</option>
+      <option value="CTRY_BG" data-alternative-spellings="BG" data-relevancy-booster="">Bulgaria</option>
+      <option value="CTRY_BF" data-alternative-spellings="BF" data-relevancy-booster="">Burkina Faso</option>
+      <option value="CTRY_BI" data-alternative-spellings="BI" data-relevancy-booster="">Burundi</option>
+      <option value="CTRY_KH" data-alternative-spellings="KH" data-relevancy-booster="">Cambodia</option>
+      <option value="CTRY_CM" data-alternative-spellings="CM" data-relevancy-booster="">Cameroon</option>
+      <option value="CTRY_CV" data-alternative-spellings="CV" data-relevancy-booster="">Cape Verde</option>
+      <option value="CTRY_KY" data-alternative-spellings="KY" data-relevancy-booster="0.5">Cayman Islands</option>
+      <option value="CTRY_CF" data-alternative-spellings="CF" data-relevancy-booster="">Central African Republic</option>
+      <option value="CTRY_TD" data-alternative-spellings="TD" data-relevancy-booster="">Chad</option>
+      <option value="CTRY_CL" data-alternative-spellings="CL" data-relevancy-booster="">Chile</option>
+      <option value="CTRY_CN" data-alternative-spellings="CN Zhongguo Zhonghua Peoples Republic" data-relevancy-booster="">China</option>
+      <option value="CTRY_CX" data-alternative-spellings="CX" data-relevancy-booster="0.5">Christmas Island</option>
+      <option value="CTRY_CC" data-alternative-spellings="CC" data-relevancy-booster="0.5">Cocos (Keeling) Islands</option>
+      <option value="CTRY_CO" data-alternative-spellings="CO" data-relevancy-booster="">Colombia</option>
+      <option value="CTRY_KM" data-alternative-spellings="KM" data-relevancy-booster="">Comoros</option>
+      <option value="CTRY_CG" data-alternative-spellings="CG" data-relevancy-booster="">Congo</option>
+      <option value="CTRY_CD" data-alternative-spellings="CD" data-relevancy-booster="">Congo, the Democratic Republic of the</option>
+      <option value="CTRY_CK" data-alternative-spellings="CK" data-relevancy-booster="0.5">Cook Islands</option>
+      <option value="CTRY_CR" data-alternative-spellings="CR" data-relevancy-booster="">Costa Rica</option>
+      <option value="CTRY_CI" data-alternative-spellings="CI Cote dIvoire Ivory Coast" data-relevancy-booster="">Ivory Coast</option>
+      <option value="CTRY_HR" data-alternative-spellings="HR Hrvatska" data-relevancy-booster="">Croatia</option>
+      <option value="CTRY_CY" data-alternative-spellings="CY" data-relevancy-booster="">Cyprus</option>
+      <option value="CTRY_CZ" data-alternative-spellings="CZ Česká Ceska" data-relevancy-booster="">Czech Republic</option>
+      <option value="CTRY_DK" data-alternative-spellings="DK Danmark" data-relevancy-booster="1.5">Denmark</option>
+      <option value="CTRY_DJ" data-alternative-spellings="DJ" data-relevancy-booster="">Djibouti</option>
+      <option value="CTRY_DM" data-alternative-spellings="DM" data-relevancy-booster="0.5">Dominica</option>
+      <option value="CTRY_DO" data-alternative-spellings="DO" data-relevancy-booster="">Dominican Republic</option>
+      <option value="CTRY_EC" data-alternative-spellings="EC" data-relevancy-booster="">Ecuador</option>
+      <option value="CTRY_EG" data-alternative-spellings="EG" data-relevancy-booster="1.5">Egypt</option>
+      <option value="CTRY_SV" data-alternative-spellings="SV" data-relevancy-booster="">El Salvador</option>
+      <option value="CTRY_GQ" data-alternative-spellings="GQ" data-relevancy-booster="">Equatorial Guinea</option>
+      <option value="CTRY_ER" data-alternative-spellings="ER" data-relevancy-booster="">Eritrea</option>
+      <option value="CTRY_EE" data-alternative-spellings="EE Eesti" data-relevancy-booster="">Estonia</option>
+      <option value="CTRY_ET" data-alternative-spellings="ET" data-relevancy-booster="">Ethiopia</option>
+      <option value="CTRY_FK" data-alternative-spellings="FK" data-relevancy-booster="0.5">Falkland Islands (Malvinas)</option>
+      <option value="CTRY_FO" data-alternative-spellings="FO Føroyar F�E6røerne" data-relevancy-booster="0.5">Faroe Islands</option>
+      <option value="CTRY_FJ" data-alternative-spellings="FJ" data-relevancy-booster="">Fiji</option>
+      <option value="CTRY_FI" data-alternative-spellings="FI Suomi" data-relevancy-booster="">Finland</option>
+      <option value="CTRY_FR" data-alternative-spellings="FR République Française" data-relevancy-booster="2.5">France</option>
+      <option value="CTRY_GF" data-alternative-spellings="GF" data-relevancy-booster="">French Guiana</option>
+      <option value="CTRY_PF" data-alternative-spellings="PF" data-relevancy-booster="">French Polynesia</option>
+      <option value="CTRY_TF" data-alternative-spellings="TF" data-relevancy-booster="">French Southern Territories</option>
+      <option value="CTRY_GA" data-alternative-spellings="GA" data-relevancy-booster="">Gabon</option>
+      <option value="CTRY_GM" data-alternative-spellings="GM" data-relevancy-booster="">Gambia</option>
+      <option value="CTRY_GE" data-alternative-spellings="GE" data-relevancy-booster="">Georgia</option>
+      <option value="CTRY_DE" data-alternative-spellings="DE Bundesrepublik Deutschland" data-relevancy-booster="3.0">Germany</option>
+      <option value="CTRY_GH" data-alternative-spellings="GH" data-relevancy-booster="">Ghana</option>
+      <option value="CTRY_GI" data-alternative-spellings="GI" data-relevancy-booster="0.5">Gibraltar</option>
+      <option value="CTRY_GR" data-alternative-spellings="GR" data-relevancy-booster="1.5">Greece</option>
+      <option value="CTRY_GL" data-alternative-spellings="GL Grønland" data-relevancy-booster="0.5">Greenland</option>
+      <option value="CTRY_GD" data-alternative-spellings="GD" data-relevancy-booster="">Grenada</option>
+      <option value="CTRY_GP" data-alternative-spellings="GP" data-relevancy-booster="">Guadeloupe</option>
+      <option value="CTRY_GU" data-alternative-spellings="GU" data-relevancy-booster="">Guam</option>
+      <option value="CTRY_GT" data-alternative-spellings="GT" data-relevancy-booster="">Guatemala</option>
+      <option value="CTRY_GN" data-alternative-spellings="GN" data-relevancy-booster="">Guinea</option>
+      <option value="CTRY_GW" data-alternative-spellings="GW" data-relevancy-booster="">Guinea-Bissau</option>
+      <option value="CTRY_GY" data-alternative-spellings="GY" data-relevancy-booster="">Guyana</option>
+      <option value="CTRY_HT" data-alternative-spellings="HT" data-relevancy-booster="">Haiti</option>
+      <option value="CTRY_HM" data-alternative-spellings="HM" data-relevancy-booster="">Heard Island and McDonald Islands</option>
+      <option value="CTRY_VA" data-alternative-spellings="VA" data-relevancy-booster="0.5">Holy See (Vatican City State)</option>
+      <option value="CTRY_HN" data-alternative-spellings="HN" data-relevancy-booster="">Honduras</option>
+      <option value="CTRY_HK" data-alternative-spellings="HK" data-relevancy-booster="">Hong Kong</option>
+      <option value="CTRY_HU" data-alternative-spellings="HU" data-relevancy-booster="">Hungary</option>
+      <option value="CTRY_IS" data-alternative-spellings="IS Island" data-relevancy-booster="">Iceland</option>
+      <option value="CTRY_IN" data-alternative-spellings="IN" data-relevancy-booster="3.0">India</option>
+      <option value="CTRY_ID" data-alternative-spellings="ID" data-relevancy-booster="2.0">Indonesia</option>
+      <option value="CTRY_IQ" data-alternative-spellings="IQ" data-relevancy-booster="">Iraq</option>
+      <option value="CTRY_IE" data-alternative-spellings="IE Éire" data-relevancy-booster="1.2">Ireland</option>
+      <option value="CTRY_IL" data-alternative-spellings="IL" data-relevancy-booster="">Israel</option>
+      <option value="CTRY_IT" data-alternative-spellings="IT Italia" data-relevancy-booster="2.0">Italy</option>
+      <option value="CTRY_JM" data-alternative-spellings="JM" data-relevancy-booster="">Jamaica</option>
+      <option value="CTRY_JP" data-alternative-spellings="JP Nippon Nihon" data-relevancy-booster="2.5">Japan</option>
+      <option value="CTRY_JO" data-alternative-spellings="JO" data-relevancy-booster="">Jordan</option>
+      <option value="CTRY_KZ" data-alternative-spellings="KZ" data-relevancy-booster="">Kazakhstan</option>
+      <option value="CTRY_KE" data-alternative-spellings="KE" data-relevancy-booster="">Kenya</option>
+      <option value="CTRY_KI" data-alternative-spellings="KI" data-relevancy-booster="">Kiribati</option>
+      <option value="CTRY_KR" data-alternative-spellings="KR South Korea" data-relevancy-booster="1.5">Korea, Republic of</option>
+      <option value="CTRY_KW" data-alternative-spellings="KW" data-relevancy-booster="">Kuwait</option>
+      <option value="CTRY_KG" data-alternative-spellings="KG" data-relevancy-booster="">Kyrgyzstan</option>
+      <option value="CTRY_LA" data-alternative-spellings="LA" data-relevancy-booster="">Lao People`s Democratic Republic</option>
+      <option value="CTRY_LV" data-alternative-spellings="LV" data-relevancy-booster="">Latvia</option>
+      <option value="CTRY_LB" data-alternative-spellings="LB" data-relevancy-booster="">Lebanon</option>
+      <option value="CTRY_LS" data-alternative-spellings="LS" data-relevancy-booster="">Lesotho</option>
+      <option value="CTRY_LR" data-alternative-spellings="LR" data-relevancy-booster="">Liberia</option>
+      <option value="CTRY_LY" data-alternative-spellings="LY" data-relevancy-booster="">Libya</option>
+      <option value="CTRY_LI" data-alternative-spellings="LI" data-relevancy-booster="">Liechtenstein</option>
+      <option value="CTRY_LT" data-alternative-spellings="LT" data-relevancy-booster="">Lithuania</option>
+      <option value="CTRY_LU" data-alternative-spellings="LU" data-relevancy-booster="">Luxembourg</option>
+      <option value="CTRY_MO" data-alternative-spellings="MO" data-relevancy-booster="">Macao</option>
+      <option value="CTRY_MK" data-alternative-spellings="MK" data-relevancy-booster="">Macedonia, the former Yugoslav Republic of</option>
+      <option value="CTRY_MG" data-alternative-spellings="MG" data-relevancy-booster="">Madagascar</option>
+      <option value="CTRY_MW" data-alternative-spellings="MW" data-relevancy-booster="">Malawi</option>
+      <option value="CTRY_MY" data-alternative-spellings="MY" data-relevancy-booster="">Malaysia</option>
+      <option value="CTRY_MV" data-alternative-spellings="MV" data-relevancy-booster="">Maldives</option>
+      <option value="CTRY_ML" data-alternative-spellings="ML" data-relevancy-booster="">Mali</option>
+      <option value="CTRY_MT" data-alternative-spellings="MT" data-relevancy-booster="">Malta</option>
+      <option value="CTRY_MH" data-alternative-spellings="MH" data-relevancy-booster="0.5">Marshall Islands</option>
+      <option value="CTRY_MQ" data-alternative-spellings="MQ" data-relevancy-booster="">Martinique</option>
+      <option value="CTRY_MR" data-alternative-spellings="MR" data-relevancy-booster="">Mauritania</option>
+      <option value="CTRY_MU" data-alternative-spellings="MU" data-relevancy-booster="">Mauritius</option>
+      <option value="CTRY_YT" data-alternative-spellings="YT" data-relevancy-booster="">Mayotte</option>
+      <option value="CTRY_MX" data-alternative-spellings="MX Mexicanos" data-relevancy-booster="1.5">Mexico</option>
+      <option value="CTRY_FM" data-alternative-spellings="FM" data-relevancy-booster="">Micronesia, Federated States of</option>
+      <option value="CTRY_MD" data-alternative-spellings="MD" data-relevancy-booster="">Moldova, Republic of</option>
+      <option value="CTRY_MC" data-alternative-spellings="MC" data-relevancy-booster="">Monaco</option>
+      <option value="CTRY_MN" data-alternative-spellings="MN" data-relevancy-booster="">Mongolia</option>
+      <option value="CTRY_ME" data-alternative-spellings="ME" data-relevancy-booster="">Montenegro</option>
+      <option value="CTRY_MS" data-alternative-spellings="MS" data-relevancy-booster="0.5">Montserrat</option>
+      <option value="CTRY_MA" data-alternative-spellings="MA" data-relevancy-booster="">Morocco</option>
+      <option value="CTRY_MZ" data-alternative-spellings="MZ" data-relevancy-booster="">Mozambique</option>
+      <option value="CTRY_MM" data-alternative-spellings="MM Burma Myanmar" data-relevancy-booster="">translation missing: en.ctry_mm</option>
+      <option value="CTRY_NA" data-alternative-spellings="NA" data-relevancy-booster="">Namibia</option>
+      <option value="CTRY_NR" data-alternative-spellings="NR" data-relevancy-booster="0.5">Nauru</option>
+      <option value="CTRY_NP" data-alternative-spellings="NP" data-relevancy-booster="">Nepal</option>
+      <option value="CTRY_NL" data-alternative-spellings="NL Holland Nederland" data-relevancy-booster="1.5">Netherlands</option>
+      <option value="CTRY_AN" data-alternative-spellings="AN" data-relevancy-booster="">Netherlands Antilles</option>
+      <option value="CTRY_NC" data-alternative-spellings="NC" data-relevancy-booster="0.5">New Caledonia</option>
+      <option value="CTRY_NZ" data-alternative-spellings="NZ" data-relevancy-booster="">New Zealand</option>
+      <option value="CTRY_NI" data-alternative-spellings="NI" data-relevancy-booster="">Nicaragua</option>
+      <option value="CTRY_NE" data-alternative-spellings="NE" data-relevancy-booster="">Niger</option>
+      <option value="CTRY_NG" data-alternative-spellings="NG" data-relevancy-booster="1.5">Nigeria</option>
+      <option value="CTRY_NU" data-alternative-spellings="NU" data-relevancy-booster="0.5">Niue</option>
+      <option value="CTRY_NF" data-alternative-spellings="NF" data-relevancy-booster="0.5">Norfolk Island</option>
+      <option value="CTRY_MP" data-alternative-spellings="MP" data-relevancy-booster="0.5">Northern Mariana Islands</option>
+      <option value="CTRY_NO" data-alternative-spellings="NO Norge Noreg" data-relevancy-booster="1.5">Norway</option>
+      <option value="CTRY_OM" data-alternative-spellings="OM" data-relevancy-booster="">Oman</option>
+      <option value="CTRY_PK" data-alternative-spellings="PK" data-relevancy-booster="2.0">Pakistan</option>
+      <option value="CTRY_PW" data-alternative-spellings="PW" data-relevancy-booster="0.5">Palau</option>
+      <option value="CTRY_PS" data-alternative-spellings="PS Palestinian Territory, Occupied" data-relevancy-booster="">Palestinian Territory, Occupied</option>
+      <option value="CTRY_PA" data-alternative-spellings="PA" data-relevancy-booster="">Panama</option>
+      <option value="CTRY_PG" data-alternative-spellings="PG" data-relevancy-booster="">Papua New Guinea</option>
+      <option value="CTRY_PY" data-alternative-spellings="PY" data-relevancy-booster="">Paraguay</option>
+      <option value="CTRY_PE" data-alternative-spellings="PE" data-relevancy-booster="">Peru</option>
+      <option value="CTRY_PH" data-alternative-spellings="PH" data-relevancy-booster="1.5">Philippines</option>
+      <option value="CTRY_PN" data-alternative-spellings="PN" data-relevancy-booster="0.5">Pitcairn</option>
+      <option value="CTRY_PL" data-alternative-spellings="PL" data-relevancy-booster="1.25">Poland</option>
+      <option value="CTRY_PT" data-alternative-spellings="PT" data-relevancy-booster="1.5">Portugal</option>
+      <option value="CTRY_PR" data-alternative-spellings="PR" data-relevancy-booster="">Puerto Rico</option>
+      <option value="CTRY_QA" data-alternative-spellings="QA" data-relevancy-booster="">Qatar</option>
+      <option value="CTRY_RE" data-alternative-spellings="RE Reunion" data-relevancy-booster="">Réunion</option>
+      <option value="CTRY_RO" data-alternative-spellings="RO" data-relevancy-booster="">Romania</option>
+      <option value="CTRY_RU" data-alternative-spellings="RU Russia Rossiya" data-relevancy-booster="2.5">Russian Federation</option>
+      <option value="CTRY_RW" data-alternative-spellings="RW" data-relevancy-booster="">Rwanda</option>
+      <option value="CTRY_SH" data-alternative-spellings="SH" data-relevancy-booster="0.5">Saint Helena</option>
+      <option value="CTRY_KN" data-alternative-spellings="KN" data-relevancy-booster="0.5">Saint Kitts and Nevis</option>
+      <option value="CTRY_LC" data-alternative-spellings="LC" data-relevancy-booster="0.5">Saint Lucia</option>
+      <option value="CTRY_PM" data-alternative-spellings="PM" data-relevancy-booster="0.5">Saint Pierre and Miquelon</option>
+      <option value="CTRY_VC" data-alternative-spellings="VC" data-relevancy-booster="0.5">Saint Vincent and the Grenadines</option>
+      <option value="CTRY_WS" data-alternative-spellings="WS" data-relevancy-booster="">Samoa</option>
+      <option value="CTRY_SM" data-alternative-spellings="SM" data-relevancy-booster="">San Marino</option>
+      <option value="CTRY_ST" data-alternative-spellings="ST" data-relevancy-booster="">Sao Tome and Principe</option>
+      <option value="CTRY_SA" data-alternative-spellings="SA" data-relevancy-booster="">Saudi Arabia</option>
+      <option value="CTRY_SN" data-alternative-spellings="SN" data-relevancy-booster="">Senegal</option>
+      <option value="CTRY_RS" data-alternative-spellings="RS" data-relevancy-booster="">Serbia</option>
+      <option value="CTRY_SC" data-alternative-spellings="SC" data-relevancy-booster="0.5">Seychelles</option>
+      <option value="CTRY_SL" data-alternative-spellings="SL" data-relevancy-booster="">Sierra Leone</option>
+      <option value="CTRY_SG" data-alternative-spellings="SG" data-relevancy-booster="">Singapore</option>
+      <option value="CTRY_SK" data-alternative-spellings="SK" data-relevancy-booster="">Slovakia</option>
+      <option value="CTRY_SI" data-alternative-spellings="SI" data-relevancy-booster="">Slovenia</option>
+      <option value="CTRY_SB" data-alternative-spellings="SB" data-relevancy-booster="">Solomon Islands</option>
+      <option value="CTRY_SO" data-alternative-spellings="SO" data-relevancy-booster="">Somalia</option>
+      <option value="CTRY_ZA" data-alternative-spellings="ZA" data-relevancy-booster="">South Africa</option>
+      <option value="CTRY_GS" data-alternative-spellings="GS" data-relevancy-booster="">South Georgia and the South Sandwich Islands</option>
+      <option value="CTRY_ES" data-alternative-spellings="ES España Espana" data-relevancy-booster="2.0">Spain</option>
+      <option value="CTRY_LK" data-alternative-spellings="LK" data-relevancy-booster="">Sri Lanka</option>
+      <option value="CTRY_SR" data-alternative-spellings="SR" data-relevancy-booster="">Suriname</option>
+      <option value="CTRY_SJ" data-alternative-spellings="SJ" data-relevancy-booster="0.5">Svalbard and Jan Mayen</option>
+      <option value="CTRY_SZ" data-alternative-spellings="SZ" data-relevancy-booster="">Swaziland</option>
+      <option value="CTRY_SE" data-alternative-spellings="SE Sverige" data-relevancy-booster="1.5">Sweden</option>
+      <option value="CTRY_CH" data-alternative-spellings="CH Swiss Confederation Schweiz Suisse Svizzera Svizra" data-relevancy-booster="1.5">Switzerland</option>
+      <option value="CTRY_TW" data-alternative-spellings="TW" data-relevancy-booster="">Taiwan</option>
+      <option value="CTRY_TJ" data-alternative-spellings="TJ" data-relevancy-booster="">Tajikistan</option>
+      <option value="CTRY_TZ" data-alternative-spellings="TZ" data-relevancy-booster="">Tanzania, United Republic of</option>
+      <option value="CTRY_TH" data-alternative-spellings="TH" data-relevancy-booster="">Thailand</option>
+      <option value="CTRY_TL" data-alternative-spellings="TL" data-relevancy-booster="">Timor-Leste</option>
+      <option value="CTRY_TG" data-alternative-spellings="TG" data-relevancy-booster="">Togo</option>
+      <option value="CTRY_TK" data-alternative-spellings="TK" data-relevancy-booster="0.5">Tokelau</option>
+      <option value="CTRY_TO" data-alternative-spellings="TO" data-relevancy-booster="">Tonga</option>
+      <option value="CTRY_TT" data-alternative-spellings="TT" data-relevancy-booster="">Trinidad and Tobago</option>
+      <option value="CTRY_TN" data-alternative-spellings="TN" data-relevancy-booster="">Tunisia</option>
+      <option value="CTRY_TR" data-alternative-spellings="TR Türkiye Turkiye" data-relevancy-booster="">Turkey</option>
+      <option value="CTRY_TM" data-alternative-spellings="TM" data-relevancy-booster="">Turkmenistan</option>
+      <option value="CTRY_TC" data-alternative-spellings="TC" data-relevancy-booster="0.5">Turks and Caicos Islands</option>
+      <option value="CTRY_TV" data-alternative-spellings="TV" data-relevancy-booster="0.5">Tuvalu</option>
+      <option value="CTRY_UG" data-alternative-spellings="UG" data-relevancy-booster="">Uganda</option>
+      <option value="CTRY_UA" data-alternative-spellings="UA Ukrayina" data-relevancy-booster="">Ukraine</option>
+      <option value="CTRY_AE" data-alternative-spellings="AE UAE Emirates" data-relevancy-booster="">United Arab Emirates</option>
+      <option value="CTRY_GB" data-alternative-spellings="GB Great Britain England UK Wales Scotland Northern Ireland" data-relevancy-booster="2.5">United Kingdom</option>
+      <option value="CTRY_UM" data-alternative-spellings="UM" data-relevancy-booster="">United States Minor Outlying Islands</option>
+      <option value="CTRY_UY" data-alternative-spellings="UY" data-relevancy-booster="">Uruguay</option>
+      <option value="CTRY_UZ" data-alternative-spellings="UZ" data-relevancy-booster="">Uzbekistan</option>
+      <option value="CTRY_VU" data-alternative-spellings="VU" data-relevancy-booster="">Vanuatu</option>
+      <option value="CTRY_VE" data-alternative-spellings="VE" data-relevancy-booster="">Venezuela</option>
+      <option value="CTRY_VN" data-alternative-spellings="VN" data-relevancy-booster="1.5">Vietnam</option>
+      <option value="CTRY_VG" data-alternative-spellings="VG" data-relevancy-booster="">Virgin Islands, British</option>
+      <option value="CTRY_VI" data-alternative-spellings="VG" data-relevancy-booster="0.5">Virgin Islands, U.S.</option>
+      <option value="CTRY_WF" data-alternative-spellings="VI" data-relevancy-booster="0.5">Wallis and Futuna</option>
+      <option value="CTRY_EH" data-alternative-spellings="EH" data-relevancy-booster="">Western Sahara</option>
+      <option value="CTRY_YE" data-alternative-spellings="YE" data-relevancy-booster="">Yemen</option>
+      <option value="CTRY_ZM" data-alternative-spellings="ZM" data-relevancy-booster="">Zambia</option>
+      <option value="CTRY_ZW" data-alternative-spellings="ZW" data-relevancy-booster="">Zimbabwe</option></select>
+      </div>
 
-          <div class="gift_field">
-            <div class="field">
-              <select id="ship_country">
-                <option>Country:</option>
-                <option>Canada</option>
-                <option>USA</option>
-              </select>
-            </div>
-        <%= hidden_field_tag "rewards", true %>
-        <%= hidden_field_tag "quantity", params[:quantity] %>
-        <%= submit_tag "Checkout", :class => "blue_button disabled", :id => "amazon_button" %>
-      <% end %>
+      <div class="input-item-text">
+        <label for="pledge_shipping_address">Street Address</label>
+        <input class="rounded shorter-than-long" id="pledge_shipping_address" name="shipping[address]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "1 Infinite Loop" ; end %>"
+        >
+      </div>
+
+      <div class="clearfix">
+        <div class="fl input-item-text">
+          <label for="pledge_shipping_city">City</label>
+          <input class="longer-than-short rounded" id="pledge_shipping_city" name="shipping[city]" size="30" type="text"
+                 value="<%= if Rails.env.development? ; "Cupertino" ; end %>"
+          >
+        </div>
+
+        <div class="fl input-item-select" id="shipping_state_div">
+          <label for="pledge_shipping_state" id="label_shipping_state">State/Province</label>
+          <input class="longer-than-short rounded" id="pledge_shipping_state" name="shipping[state]" size="30" type="text"
+                 value="<%= if Rails.env.development? ; "CA" ; end %>"
+          >
+        </div>
+
+        <div class="fl input-item-text">
+          <label for="pledge_shipping_zipcode" id="label_shipping_zipcode">Postal Code</label>
+          <input class="longer-than-short rounded zipcode-field" id="pledge_shipping_zipcode" name="shipping[zip]" size="30" type="text"
+                 value="<%= if Rails.env.development? ; "95014" ; end %>"
+          >
+        </div>
+      </div>
+
+      </fieldset>
+      </section>
+
+    <section class="box rounded shadow shipping-address">
+    <div class="heading clearfix">
+      <h2 class="fl title bold">Pay with a Credit Card</h2>
     </div>
-  </div>
 
+
+
+    <fieldset class="group">
+
+    <div class="clearfix">
+      <div class="fl input-item-text">
+        <label for="pledge_firstname">Name</label>
+        <input class="rounded ajax" id="order_user_name" name="billing[name]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "John card" ; end %>"
+        >
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <div class="fl input-item-text">
+        <label for="pledge_card_number">Card Number</label>
+        <input autocomplete="off" class="rounded no-ajax" id="card_number" size="30" type="text"
+               value="<%= if Rails.env.development? ; 4242424242424242 ; end %>">
+      </div>
+      <div class="fl paypal_images amex"></div>
+      <div class="fl paypal_images mc"></div>
+      <div class="fl paypal_images visa"></div>
+      <div class="fl paypal_images discover"></div>
+      <div class="fl input-item-text">
+        <label for="pledge_cvv2">Security Code or Verification Code</label>
+        <input autocomplete="off" class="rounded very-short no-ajax" id="card_code" size="30" type="text"
+               value="<%= if Rails.env.development? ; 123 ; end %>">
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <div class="fl input-item-select">
+        <label for="pledge_card_exp_date_month">Expiration Date</label>
+        <select class="short no-ajax" id="card_month">
+          <option value="">MM</option>
+          <option value="1">01 - January</option>
+          <option value="2">02 - February</option>
+          <option value="3"
+                  <%= if Rails.env.development? ; 'selected' ; end %>
+            >03 - March</option>
+          <option value="4">04 - April</option>
+          <option value="5">05 - May</option>
+          <option value="6">06 - June</option>
+          <option value="7">07 - July</option>
+          <option value="8">08 - August</option>
+          <option value="9">09 - September</option>
+          <option value="10">10 - October</option>
+          <option value="11">11 - November</option>
+          <option value="12">12 - December</option>
+        </select>
+
+        <span>&nbsp;&nbsp;/</span>
+      </div>
+
+      <div class="fl input-item-select">
+        <label for="pledge_card_exp_date_year">&nbsp;</label>
+        <select class="very-short no-ajax" id="card_year">
+          <option value="">YYYY</option>
+          <option value="2013">2013</option>
+          <option value="2014"
+                  <%= if Rails.env.development? ; 'selected' ; end %>
+             >2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+          <option value="2031">2031</option>
+          <option value="2032">2032</option>
+          <option value="2033">2033</option>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="input-item-checkbox clearfix">
+      <input class="fl no-ajax" id="same_as_my_shipping_address" name="same_as_my_shipping_address" type="checkbox" value="1">
+      <label class="fl" for="same_as_my_shipping_address">Same as my shipping address</label>
+    </div>
+
+    <div class="ajax" id="billing_address">
+    <div class="input-item-select">
+    <label for="pledge_country">Country</label>
+    <select class="country-selector" id="pledge_country" name="billing[country]">
+    <option value=""></option>
+    <option value="CTRY_CA" data-alternative-spellings="CA" data-relevancy-booster="2.0">Canada</option>
+    <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
+            <%= if Rails.env.development? ; 'selected' ; end %>
+    >United States</option>
+    <option value="CTRY_AF" data-alternative-spellings="AF" data-relevancy-booster="">Afghanistan</option>
+    <option value="CTRY_AX" data-alternative-spellings="AX Aaland Aland" data-relevancy-booster="0.5">Aland Islands</option>
+    <option value="CTRY_AL" data-alternative-spellings="AL" data-relevancy-booster="">Albania</option>
+    <option value="CTRY_DZ" data-alternative-spellings="DZ" data-relevancy-booster="">Algeria</option>
+    <option value="CTRY_AS" data-alternative-spellings="AS" data-relevancy-booster="0.5">American Samoa</option>
+    <option value="CTRY_AD" data-alternative-spellings="AD" data-relevancy-booster="0.5">Andorra</option>
+    <option value="CTRY_AO" data-alternative-spellings="AO" data-relevancy-booster="">Angola</option>
+    <option value="CTRY_AI" data-alternative-spellings="AI" data-relevancy-booster="0.5">Anguilla</option>
+    <option value="CTRY_AQ" data-alternative-spellings="AQ" data-relevancy-booster="0.5">Antarctica</option>
+    <option value="CTRY_AG" data-alternative-spellings="AG" data-relevancy-booster="0.5">Antigua and Barbuda</option>
+    <option value="CTRY_AR" data-alternative-spellings="AR" data-relevancy-booster="">Argentina</option>
+    <option value="CTRY_AM" data-alternative-spellings="AM" data-relevancy-booster="">Armenia</option>
+    <option value="CTRY_AW" data-alternative-spellings="AW" data-relevancy-booster="0.5">Aruba</option>
+    <option value="CTRY_AU" data-alternative-spellings="AU" data-relevancy-booster="1.5">Australia</option>
+    <option value="CTRY_AT" data-alternative-spellings="AT Österreich Osterreich Oesterreich" data-relevancy-booster="">Austria</option>
+    <option value="CTRY_AZ" data-alternative-spellings="AZ" data-relevancy-booster="">Azerbaijan</option>
+    <option value="CTRY_BS" data-alternative-spellings="BS" data-relevancy-booster="">Bahamas</option>
+    <option value="CTRY_BH" data-alternative-spellings="BH" data-relevancy-booster="">Bahrain</option>
+    <option value="CTRY_BD" data-alternative-spellings="BD" data-relevancy-booster="2.0">Bangladesh</option>
+    <option value="CTRY_BB" data-alternative-spellings="BB" data-relevancy-booster="">Barbados</option>
+    <option value="CTRY_BY" data-alternative-spellings="BY" data-relevancy-booster="">Belarus</option>
+    <option value="CTRY_BE" data-alternative-spellings="BE België Belgie Belgien Belgique" data-relevancy-booster="1.5">Belgium</option>
+    <option value="CTRY_BZ" data-alternative-spellings="BZ" data-relevancy-booster="">Belize</option>
+    <option value="CTRY_BJ" data-alternative-spellings="BJ" data-relevancy-booster="">Benin</option>
+    <option value="CTRY_BM" data-alternative-spellings="BM" data-relevancy-booster="0.5">Bermuda</option>
+    <option value="CTRY_BT" data-alternative-spellings="BT" data-relevancy-booster="">Bhutan</option>
+    <option value="CTRY_BO" data-alternative-spellings="BO" data-relevancy-booster="">Bolivia</option>
+    <option value="CTRY_BA" data-alternative-spellings="BA" data-relevancy-booster="">Bosnia and Herzegovina</option>
+    <option value="CTRY_BW" data-alternative-spellings="BW" data-relevancy-booster="">Botswana</option>
+    <option value="CTRY_BV" data-alternative-spellings="BV" data-relevancy-booster="">Bouvet Island</option>
+    <option value="CTRY_BR" data-alternative-spellings="BR Brasil" data-relevancy-booster="2.0">Brazil</option>
+    <option value="CTRY_IO" data-alternative-spellings="IO" data-relevancy-booster="">British Indian Ocean Territory</option>
+    <option value="CTRY_BN" data-alternative-spellings="BN" data-relevancy-booster="">Brunei Darussalam</option>
+    <option value="CTRY_BG" data-alternative-spellings="BG" data-relevancy-booster="">Bulgaria</option>
+    <option value="CTRY_BF" data-alternative-spellings="BF" data-relevancy-booster="">Burkina Faso</option>
+    <option value="CTRY_BI" data-alternative-spellings="BI" data-relevancy-booster="">Burundi</option>
+    <option value="CTRY_KH" data-alternative-spellings="KH" data-relevancy-booster="">Cambodia</option>
+    <option value="CTRY_CM" data-alternative-spellings="CM" data-relevancy-booster="">Cameroon</option>
+    <option value="CTRY_CV" data-alternative-spellings="CV" data-relevancy-booster="">Cape Verde</option>
+    <option value="CTRY_KY" data-alternative-spellings="KY" data-relevancy-booster="0.5">Cayman Islands</option>
+    <option value="CTRY_CF" data-alternative-spellings="CF" data-relevancy-booster="">Central African Republic</option>
+    <option value="CTRY_TD" data-alternative-spellings="TD" data-relevancy-booster="">Chad</option>
+    <option value="CTRY_CL" data-alternative-spellings="CL" data-relevancy-booster="">Chile</option>
+    <option value="CTRY_CN" data-alternative-spellings="CN Zhongguo Zhonghua Peoples Republic" data-relevancy-booster="">China</option>
+    <option value="CTRY_CX" data-alternative-spellings="CX" data-relevancy-booster="0.5">Christmas Island</option>
+    <option value="CTRY_CC" data-alternative-spellings="CC" data-relevancy-booster="0.5">Cocos (Keeling) Islands</option>
+    <option value="CTRY_CO" data-alternative-spellings="CO" data-relevancy-booster="">Colombia</option>
+    <option value="CTRY_KM" data-alternative-spellings="KM" data-relevancy-booster="">Comoros</option>
+    <option value="CTRY_CG" data-alternative-spellings="CG" data-relevancy-booster="">Congo</option>
+    <option value="CTRY_CD" data-alternative-spellings="CD" data-relevancy-booster="">Congo, the Democratic Republic of the</option>
+    <option value="CTRY_CK" data-alternative-spellings="CK" data-relevancy-booster="0.5">Cook Islands</option>
+    <option value="CTRY_CR" data-alternative-spellings="CR" data-relevancy-booster="">Costa Rica</option>
+    <option value="CTRY_CI" data-alternative-spellings="CI Cote dIvoire Ivory Coast" data-relevancy-booster="">Ivory Coast</option>
+    <option value="CTRY_HR" data-alternative-spellings="HR Hrvatska" data-relevancy-booster="">Croatia</option>
+    <option value="CTRY_CY" data-alternative-spellings="CY" data-relevancy-booster="">Cyprus</option>
+    <option value="CTRY_CZ" data-alternative-spellings="CZ Česká Ceska" data-relevancy-booster="">Czech Republic</option>
+    <option value="CTRY_DK" data-alternative-spellings="DK Danmark" data-relevancy-booster="1.5">Denmark</option>
+    <option value="CTRY_DJ" data-alternative-spellings="DJ" data-relevancy-booster="">Djibouti</option>
+    <option value="CTRY_DM" data-alternative-spellings="DM" data-relevancy-booster="0.5">Dominica</option>
+    <option value="CTRY_DO" data-alternative-spellings="DO" data-relevancy-booster="">Dominican Republic</option>
+    <option value="CTRY_EC" data-alternative-spellings="EC" data-relevancy-booster="">Ecuador</option>
+    <option value="CTRY_EG" data-alternative-spellings="EG" data-relevancy-booster="1.5">Egypt</option>
+    <option value="CTRY_SV" data-alternative-spellings="SV" data-relevancy-booster="">El Salvador</option>
+    <option value="CTRY_GQ" data-alternative-spellings="GQ" data-relevancy-booster="">Equatorial Guinea</option>
+    <option value="CTRY_ER" data-alternative-spellings="ER" data-relevancy-booster="">Eritrea</option>
+    <option value="CTRY_EE" data-alternative-spellings="EE Eesti" data-relevancy-booster="">Estonia</option>
+    <option value="CTRY_ET" data-alternative-spellings="ET" data-relevancy-booster="">Ethiopia</option>
+    <option value="CTRY_FK" data-alternative-spellings="FK" data-relevancy-booster="0.5">Falkland Islands (Malvinas)</option>
+    <option value="CTRY_FO" data-alternative-spellings="FO Føroyar F�E6røerne" data-relevancy-booster="0.5">Faroe Islands</option>
+    <option value="CTRY_FJ" data-alternative-spellings="FJ" data-relevancy-booster="">Fiji</option>
+    <option value="CTRY_FI" data-alternative-spellings="FI Suomi" data-relevancy-booster="">Finland</option>
+    <option value="CTRY_FR" data-alternative-spellings="FR République Française" data-relevancy-booster="2.5">France</option>
+    <option value="CTRY_GF" data-alternative-spellings="GF" data-relevancy-booster="">French Guiana</option>
+    <option value="CTRY_PF" data-alternative-spellings="PF" data-relevancy-booster="">French Polynesia</option>
+    <option value="CTRY_TF" data-alternative-spellings="TF" data-relevancy-booster="">French Southern Territories</option>
+    <option value="CTRY_GA" data-alternative-spellings="GA" data-relevancy-booster="">Gabon</option>
+    <option value="CTRY_GM" data-alternative-spellings="GM" data-relevancy-booster="">Gambia</option>
+    <option value="CTRY_GE" data-alternative-spellings="GE" data-relevancy-booster="">Georgia</option>
+    <option value="CTRY_DE" data-alternative-spellings="DE Bundesrepublik Deutschland" data-relevancy-booster="3.0">Germany</option>
+    <option value="CTRY_GH" data-alternative-spellings="GH" data-relevancy-booster="">Ghana</option>
+    <option value="CTRY_GI" data-alternative-spellings="GI" data-relevancy-booster="0.5">Gibraltar</option>
+    <option value="CTRY_GR" data-alternative-spellings="GR" data-relevancy-booster="1.5">Greece</option>
+    <option value="CTRY_GL" data-alternative-spellings="GL Grønland" data-relevancy-booster="0.5">Greenland</option>
+    <option value="CTRY_GD" data-alternative-spellings="GD" data-relevancy-booster="">Grenada</option>
+    <option value="CTRY_GP" data-alternative-spellings="GP" data-relevancy-booster="">Guadeloupe</option>
+    <option value="CTRY_GU" data-alternative-spellings="GU" data-relevancy-booster="">Guam</option>
+    <option value="CTRY_GT" data-alternative-spellings="GT" data-relevancy-booster="">Guatemala</option>
+    <option value="CTRY_GN" data-alternative-spellings="GN" data-relevancy-booster="">Guinea</option>
+    <option value="CTRY_GW" data-alternative-spellings="GW" data-relevancy-booster="">Guinea-Bissau</option>
+    <option value="CTRY_GY" data-alternative-spellings="GY" data-relevancy-booster="">Guyana</option>
+    <option value="CTRY_HT" data-alternative-spellings="HT" data-relevancy-booster="">Haiti</option>
+    <option value="CTRY_HM" data-alternative-spellings="HM" data-relevancy-booster="">Heard Island and McDonald Islands</option>
+    <option value="CTRY_VA" data-alternative-spellings="VA" data-relevancy-booster="0.5">Holy See (Vatican City State)</option>
+    <option value="CTRY_HN" data-alternative-spellings="HN" data-relevancy-booster="">Honduras</option>
+    <option value="CTRY_HK" data-alternative-spellings="HK" data-relevancy-booster="">Hong Kong</option>
+    <option value="CTRY_HU" data-alternative-spellings="HU" data-relevancy-booster="">Hungary</option>
+    <option value="CTRY_IS" data-alternative-spellings="IS Island" data-relevancy-booster="">Iceland</option>
+    <option value="CTRY_IN" data-alternative-spellings="IN" data-relevancy-booster="3.0">India</option>
+    <option value="CTRY_ID" data-alternative-spellings="ID" data-relevancy-booster="2.0">Indonesia</option>
+    <option value="CTRY_IQ" data-alternative-spellings="IQ" data-relevancy-booster="">Iraq</option>
+    <option value="CTRY_IE" data-alternative-spellings="IE Éire" data-relevancy-booster="1.2">Ireland</option>
+    <option value="CTRY_IL" data-alternative-spellings="IL" data-relevancy-booster="">Israel</option>
+    <option value="CTRY_IT" data-alternative-spellings="IT Italia" data-relevancy-booster="2.0">Italy</option>
+    <option value="CTRY_JM" data-alternative-spellings="JM" data-relevancy-booster="">Jamaica</option>
+    <option value="CTRY_JP" data-alternative-spellings="JP Nippon Nihon" data-relevancy-booster="2.5">Japan</option>
+    <option value="CTRY_JO" data-alternative-spellings="JO" data-relevancy-booster="">Jordan</option>
+    <option value="CTRY_KZ" data-alternative-spellings="KZ" data-relevancy-booster="">Kazakhstan</option>
+    <option value="CTRY_KE" data-alternative-spellings="KE" data-relevancy-booster="">Kenya</option>
+    <option value="CTRY_KI" data-alternative-spellings="KI" data-relevancy-booster="">Kiribati</option>
+    <option value="CTRY_KR" data-alternative-spellings="KR South Korea" data-relevancy-booster="1.5">Korea, Republic of</option>
+    <option value="CTRY_KW" data-alternative-spellings="KW" data-relevancy-booster="">Kuwait</option>
+    <option value="CTRY_KG" data-alternative-spellings="KG" data-relevancy-booster="">Kyrgyzstan</option>
+    <option value="CTRY_LA" data-alternative-spellings="LA" data-relevancy-booster="">Lao People`s Democratic Republic</option>
+    <option value="CTRY_LV" data-alternative-spellings="LV" data-relevancy-booster="">Latvia</option>
+    <option value="CTRY_LB" data-alternative-spellings="LB" data-relevancy-booster="">Lebanon</option>
+    <option value="CTRY_LS" data-alternative-spellings="LS" data-relevancy-booster="">Lesotho</option>
+    <option value="CTRY_LR" data-alternative-spellings="LR" data-relevancy-booster="">Liberia</option>
+    <option value="CTRY_LY" data-alternative-spellings="LY" data-relevancy-booster="">Libya</option>
+    <option value="CTRY_LI" data-alternative-spellings="LI" data-relevancy-booster="">Liechtenstein</option>
+    <option value="CTRY_LT" data-alternative-spellings="LT" data-relevancy-booster="">Lithuania</option>
+    <option value="CTRY_LU" data-alternative-spellings="LU" data-relevancy-booster="">Luxembourg</option>
+    <option value="CTRY_MO" data-alternative-spellings="MO" data-relevancy-booster="">Macao</option>
+    <option value="CTRY_MK" data-alternative-spellings="MK" data-relevancy-booster="">Macedonia, the former Yugoslav Republic of</option>
+    <option value="CTRY_MG" data-alternative-spellings="MG" data-relevancy-booster="">Madagascar</option>
+    <option value="CTRY_MW" data-alternative-spellings="MW" data-relevancy-booster="">Malawi</option>
+    <option value="CTRY_MY" data-alternative-spellings="MY" data-relevancy-booster="">Malaysia</option>
+    <option value="CTRY_MV" data-alternative-spellings="MV" data-relevancy-booster="">Maldives</option>
+    <option value="CTRY_ML" data-alternative-spellings="ML" data-relevancy-booster="">Mali</option>
+    <option value="CTRY_MT" data-alternative-spellings="MT" data-relevancy-booster="">Malta</option>
+    <option value="CTRY_MH" data-alternative-spellings="MH" data-relevancy-booster="0.5">Marshall Islands</option>
+    <option value="CTRY_MQ" data-alternative-spellings="MQ" data-relevancy-booster="">Martinique</option>
+    <option value="CTRY_MR" data-alternative-spellings="MR" data-relevancy-booster="">Mauritania</option>
+    <option value="CTRY_MU" data-alternative-spellings="MU" data-relevancy-booster="">Mauritius</option>
+    <option value="CTRY_YT" data-alternative-spellings="YT" data-relevancy-booster="">Mayotte</option>
+    <option value="CTRY_MX" data-alternative-spellings="MX Mexicanos" data-relevancy-booster="1.5">Mexico</option>
+    <option value="CTRY_FM" data-alternative-spellings="FM" data-relevancy-booster="">Micronesia, Federated States of</option>
+    <option value="CTRY_MD" data-alternative-spellings="MD" data-relevancy-booster="">Moldova, Republic of</option>
+    <option value="CTRY_MC" data-alternative-spellings="MC" data-relevancy-booster="">Monaco</option>
+    <option value="CTRY_MN" data-alternative-spellings="MN" data-relevancy-booster="">Mongolia</option>
+    <option value="CTRY_ME" data-alternative-spellings="ME" data-relevancy-booster="">Montenegro</option>
+    <option value="CTRY_MS" data-alternative-spellings="MS" data-relevancy-booster="0.5">Montserrat</option>
+    <option value="CTRY_MA" data-alternative-spellings="MA" data-relevancy-booster="">Morocco</option>
+    <option value="CTRY_MZ" data-alternative-spellings="MZ" data-relevancy-booster="">Mozambique</option>
+    <option value="CTRY_MM" data-alternative-spellings="MM Burma Myanmar" data-relevancy-booster="">translation missing: en.ctry_mm</option>
+    <option value="CTRY_NA" data-alternative-spellings="NA" data-relevancy-booster="">Namibia</option>
+    <option value="CTRY_NR" data-alternative-spellings="NR" data-relevancy-booster="0.5">Nauru</option>
+    <option value="CTRY_NP" data-alternative-spellings="NP" data-relevancy-booster="">Nepal</option>
+    <option value="CTRY_NL" data-alternative-spellings="NL Holland Nederland" data-relevancy-booster="1.5">Netherlands</option>
+    <option value="CTRY_AN" data-alternative-spellings="AN" data-relevancy-booster="">Netherlands Antilles</option>
+    <option value="CTRY_NC" data-alternative-spellings="NC" data-relevancy-booster="0.5">New Caledonia</option>
+    <option value="CTRY_NZ" data-alternative-spellings="NZ" data-relevancy-booster="">New Zealand</option>
+    <option value="CTRY_NI" data-alternative-spellings="NI" data-relevancy-booster="">Nicaragua</option>
+    <option value="CTRY_NE" data-alternative-spellings="NE" data-relevancy-booster="">Niger</option>
+    <option value="CTRY_NG" data-alternative-spellings="NG" data-relevancy-booster="1.5">Nigeria</option>
+    <option value="CTRY_NU" data-alternative-spellings="NU" data-relevancy-booster="0.5">Niue</option>
+    <option value="CTRY_NF" data-alternative-spellings="NF" data-relevancy-booster="0.5">Norfolk Island</option>
+    <option value="CTRY_MP" data-alternative-spellings="MP" data-relevancy-booster="0.5">Northern Mariana Islands</option>
+    <option value="CTRY_NO" data-alternative-spellings="NO Norge Noreg" data-relevancy-booster="1.5">Norway</option>
+    <option value="CTRY_OM" data-alternative-spellings="OM" data-relevancy-booster="">Oman</option>
+    <option value="CTRY_PK" data-alternative-spellings="PK" data-relevancy-booster="2.0">Pakistan</option>
+    <option value="CTRY_PW" data-alternative-spellings="PW" data-relevancy-booster="0.5">Palau</option>
+    <option value="CTRY_PS" data-alternative-spellings="PS Palestinian Territory, Occupied" data-relevancy-booster="">Palestinian Territory, Occupied</option>
+    <option value="CTRY_PA" data-alternative-spellings="PA" data-relevancy-booster="">Panama</option>
+    <option value="CTRY_PG" data-alternative-spellings="PG" data-relevancy-booster="">Papua New Guinea</option>
+    <option value="CTRY_PY" data-alternative-spellings="PY" data-relevancy-booster="">Paraguay</option>
+    <option value="CTRY_PE" data-alternative-spellings="PE" data-relevancy-booster="">Peru</option>
+    <option value="CTRY_PH" data-alternative-spellings="PH" data-relevancy-booster="1.5">Philippines</option>
+    <option value="CTRY_PN" data-alternative-spellings="PN" data-relevancy-booster="0.5">Pitcairn</option>
+    <option value="CTRY_PL" data-alternative-spellings="PL" data-relevancy-booster="1.25">Poland</option>
+    <option value="CTRY_PT" data-alternative-spellings="PT" data-relevancy-booster="1.5">Portugal</option>
+    <option value="CTRY_PR" data-alternative-spellings="PR" data-relevancy-booster="">Puerto Rico</option>
+    <option value="CTRY_QA" data-alternative-spellings="QA" data-relevancy-booster="">Qatar</option>
+    <option value="CTRY_RE" data-alternative-spellings="RE Reunion" data-relevancy-booster="">Réunion</option>
+    <option value="CTRY_RO" data-alternative-spellings="RO" data-relevancy-booster="">Romania</option>
+    <option value="CTRY_RU" data-alternative-spellings="RU Russia Rossiya" data-relevancy-booster="2.5">Russian Federation</option>
+    <option value="CTRY_RW" data-alternative-spellings="RW" data-relevancy-booster="">Rwanda</option>
+    <option value="CTRY_SH" data-alternative-spellings="SH" data-relevancy-booster="0.5">Saint Helena</option>
+    <option value="CTRY_KN" data-alternative-spellings="KN" data-relevancy-booster="0.5">Saint Kitts and Nevis</option>
+    <option value="CTRY_LC" data-alternative-spellings="LC" data-relevancy-booster="0.5">Saint Lucia</option>
+    <option value="CTRY_PM" data-alternative-spellings="PM" data-relevancy-booster="0.5">Saint Pierre and Miquelon</option>
+    <option value="CTRY_VC" data-alternative-spellings="VC" data-relevancy-booster="0.5">Saint Vincent and the Grenadines</option>
+    <option value="CTRY_WS" data-alternative-spellings="WS" data-relevancy-booster="">Samoa</option>
+    <option value="CTRY_SM" data-alternative-spellings="SM" data-relevancy-booster="">San Marino</option>
+    <option value="CTRY_ST" data-alternative-spellings="ST" data-relevancy-booster="">Sao Tome and Principe</option>
+    <option value="CTRY_SA" data-alternative-spellings="SA" data-relevancy-booster="">Saudi Arabia</option>
+    <option value="CTRY_SN" data-alternative-spellings="SN" data-relevancy-booster="">Senegal</option>
+    <option value="CTRY_RS" data-alternative-spellings="RS" data-relevancy-booster="">Serbia</option>
+    <option value="CTRY_SC" data-alternative-spellings="SC" data-relevancy-booster="0.5">Seychelles</option>
+    <option value="CTRY_SL" data-alternative-spellings="SL" data-relevancy-booster="">Sierra Leone</option>
+    <option value="CTRY_SG" data-alternative-spellings="SG" data-relevancy-booster="">Singapore</option>
+    <option value="CTRY_SK" data-alternative-spellings="SK" data-relevancy-booster="">Slovakia</option>
+    <option value="CTRY_SI" data-alternative-spellings="SI" data-relevancy-booster="">Slovenia</option>
+    <option value="CTRY_SB" data-alternative-spellings="SB" data-relevancy-booster="">Solomon Islands</option>
+    <option value="CTRY_SO" data-alternative-spellings="SO" data-relevancy-booster="">Somalia</option>
+    <option value="CTRY_ZA" data-alternative-spellings="ZA" data-relevancy-booster="">South Africa</option>
+    <option value="CTRY_GS" data-alternative-spellings="GS" data-relevancy-booster="">South Georgia and the South Sandwich Islands</option>
+    <option value="CTRY_ES" data-alternative-spellings="ES España Espana" data-relevancy-booster="2.0">Spain</option>
+    <option value="CTRY_LK" data-alternative-spellings="LK" data-relevancy-booster="">Sri Lanka</option>
+    <option value="CTRY_SR" data-alternative-spellings="SR" data-relevancy-booster="">Suriname</option>
+    <option value="CTRY_SJ" data-alternative-spellings="SJ" data-relevancy-booster="0.5">Svalbard and Jan Mayen</option>
+    <option value="CTRY_SZ" data-alternative-spellings="SZ" data-relevancy-booster="">Swaziland</option>
+    <option value="CTRY_SE" data-alternative-spellings="SE Sverige" data-relevancy-booster="1.5">Sweden</option>
+    <option value="CTRY_CH" data-alternative-spellings="CH Swiss Confederation Schweiz Suisse Svizzera Svizra" data-relevancy-booster="1.5">Switzerland</option>
+    <option value="CTRY_TW" data-alternative-spellings="TW" data-relevancy-booster="">Taiwan</option>
+    <option value="CTRY_TJ" data-alternative-spellings="TJ" data-relevancy-booster="">Tajikistan</option>
+    <option value="CTRY_TZ" data-alternative-spellings="TZ" data-relevancy-booster="">Tanzania, United Republic of</option>
+    <option value="CTRY_TH" data-alternative-spellings="TH" data-relevancy-booster="">Thailand</option>
+    <option value="CTRY_TL" data-alternative-spellings="TL" data-relevancy-booster="">Timor-Leste</option>
+    <option value="CTRY_TG" data-alternative-spellings="TG" data-relevancy-booster="">Togo</option>
+    <option value="CTRY_TK" data-alternative-spellings="TK" data-relevancy-booster="0.5">Tokelau</option>
+    <option value="CTRY_TO" data-alternative-spellings="TO" data-relevancy-booster="">Tonga</option>
+    <option value="CTRY_TT" data-alternative-spellings="TT" data-relevancy-booster="">Trinidad and Tobago</option>
+    <option value="CTRY_TN" data-alternative-spellings="TN" data-relevancy-booster="">Tunisia</option>
+    <option value="CTRY_TR" data-alternative-spellings="TR Türkiye Turkiye" data-relevancy-booster="">Turkey</option>
+    <option value="CTRY_TM" data-alternative-spellings="TM" data-relevancy-booster="">Turkmenistan</option>
+    <option value="CTRY_TC" data-alternative-spellings="TC" data-relevancy-booster="0.5">Turks and Caicos Islands</option>
+    <option value="CTRY_TV" data-alternative-spellings="TV" data-relevancy-booster="0.5">Tuvalu</option>
+    <option value="CTRY_UG" data-alternative-spellings="UG" data-relevancy-booster="">Uganda</option>
+    <option value="CTRY_UA" data-alternative-spellings="UA Ukrayina" data-relevancy-booster="">Ukraine</option>
+    <option value="CTRY_AE" data-alternative-spellings="AE UAE Emirates" data-relevancy-booster="">United Arab Emirates</option>
+    <option value="CTRY_GB" data-alternative-spellings="GB Great Britain England UK Wales Scotland Northern Ireland" data-relevancy-booster="2.5">United Kingdom</option>
+    <option value="CTRY_UM" data-alternative-spellings="UM" data-relevancy-booster="">United States Minor Outlying Islands</option>
+    <option value="CTRY_UY" data-alternative-spellings="UY" data-relevancy-booster="">Uruguay</option>
+    <option value="CTRY_UZ" data-alternative-spellings="UZ" data-relevancy-booster="">Uzbekistan</option>
+    <option value="CTRY_VU" data-alternative-spellings="VU" data-relevancy-booster="">Vanuatu</option>
+    <option value="CTRY_VE" data-alternative-spellings="VE" data-relevancy-booster="">Venezuela</option>
+    <option value="CTRY_VN" data-alternative-spellings="VN" data-relevancy-booster="1.5">Vietnam</option>
+    <option value="CTRY_VG" data-alternative-spellings="VG" data-relevancy-booster="">Virgin Islands, British</option>
+    <option value="CTRY_VI" data-alternative-spellings="VG" data-relevancy-booster="0.5">Virgin Islands, U.S.</option>
+    <option value="CTRY_WF" data-alternative-spellings="VI" data-relevancy-booster="0.5">Wallis and Futuna</option>
+    <option value="CTRY_EH" data-alternative-spellings="EH" data-relevancy-booster="">Western Sahara</option>
+    <option value="CTRY_YE" data-alternative-spellings="YE" data-relevancy-booster="">Yemen</option>
+    <option value="CTRY_ZM" data-alternative-spellings="ZM" data-relevancy-booster="">Zambia</option>
+    <option value="CTRY_ZW" data-alternative-spellings="ZW" data-relevancy-booster="">Zimbabwe</option></select>
+    </div>
+
+    <div class="input-item-text">
+      <label for="pledge_address">Street Address</label>
+      <input class="very-long rounded" id="pledge_address" name="billing[address]" size="30" type="text"
+             value="<%= if Rails.env.development? ; '1600 Amphitheatre Pkwy' ; end %>"
+      >
+    </div>
+
+    <div class="clearfix">
+      <div class="fl input-item-text">
+        <label for="pledge_city">City</label>
+        <input class="longer-than-short rounded" id="pledge_city" name="billing[city]" size="30" type="text"
+               value="<%= if Rails.env.development? ; 'Mountain View' ; end %>"
+        >
+      </div>
+
+      <div class="fl input-item-select" id="state_div">
+        <label for="pledge_state" id="label_state">State/Province</label>
+        <input class="longer-than-short rounded" id="pledge_state" name="billing[state]" size="30" type="text"
+               value="<%= if Rails.env.development? ; 'CA' ; end %>"
+        >
+      </div>
+
+      <div class="fl input-item-text">
+        <label for="pledge_zipcode" id="label_zipcode">Postal Code</label>
+        <input class="longer-than-short rounded zipcode-field" id="pledge_zipcode" name="billing[zip]" size="30" type="text"
+               value="<%= if Rails.env.development? ; "94043" ; end %>"
+        >
+      </div>
+    </div>
+    </div>
+    <input id="user_stripe_token" name="user_stripe_token" type="hidden" value="" />
+    </fieldset>
+    <div id="stripe_error" class="alert alert-error" style="display:none"> </div>
+
+    <div class="clearfix input-item-submit">
+      <input class="fr no-ajax process button rounded shadow bold translate" name="commit" type="submit" value="Continue ▶">
+    </div>
+    </section>
+      </form>
+    </div>
+
+  </div>
 </div>
-</div>
-</div>
+
+<%= if Rails.env.development? ; "(dev_mode) current time: " + Time.now.to_s ; end %>
+
+<script>
+    $(document).ready(function () {
+	    $("#same_as_my_shipping_address").change(function(){
+		    if ($('#same_as_my_shipping_address').is(':checked')) {
+			    $("#billing_address").hide();
+		    } else {
+			    $("#billing_address").show();
+		    }
+	    })
+
+        Stripe.setPublishableKey("<%=STRIPE_PUBLISHABLE_KEY %>");
+        var subscription = {
+            setupForm:function () {
+                $('#new_pledge').submit(function () {
+                    $('input[type=submit]').prop('disabled', true);
+                    if ($('#card_number').length) {
+                        subscription.processCard();
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+            },
+            processCard:function () {
+                var card;
+                card = {
+                    name:$('#order_user_name').val(),
+                    number:$('#card_number').val(),
+                    cvc:$('#card_code').val(),
+                    expMonth:$('#card_month').val(),
+                    expYear:$('#card_year').val()
+                };
+                Stripe.createToken(card, subscription.handleStripeResponse);
+            },
+            handleStripeResponse:function (status, response) {
+                if (status === 200) {
+                    $('#user_stripe_token').val(response.id);
+                    <%= if Rails.env.development? ; 'console.log(response.id)' ; end %>
+
+                    $('#new_pledge')[0].submit();
+                } else {
+                    $('#stripe_error').text(response.error.message).show();
+                    return $('input[type=submit]').prop('disabled', false);
+                }
+            }
+        };
+        subscription.setupForm();
+    });
+</script>
+

@@ -12,6 +12,28 @@ class RewardsController < ApplicationController
   end
 
   def select_reward
+    #Order.all.inject({}) { |counts, order| if }
+    #
+    #  for order in Order.all
+    #
+    #  end
+    #@counts = {}
+
+    #Order.all.each do |order| begin
+    #   #@counts[Order.plan_id]
+    #end
+
+    @counts = {}
+    @counts[1] = 0;
+    @counts[2] = 0;
+    @counts[3] = 0;
+    @counts[4] = 0;
+    @counts[5] = 0;
+
+
+    for order in Order.all
+      @counts[order.plan_id] += 1
+    end
   end
 
   def shipping
@@ -114,7 +136,7 @@ class RewardsController < ApplicationController
 
     session.clear
     session[:user] = user.id
-    redirect_to :action => "share"
+    redirect_to SubPath.getUrl("/rewards/share")
   end
 
   def share
@@ -123,6 +145,10 @@ class RewardsController < ApplicationController
     if user
       @referring_url = user.get_referring_url
     end
+  end
+
+  def referrals
+
   end
 
   def ipn

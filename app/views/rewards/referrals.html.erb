@@ -1,0 +1,469 @@
+  <meta charset="UTF-8">
+  <title>Refer a Friend | Linquet</title>
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!--Start CSS-->
+  <link rel="stylesheet" href="css/global.css" type="text/css" media="screen" />
+  <!--End CSS-->
+
+  <!--Start SCRIPTS-->
+
+
+  <script type="text/javascript">
+	  var _gaq = _gaq || [];
+
+
+  </script>
+
+  <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+
+  <!-- jquery lightbox -->
+  <link rel="stylesheet" type="text/css" href="js/lightbox/themes/default/jquery.lightbox.css" />
+  <script type="text/javascript" src="js/lightbox/jquery.lightbox.min.js"></script>
+  <!-- jquery lightbox -->
+
+  <script type="text/javascript" src="js/clickable-div.js"></script>
+
+  <!-- jQuery framework and utilities -->
+
+  <script type="text/javascript" src="js/custom-image-fade.js"></script><!-- for image fades on hover -->
+  <!-- jQuery framework and utilities -->
+  <script type="text/javascript" src="js/linquet_loginout.js"></script>
+
+  <script type="text/javascript">
+	  $(document).ready(function(){
+		  jQuery('#loading').fadeOut(1000);
+		  $('#page_effect').fadeIn(1500);
+		  $('.lightbox').lightbox();
+		  setupLoginoutBtns();
+
+	  });
+
+  </script>
+
+  <!--End SCRIPTS-->
+</head>
+<body>
+
+<div id="page-wrap">
+<div id="header">
+
+
+  <script type="text/javascript" src="/js/pop-up.js"></script>
+  <script type="text/javascript">
+	  function goToHomePage(){
+		  window.location = "/";
+	  }
+
+	  function deleteLogCookies() {
+		  var cookies = document.cookie.split(";");
+
+		  for (var i = 0; i < cookies.length; i++) {
+			  var cookie = cookies[i];
+			  var eqPos = cookie.indexOf("=");
+			  var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+			  document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		  }
+	  }
+
+	  $(document).ready( function() {
+		  $("#btnSignin").bind("click", function (e) {
+			  e.preventDefault();
+			  var isAgreed = $('#terms').is(':checked');
+
+			  $.ajax({
+				  type: 'POST',
+				  url: "/API/WebLogin",
+				  dataType: "json",
+				  data: {
+					  email: $("#username").val(),
+					  password: $("#password").val(),
+					  remember: ($('#remember').attr('checked')),
+					  agreed: isAgreed
+				  },
+				  success: function (data) {
+					  if (data.Status == 0) {
+						  goToHomePage();
+					  } else if (data.Status == 1) {
+						  $("#termsOfService").show();
+						  $("#signin_error").css('color', 'blue');
+						  $("#signin_error").html("Please agree to Linquet terms of service");
+					  }
+					  else {
+						  $("#password").val("");
+						  $("#signin_error").css('color', 'red');
+						  $("#signin_error").html("Invalid email or password");
+					  }
+				  }
+			  });
+		  });
+
+		  $("#signout").click(function (e) {
+			  e.preventDefault();
+			  deleteLogCookies();
+			  $.ajax({
+				  type: 'POST',
+				  url: "/API/WebLogOff",
+				  success: function () {
+					  goToHomePage();
+				  },
+				  error: function () {
+
+				  }
+			  });
+		  });
+
+		  $("#resend_password_link").click(function () {
+			  window.location = "/recover-password";
+		  });
+
+		  $("#sharebtn").click(function(){
+			  if (currentUser) {
+				  _gaq.push(['_trackEvent', 'Share', 'Signed in', '', 0]);
+			  } else {
+				  _gaq.push(['_trackEvent', 'Share', 'Visiter', '', 0]);
+			  }
+		  });
+
+		  $("#freebtn").click(function(){
+			  _gaq.push(['_trackEvent', 'Free button', 'Clicked', '', 0]);
+		  });
+
+		  $("#top_left_gift").click(function(){
+			  if (currentUser) {
+				  window.location = '/profile-order?gift=true'
+			  } else {
+				  window.location = '/gift';
+			  }
+		  });
+	  })
+
+  </script>
+
+  <!-- header view -->
+  <div id="top_left_gift">
+    <img src="/images/gift.png" height="100px" alt="Send Gift" />
+  </div>
+
+
+  <div id="top-btn">
+    <a href="#?w=425" id="sharebtn" rel="popup_name_social" class="small textlink poplight" style="" >
+      <span>Share</span>
+    </a>
+
+    <a href="/free" id="freebtn" class="small textlink linq poplight" style="display:none">
+      <img id="free-heart-icon" src="/images/free-heart.png" height="20px"/>
+      <span>Get Free Months!&nbsp;</span>
+    </a>
+
+    &nbsp;|&nbsp;
+
+    <a href="#?w=370" id="signinpopupbtn" rel="popup_name_sign-in" class="small textlink poplight" style="">
+      <span>Sign in</span>
+    </a>
+
+    <a id="signout" href="/" class="small textlink signout" style="display:none">
+      <span>Sign out</span>
+    </a>
+  </div>
+
+  <div class="main-logo" onclick="location.href='/';">
+    <img style="width:100%" src="/images/logo_beta.png" alt="Linquet" />
+  </div>
+
+  <!-- pop up views -->
+  <div id="popup_name_sign-in" class="popup_block" >
+    <div style="padding-left: 50px; padding-top: 30px; padding-bottom: 30px;">
+      <form action="#" method="post" class="stn-form label-inline simple">
+        <p style="color:red" id="signin_error"></p>
+
+        <div class="field" style="font-family:MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Helvetica, Arial, sans-serif;margin-bottom:5px;">
+          <label for="username">Email Address</label>
+          <input id="username" name="username"  size="35" type="text" />
+        </div>
+
+        <div class="field" style="font-family:MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Helvetica, Arial, sans-serif;">
+          <label for="password">Password </label>
+          <input type="password" id="password" name="password" size="35" type="text" />
+        </div>
+
+        <div>
+          <div class="actionrow" style="float:left;margin-left:0px;">
+            <button id="btnSignin" class="yellow btn medium">Sign In</button>
+          </div>
+          <div style="float:left;margin-left:15px;padding-top:8px;">
+            <input id="remember" name="remember_me" value="1"  type="checkbox" />
+          </div>
+          <div style="float:left;padding-left:10px;font-family:MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Helvetica, Arial, sans-serif;">
+            <label for="remember" style="font-size:12px;">Keep me logged in</label>
+          </div>
+        </div>
+
+        <div id="termsOfService" style="display:none; clear:both">
+          <div style="float:left; padding-top:8px;">
+            <input id="terms" style="float: left;" name="terms" value="1"  type="checkbox" />
+					<span style="font-size:10px; float: left; padding: 3px;">
+						I Agree to Linquet <a href="/legal/TOS " target="_blank" style="color:blue; text-decoration:underline;">Terms of Service</a>
+					</span>
+          </div>
+        </div>
+
+        <p style="clear:both;padding:15px 0px 0px 0px;">
+          <a style="color:#FC0;text-decoration:underline;" href="javascript:;" id="resend_password_link">Forgot your password?</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="popup_name_social" class="popup_block">
+    <div style="width:425px; padding-top: 10px;" >
+      <img src="/images/social-pop-up.png" border="0" usemap="#Map" />
+      <map name="Map" id="Map">
+        <area shape="rect" target="_blank" coords="27,23,123,113" href="http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fepoma.org" alt="facebook" title="Share on Facebook" />
+        <area shape="rect" target="_blank" coords="161,23,257,113" href="http://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fepoma.org&text=Awesome!%20Never%20Lose%20Your%20Phone,%20Keys%20or%20Wallet%20Again%20With%20%40Linquet%20.%20Sign%20up%20for%20Free!%20epoma.org%20%23iwantthis%20%23ReTweet" alt="twitter" title="Follow on Twitter" />
+        <area shape="rect" target="_blank" coords="295,22,391,115" href="https://plus.google.com/share?url=https%3A%2F%2Fepoma.org" alt="Google Plus" title="Share on Google Plus" />
+      </map>
+    </div>
+  </div>
+
+</div>
+
+<div id="main-content" style="margin-top: 25px;">
+
+  <div id="main-sub-page-container-small" style="text-align: center;">
+    <h1 style="font-size: 20px;padding-top: 45px;">For every friend who orders Linquet, <br>you'll get <b>1 month FREE!</b></h1>
+    <div id="validationErrorInfo" style="display: none;margin: auto;width: 300px;color:red;"></div>
+    <div style="padding: 20px;width:500px;margin:auto;">
+      <div style="width: 450px; margin: auto; font-size:18px">
+        <p><i>Invite friends from Facebook or Twitter</i></p>
+
+        <!--<textarea cols="58" rows="6" id="socialShareText" name="comment" style="color: #666;" size="40" type="text">Awesome! Never Lose Your Phone, Keys, Wallet or Laptop Again With @Linquet . Get it for FREE! http://db.tt/QBFzoyb #iwantthis #RETWEET </textarea>-->
+      </div>
+      <div style="margin:auto;width:450px">
+        <button id="shareonFB" class="btn medium"><img src="images/social-icons/facebook_email.png"/><span style="position: relative;top: -21px;"> Share on Facebook</span></button>
+        <button id="shareonTwitter" class="btn medium"><img src="images/social-icons/twitter_email.png"/><span style="position: relative;top: -21px;"> Share on Twitter</span></button>
+      </div>
+    </div>
+
+    <div style="padding: 20px;width:450px;margin:auto;font-size:18px"> <p><i>or invite email addresses:</i></p>
+      <form action="#" method="post" class="stn-form label-inline simple">
+
+
+        <div class="field" style="margin:auto;margin-bottom: 20px;width:400px">
+          <input id="email" style="width:100%" name="phone" type="email" value="Email Address" style="width:410px" onFocus="formElementFocus(this,'Email Address',false);"  onblur="formElementBlur(this,'Email Address',false);">
+        </div>
+        <div id="inviteSentText" style="position:relative;top:-15px;font-size:12px;display:none"><p>Invitation sent.<br>Invite more people to sign up to get more free months!</p></div>
+
+        <div>
+          <button id="submitBtn" class="btn large" style="padding: 26px 64px;font-size:14px !important;">Send Invite</button>
+        </div>
+      </form>
+      <br/>
+    </div>
+    <p style="font-size:18px;padding-bottom: 50px;"><i>or send this link to your friends </i><br><br><u><a id="refferal_link" href="#" style="font-size:12px"></a></u></p>
+  </div>
+
+</div><!--End main-content-->
+
+<div id="thanks" style="display:none">
+  <p style="font-size:30px">
+    Thank You for Your Feedback
+  </p>
+</div>
+
+<div id="footer">
+
+  <div id="footer-nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>|</li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li>|</li>
+      <li><a href="/partners">Partners</a></li>
+      <li>|</li>
+      <li><a href="/FAQ">FAQ</a></li>
+      <li>|</li>
+      <li><a href="http://blog.linquet.com">Blog</a></li>
+      <li>|</li>
+      <li><a href="/careers">Careers</a></li>
+      <li>|</li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <div id="social-icons">
+    <ul>
+      <li class="facebook"><a target="_blank" href="http://www.facebook.com/Linquet" title="facebook">facebook</a></li>
+      <li class="twitter"><a target="_blank" href="http://twitter.com/linquet" title="twitter">twitter</a></li>
+      <li class="google"><a target="_blank" href="https://plus.google.com/113925221180296859058/" title="google plus">google plus</a></li>
+    </ul>
+  </div>
+
+  <p id="footer-trademark">Linquet &copy; 2012 Linquet Technologies Inc. All rights reserved.</p>
+</div>
+
+</div><!--End page-wrap-->
+<script>
+	jQuery(document).ready(function($){
+		$('.lightbox').lightbox();
+		pageLoaded();
+	});
+
+	function formElementBlur(target,initalName,isPassword){
+		if(target.value == ''){
+			target.value = initalName;
+			if((isPassword == true)){
+				target.type = "text"
+			}
+		}
+	}
+
+	function formElementFocus(target,initalName,isPassword){
+		if(target.value == initalName){
+			target.value = '';
+		}
+		if(isPassword == true){
+			target.type = "password"
+		}
+	}
+
+	function textElementBlur(target,initalName,isPassword){
+		if($(target).html() == ''){
+			$(target).html(initalName);
+		}
+	}
+
+	function textElementFocus(target,initalName,isPassword){
+		if($(target).html() == initalName){
+			$(target).html("");
+		}
+	}
+	var refURL;
+	function pageLoaded(){
+
+		$("#submitBtn").click(function (e) {
+			e.preventDefault();
+			if(validateContactForm() == false){
+				$("#validationErrorInfo").css('display','block');
+				return false;
+			} else {
+				$("#validationErrorInfo").css('display','none');
+			}
+			$("#inviteSentText").css('display','block');
+
+			//setTimeout(function(){$("#inviteSentText").fadeOut(1000);},5000);
+			$.ajax({
+				type: 'POST',
+				url: "/API/EmailInvite",
+				dataType: "json",
+				data: {
+					referree_email: $("#email").val()
+				},
+				success: function (data) {
+					$("#email").val("");
+					setTimeout(function(){$("#inviteSentText").fadeOut(1000);},5000);
+
+				}
+			});
+		});
+		getUserInfo();
+		$("#shareonFB").click(function(evt) {
+			$.ajax({
+				type: 'POST',
+				url: "/API/InviteStat",
+				dataType: "json",
+				data: {
+					referral_type: "facebook"
+				},
+				success: function (data) {
+
+				}
+			});
+			window.open("http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fepoma.org/?"+refURL+"-fb");
+
+		});
+		$("#shareonTwitter").click(function(evt) {
+			$.ajax({
+				type: 'POST',
+				url: "/API/InviteStat",
+				dataType: "json",
+				data: {
+					referral_type: "twitter"
+				},
+				success: function (data) {}
+			});
+			window.open("http://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fepoma.org&text=Awesome!%20Never%20Lose%20Your%20Phone%2C%20Keys%20or%20Wallet%20Again%20With%20%40Linquet%20.%20Get%20it%20for%20FREE!%20https://epoma.org%2F%3F"+refURL+"-tw"+"%20%23iwantthis%20%23ReTweet");
+
+		});
+
+	}
+
+	function validateContactForm() {
+		$("#validationErrorInfo").html("");
+
+		if (validateEmail($("#email").val()) == false)
+		{
+			$("#validationErrorInfo").html("Please enter a valid email address.");
+			return false;
+		}
+
+		return true;
+	}
+
+	function validateEmail(emailToValidate){
+
+		// test if valid email address, must have @ and .
+		var checkEmail = "@.";
+		var checkStr = emailToValidate;
+		var EmailValid = false;
+		var EmailAt = false;
+		var EmailPeriod = false;
+		var EmailPlus = false;
+		for (i = 0;  i < checkStr.length;  i++)
+		{
+			ch = checkStr.charAt(i);
+			if (ch == "@")
+				EmailAt = true;
+			if (ch == "." && EmailAt == true)
+				EmailPeriod = true;
+
+
+			// if both the @ and . were in the string
+			if (EmailAt && EmailPeriod)
+			{
+				EmailValid = true
+				break;
+			}
+		}
+		return EmailValid;
+
+	}
+
+	function getUserInfo(){
+		$.ajax({
+			type: 'GET',
+			url: "/API/Profile",
+			success: function (data) {
+				if (data.Status == 0) {
+
+					refURL = data.InviteURL;
+					$("#refferal_link").attr("href", "/sign-up?"+refURL+"-dr");
+					$("#refferal_link").html("https://epoma.org/sign-up?"+refURL+"-dr");
+
+				}
+			}
+		});
+	}
+
+
+</script>
+
+<!--font replacement-->
+<script src="js/cufon-yui.js" type="text/javascript"></script>
+<script src="js/Myriad_Pro_400.font.js" type="text/javascript"></script>
+<script src="js/regular.js" type="text/javascript"></script>
+<script src="js/Trebuchet_MS_400-1.font.js" type="text/javascript"></script>
+<script src="js/Trebuchet.js" type="text/javascript"></script>
+<!--font replacement-->

@@ -1,14 +1,6 @@
 <style>
-    .perk-title {
-        font-size: 16px;
-    }
-
     .title {
         font-size: 20px;
-    }
-
-    .description.notranslate {
-        display: none;
     }
 
     h2 {
@@ -79,19 +71,20 @@
 <div class="gray_background">
   <div class="wrapper clearfix">
     <div class="main_content" style="width:700px">
-      <h3>Select your contribution</h3>
+      <h3>Thanks for reserving Linquet</h3>
+      <h3 style="font-size: 32px;">Please select your contribution</h3> smaller 4px
 
-      <form action="shipping" method="post">
+      <form action="checkout" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
       <div id="perk-menu" class="group perks-selection"><!--graybox -->
 
         <div class='dynamic_bg shadow rounded' id='tier_0'>
           <input checked="checked" id="pledge_tier_0" name="reward_tier" type="radio" value="1"/>
           <label for="pledge_tier_0">
-            <div class="money">$19+</div>
+            <div class="money">$19</div>
               <div class="perk">
                 One free linquet + One year service
-                <div class="claimed"> 0 claimed (limited to 500)</div>
+                <div class="claimed"> <%= @counts[1] %> claimed (Only 200 available)</div>
               </div>
           </label>
         </div>
@@ -99,10 +92,10 @@
         <div class='dynamic_bg shadow rounded' id='tier_1'>
           <input checked="checked" id="pledge_tier_1" name="reward_tier" type="radio" value="2"/>
           <label for="pledge_tier_1">
-            <div class="money">$25+</div>
+            <div class="money">$25</div>
               <div class="perk">
                 One free linquet + One year service
-                <div class="claimed"> 0 claimed</div>
+                <div class="claimed"> <%= @counts[2] %> claimed</div>
               </div>
           </label>
         </div>
@@ -110,10 +103,10 @@
         <div class='dynamic_bg shadow rounded' id='tier_2'>
           <input checked="checked" id="pledge_tier_2" name="reward_tier" type="radio" value="3"/>
           <label for="pledge_tier_2">
-            <div class="money">$45+</div>
+            <div class="money">$45</div>
               <div class="perk">
                 Two free linquets + One year service
-                <div class="claimed"> 0 claimed</div>
+                <div class="claimed"> <%= @counts[3] %> claimed</div>
               </div>
           </label>
         </div>
@@ -121,10 +114,10 @@
         <div class='dynamic_bg shadow rounded' id='tier_4'>
           <input checked="checked" id="pledge_tier_4" name="reward_tier" type="radio" value="4"/>
           <label for="pledge_tier_4">
-            <div class="money">$85+</div>
+            <div class="money">$85</div>
               <div class="perk">
                 Four free linquets + One year service
-                <div class="claimed"> 0 claimed</div>
+                <div class="claimed"> <%= @counts[4] %> claimed</div>
               </div>
           </label>
         </div>
@@ -132,15 +125,15 @@
         <div class='dynamic_bg shadow rounded' id='tier_10'>
           <input checked="checked" id="pledge_tier_10" name="reward_tier" type="radio" value="5"/>
           <label for="pledge_tier_10">
-            <div class="money">$195+</div>
+            <div class="money">$195</div>
               <div class="perk">
                 Ten free linquets + One year service
-                <div class="claimed"> 0 claimed</div>
+                <div class="claimed"> <%= @counts[5] %> claimed</div>
               </div>
           </label>
         </div>
 
-         <INPUT TYPE="submit" VALUE="Continue">
+         <INPUT TYPE="submit" VALUE="Continue ▶" style="float:right; height: 80px; font-size: 48px;">
       </div>
       </form>
 

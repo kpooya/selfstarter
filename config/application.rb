@@ -25,27 +25,47 @@ end
 
 
 class SetLinuqetUrl
-  rails_server_name = ENV['rails_server']
-  rails_server_protocol = (ENV['rails_server_protocol'] && ENV['rails_server_protocol'].downcase) || "http"
-  rails_server_port = ENV['rails_server_port'] || "80"
+  front_server_protocol = (ENV['front_server_protocol'] && ENV['front_server_protocol'].downcase) || "http"
+  front_server_name = ENV['front_server_name']
+  front_server_port = ENV['front_server_port'] || "80"
 
-  if rails_server_name.nil?
+  if front_server_name.nil?
     require 'socket'
     if Socket.gethostname.downcase == "qiang-lin-mac.local"
-      rails_server_name = "localhost"
-      rails_server_port = "3000"
+      front_server_name = "localhost"
+      front_server_port = "3000"
     else
-      raise "Server name is not set. Use export rails_server= ; export rails_server_protocol= ; export rails_server_port=;"
+      raise "Server name is not set. Use export front_server= ; export front_server_protocol= ; export front_server_port=;"
     end
   end
 
-  RAILS_SERVER_URL = rails_server_protocol + "://" +
-      rails_server_name +
-      if (rails_server_port && !(rails_server_protocol == "https" && rails_server_port == "443") && !(rails_server_protocol == "http" && rails_server_port == "80"))
-        ":" + rails_server_port
+  FRONT_SERVER_URL = front_server_protocol + "://" +
+      front_server_name +
+      if (front_server_port && !(front_server_protocol == "https" && front_server_port == "443") && !(front_server_protocol == "http" && front_server_port == "80"))
+        ":" + front_server_port
       else
         ""
       end
 end
 
-LINQUET_SERVER_URL = SetLinuqetUrl::RAILS_SERVER_URL
+LINQUET_SERVER_URL = SetLinuqetUrl::FRONT_SERVER_URL
+
+class SubPath
+  if ENV["RAILS_RELATIVE_ROOT"]
+    ROOT = ENV["RAILS_RELATIVE_ROOT"]
+    def self.getAbsolutePath(path)
+      ROOT + path
+    end
+  else
+    def self.getAbsolutePath(path)
+      path
+    end
+  end
+
+  def self.getUrl(path)
+    LINQUET_SERVER_URL + getAbsolutePath(path)
+  end
+end
+
+
+

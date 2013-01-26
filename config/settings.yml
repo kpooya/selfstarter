@@ -10,14 +10,14 @@ project_goal: 75000
 # If you want to edit the FAQ, head over to app/views/rewards/homepage/_faqs.html.erb
 
 # This'll be both the page title (<title></title>) and the name in the header
-product_name: "Linquet"
+product_name: "Linquet Mini"
 
 # An image showcasing your product -- it'll show up when you pin your product
 # It should be in app/assets/images
 product_image_path: "my-product-image.png"
 
 # The message on the rewards page, Lockitron's
-value_proposition: "Never Lose Your Phone Or Valuables Again"
+value_proposition: "Never Lose Anything Again"
 
 # YouTube or Vimeo Video URL (The embed URL, without the query string options)
 video_embed_url: "https://www.youtube.com/v/tQJVxk7ggK0"
@@ -43,10 +43,10 @@ primary_stat: "backers"
 primary_stat_verb: 'backer'
 
 # The 2nd call to action button, towards the middle-ish of the page
-middle_reserve_text: "Reserve Now"
+middle_reserve_text: "Reserve for $25"
 
 # When the project should end
-expiration_date: <%= DateTime.now + 29 %>
+expiration_date: <%= DateTime.now + 49 %>
 
 # Text to show inside the progress bar, when the goal reaches/exceeds 100%
 progress_text: "Implemented"
@@ -54,10 +54,10 @@ progress_text: "Implemented"
 # Call to action section
 
 # On Lockitron, it's "First Batch Ships in March 2013"
-ships: "Ships...sometime"
+ships: "Ships April 2013"
 
 # On Lockitron, it's "Reserve Now"
-call_to_action: "Reserve Now"
+call_to_action: "Reserve for $25"
 # On Lockitron, this is "Only $149 for a limited time"
 price_human: "It costs money!"
 

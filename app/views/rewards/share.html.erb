@@ -26,7 +26,7 @@ list-style: none outside;
 
 <div id="share_page" style="height:600px">
   <div style="margin:auto;width:600px;position:relative;top:38px;font-size: 14px;text-align: center;">
-    <p style="font-size:48px;font-weight: bold;">Thanks for your order!</p>
+    <p style="font-size:48px;font-weight: bold;">Thanks for your help!</p>
   </div>
 
   <div style="margin:auto;margin-bottom:80px;width:600px;position:relative;top:45px;font-size: 14px;text-align: center;">
@@ -45,14 +45,14 @@ list-style: none outside;
     <h4 style="font-size:26px; font-weight: bolder;">Want FREE Linquets? Here’s how to get them: </h4>
 
     <ol>
-      <li><span style="font-weight: bolder;"> <a href="mailto:?Subject=Take a look at <%= @referring_url %>"> Invite Your Friends</a></span><br>
+      <li><span style="font-weight: bolder;"> <a href="/mini/referrals?r=<%=URI::encode_www_form_component(@referring_url)%>" style="text-decoration: underline;"> Invite Your Friends ▶</a></span><br>
 
-        Get 1 additional Linquet for every 3 friends who pre-order Linquet
+        Get additional Linquet Mini's by inviting your friends.
 
       <li><span style="font-weight: bolder;"> Share Linquet Mini With The Press </span><br>
 
         Get press coverage for Linquet Mini on a popular news/tech blog or channel like:
-        NBC News, BBC, MSNBC, CNN, NYTimes and etc. Just <a href="mailto:mini@linquet.com?Subject=Press coverage for Linquet Mini">
+        NBC News, BBC, MSNBC, CNN, NYTimes and etc. Just <a href="mailto:info@linquet.com?Subject=Press coverage for Linquet Mini">
         email us at mini@linquet.com </a> your communication with the respected blog/channel along with the link to the article/video, and
         we’ll confirm your FREE Linquet.
     </ol>
