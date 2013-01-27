@@ -148,7 +148,7 @@ class RewardsController < ApplicationController
   end
 
   def referrals
-
+    render :layout => nil
   end
 
   def ipn
