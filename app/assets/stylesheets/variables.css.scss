@@ -19,9 +19,9 @@ $link_color: #0008D6;
 $text_shadow: 0 1px 0px #fff;
 $font_size: 22px;
 
-// Lockitron uses ProximaNova Regular, but that costs money, so we're defaulting to Helveitca Neue instead.
-$primary_font:   "Helvetica Neue";
-$secondary_font: "Helvetica";
+$primary_font:   "ProximaNova-Regular";
+//$secondary_font: "Impact";
+$secondary_font: "Helvetica Neue";
 $tertiary_font:  "Arial";
 
 // Gray background is a gradient -- top == 0%, middle == 50%, bottom == 100%
