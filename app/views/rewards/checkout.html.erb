@@ -76,7 +76,7 @@
       color: red;
   }
   label {
-	margin-bottom: 5px;
+	margin-bottom: 4px;
   }
 </style>
 
@@ -389,7 +389,7 @@
           >
         </div>
 
-        <div class="fl input-item-select" id="shipping_state_div">
+        <div class="fl input-item-text" id="shipping_state_div">
           <label for="pledge_shipping_state" id="label_shipping_state">State/Province</label>
           <input class="longer-than-short rounded" id="pledge_shipping_state" name="shipping[state]" size="30" type="text"
                  value="<%= if Rails.env.development? ; "CA" ; end %>"
@@ -763,7 +763,7 @@
         >
       </div>
 
-      <div class="fl input-item-select" id="state_div">
+      <div class="fl input-item-text" id="state_div">
         <label for="pledge_state" id="label_state">State/Province</label>
         <input class="longer-than-short rounded" id="pledge_state" name="billing[state]" size="30" type="text"
                value="<%= if Rails.env.development? ; 'CA' ; end %>"
