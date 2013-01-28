@@ -74,6 +74,8 @@ class RewardsController < ApplicationController
   def pledge
     #@order = Order.find_by_uuid(params[:uuid])
     logger.info("session: " + session.inspect)
+
+    # TODO, high priority, if user has come here before, what to do?
     user = User.new()
     user.update_attributes(params[:user])
     user.save!
