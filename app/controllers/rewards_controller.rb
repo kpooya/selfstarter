@@ -150,7 +150,7 @@ class RewardsController < ApplicationController
       @referring_url_encoded = URI.escape(LINQUET_MINI_URL)
     end
 
-    @tweet_query_string = "original_referer=" + @referring_url_encoded + "&text=" + URI.escape("Awesome! Never Lose Anything Again With Linquet Mini ") + @referring_url_encoded + "#iwantthis #ReTweet";
+    @tweet_query_string = "original_referer=" + @referring_url_encoded + "&text=" + URI.escape("Awesome! Never Lose Anything Again With Linquet Mini ") + @referring_url_encoded + " #iwantthis #ReTweet";
   end
 
   def referrals

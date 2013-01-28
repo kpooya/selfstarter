@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
   end
 
   def get_referring_url
-    LINQUET_SERVER_URL + "/?r=" + self.referring_code
+    LINQUET_MINI_URL + "/?r=" + self.referring_code
   end
 end
