@@ -76,7 +76,7 @@
       color: red;
   }
   label {
-	margin-bottom: 4px;
+	margin-bottom: 3px;
   }
 </style>
 
@@ -508,10 +508,10 @@
     <label for="pledge_country">Country</label>
     <select class="country-selector" id="pledge_country" name="billing[country]">
     <option value=""></option>
-    <option value="CTRY_CA" data-alternative-spellings="CA" data-relevancy-booster="2.0">Canada</option>
     <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
             <%= if Rails.env.development? ; 'selected' ; end %>
     >United States</option>
+    <option value="CTRY_CA" data-alternative-spellings="CA" data-relevancy-booster="2.0">Canada</option>
     <option value="CTRY_AF" data-alternative-spellings="AF" data-relevancy-booster="">Afghanistan</option>
     <option value="CTRY_AX" data-alternative-spellings="AX Aaland Aland" data-relevancy-booster="0.5">Aland Islands</option>
     <option value="CTRY_AL" data-alternative-spellings="AL" data-relevancy-booster="">Albania</option>
