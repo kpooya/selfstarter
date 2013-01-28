@@ -144,7 +144,13 @@ class RewardsController < ApplicationController
     user = User.find_by_id(session[:user])
     if user
       @referring_url = user.get_referring_url
+      @referring_url_encoded = URI.escape(@referring_url)
+    else
+      @referring_url = LINQUET_MINI_URL
+      @referring_url_encoded = URI.escape(LINQUET_MINI_URL)
     end
+
+    @tweet_query_string = "original_referer=" + @referring_url_encoded + "&text=" + URI.escape("Awesome! Never Lose Anything Again With Linquet Mini ") + @referring_url_encoded + "#iwantthis #ReTweet";
   end
 
   def referrals

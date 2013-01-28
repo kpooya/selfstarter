@@ -174,34 +174,11 @@
 		});
 
 		$("#shareonFB").click(function (evt) {
-			$.ajax({
-				type:'POST',
-				url:"/API/InviteStat",
-				dataType:"json",
-				data:{
-					referral_type:"facebook"
-				},
-				success:function (data) {
-
-				}
-			});
-			window.open("http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fepoma.org/?" + refURL + "-fb");
-
+			window.open("http://www.facebook.com/sharer/sharer.php?u=<%=referral_link%>-fb");
 		});
 
 		$("#shareonTwitter").click(function (evt) {
-			$.ajax({
-				type:'POST',
-				url:"/API/InviteStat",
-				dataType:"json",
-				data:{
-					referral_type:"twitter"
-				},
-				success:function (data) {
-				}
-			});
-			window.open("http://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fepoma.org&text=Awesome!%20Never%20Lose%20Your%20Phone%2C%20Keys%20or%20Wallet%20Again%20With%20%40Linquet%20.%20Get%20it%20for%20FREE!%20https://epoma.org%2F%3F" + refURL + "-tw" + "%20%23iwantthis%20%23ReTweet");
-
+			window.open("http://twitter.com/intent/tweet?original_referer=<%= URI.escape(LINQUET_SERVER_URL)%>&text=<%= URI.escape("Awesome! Never Lose Your Phone, Keys or Wallet Again With Linquet. Check " + referral_link) %>-tw");
 		});
 	}
 
