@@ -72,6 +72,26 @@
 
 </style>
 
+<script type="text/javascript">
+	function formElementBlur(target,initalName,isPassword){
+		if(target.value == ''){
+			target.value = initalName;
+			if((isPassword == true)){
+				target.type = "text"
+			}
+		}
+	}
+
+	function formElementFocus(target,initalName,isPassword){
+		if(target.value == initalName){
+			target.value = '';
+		}
+		if(isPassword == true){
+			target.type = "password"
+		}
+	}
+</script>
+
 <div class="gray_background">
   <div class="wrapper clearfix">
     <div class="main_content" style="width:700px">
@@ -120,7 +140,7 @@
         <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
 
         <div class='dynamic_bg shadow rounded'>
-          <input checked="checked" id="pledge_tier_4" name="reward_tier" type="radio" value="4"/>
+          <input checked="checked" id="pledge_tier_22" name="reward_tier" type="radio" value="4"/>
           <label for="pledge_tier_4">
             <div class="money">$85</div>
               <div class="perk">
@@ -132,7 +152,7 @@
         <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
 
         <div class='dynamic_bg shadow rounded'>
-          <input checked="checked" id="pledge_tier_5" name="reward_tier" type="radio" value="5"/>
+          <input checked="checked" id="pledge_tier_33" name="reward_tier" type="radio" value="5"/>
           <label for="pledge_tier_5">
             <div class="money">$195</div>
               <div class="perk">
@@ -148,8 +168,60 @@
         </div>
       </form>
 
-    </div>
+      <div>
+        <span style="float:left"><input id="toggle_distributor" type="checkbox"></span>
+        <label for="toggle_distributor" class="shadow">Become a distributor </label>
+      </div>
+
+      <div id="distributor_wrapper" style="display: none;">
+        <div id="validationErrorInfo" style="display: none"></div>
+        <div>
+          <form action="#" method="post" class="stn-form label-inline simple">
+
+            <div class="field contactusfield" style="margin-bottom: 20px; ">
+              <br><select id="type">
+              <option>Quantity to Reserve:</option>
+              <option>1000</option>
+              <option>5000</option>
+              <option>10000</option>
+              <option>50000</option>
+            </select>
+            </div>
+
+            <div class="field contactusfield" style="">
+              <input id="name" style="" name="name" value="Name" type="text" onfocus="formElementFocus(this,'Name',false);" onblur="formElementBlur(this,'Name',false);">
+            </div>
+
+            <div class="field contactusfield" style="">
+              <input id="email" style="" name="email" type="text" value="Email" onfocus="formElementFocus(this,'Email',false);" onblur="formElementBlur(this,'Email',false);">
+            </div>
+
+            <div class="field contactusfield" style="">
+              <input id="phone" style="" name="phone" type="text" value="Phone Number" onfocus="formElementFocus(this,'Phone Number',false);" onblur="formElementBlur(this,'Phone Number',false);">
+            </div>
+
+            <div class="field contactusfield" style="">
+              <textarea cols="40" id="comment" name="comment" size="40" type="text" onfocus="textElementFocus(this,'Enter Your Message Here',false);" onblur="textElementBlur(this,'Enter Your Message Here',false);">Enter
+                Your Message Here</textarea>
+            </div>
+
+            <div class="actionrow">
+              <button id="submitBtn" class="yellow btn medium">Submit</button>
+            </div>
+          </form>
+          <br>
+        </div>
+      </div>
 
   </div>
 
 </div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function ($) {
+		$('#toggle_distributor').click(function () {
+			$('#distributor_wrapper').toggle();
+		})
+	})
+</script>
