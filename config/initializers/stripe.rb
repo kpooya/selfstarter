@@ -1,4 +1,4 @@
-# require 'stripe/model'
+require 'stripe'
 
 if Rails.env.production?
   Stripe.api_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -8,6 +8,6 @@ else
   STRIPE_PUBLISHABLE_KEY = "pk_test_K9t4awU0QmOsGVt2OkFKA5dw"
 end
 
-STRIPE_PLAN_ID = "some-awesome-plan"
-STRIPE_TRIAL_PERIOD = 1.month# For test
+# STRIPE_PLAN_ID = "some-awesome-plan"
+# STRIPE_TRIAL_PERIOD = 1.month# For test
 
