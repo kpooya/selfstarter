@@ -13,9 +13,6 @@
         padding-right: 20px;
         margin-bottom: 20px;
     }
-    input.shorter-than-long {
-        width: 370px!important;
-    }
     .shipping-address .input-item-text input, .input-item-select select {
         margin-bottom: 10px;
     }
@@ -58,12 +55,10 @@
     .input-item-select option{
 	    font-size: 18px;
     }
-    input.very-long {
-        width: 584px !important;
-    }
     label {
         cursor: pointer;
         display: block;
+	    margin-bottom: 3px;
     }
     fieldset {
         display: block;
@@ -74,9 +69,6 @@
     }
   .alert-error {
       color: red;
-  }
-  label {
-	margin-bottom: 3px;
   }
 </style>
 
@@ -96,23 +88,24 @@
 
       <section class="shipping-address box rounded shadow">
         <div class="heading clearfix">
-          <h2 class="fl title bold">Contact Information</h2><span class="fl instruction">(This is how we will communicate with you and it will be your user name as well.)</span>
+          <h2 class="fl title bold">Contact Information</h2><span class="fl instruction">(This is how we will communicate with you and it will be your username as well.)</span>
         </div>
         <fieldset class="group ajax">
           <div class="input-item-text">
             <label for="pledge_email">Email</label>
             <% if Rails.env.development? ; user_email = 'qiang8701+' + Random.new.rand(10000).to_s + '@gmail.com' ; end %>
 
-            <input class="very-long rounded no-ajax" id="pledge_email" name="user[email]" size="30" type="text"
+            <input class="rounded no-ajax" id="pledge_email" name="user[email]" size="30" type="text"
                    value="<%= if Rails.env.development? ; user_email ; end %>"
             >
           </div>
-          <div class="input-item-text">
+          <div class="input-item-text" class="fr">
             <label for="pledge_email_again">Email Again</label>
-            <input class="very-long rounded no-ajax" id="pledge_email_again" name="again[email]" size="30" type="text"
+            <input class="rounded no-ajax" id="pledge_email_again" name="again[email]" size="30" type="text"
                    value="<%= if Rails.env.development? ; user_email ; end %>"
             >
           </div>
+			<div id="email_error" class="alert alert-error" style="display:none"> </div>
         </fieldset>
       </section>
 
@@ -125,14 +118,14 @@
 
       <div class="input-item-text">
         <label for="pledge_shipping_name">Name</label>
-        <input class="shorter-than-long rounded" id="pledge_shipping_name" name="shipping[name]" size="30" type="text"
+        <input class="rounded" id="pledge_shipping_name" name="shipping[name]" size="30" type="text"
                value="<%= if Rails.env.development? ; "john dev" ; end %>"
         >
       </div>
 
       <div class="input-item-select">
-      <label for="pledge_shipping_country">Country</label>
-      <select id="pledge_shipping_country" name="shipping[country]">
+      <label for="shipping_country">Country</label>
+      <select id="shipping_country" name="shipping[country]">
       <option value=""></option>
       <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
               <%= if Rails.env.development? ; 'selected' ; end %>
@@ -375,34 +368,35 @@
       </div>
 
       <div class="input-item-text">
-        <label for="pledge_shipping_address">Street Address</label>
-        <input class="rounded shorter-than-long" id="pledge_shipping_address" name="shipping[address]" size="30" type="text"
+        <label for="shipping_address">Street Address</label>
+        <input class="round" id="shipping_address" name="shipping[address]" size="30" type="text"
                value="<%= if Rails.env.development? ; "1 Infinite Loop" ; end %>"
         >
       </div>
 
       <div class="clearfix">
         <div class="fl input-item-text">
-          <label for="pledge_shipping_city">City</label>
-          <input class="longer-than-short rounded" id="pledge_shipping_city" name="shipping[city]" size="30" type="text"
+          <label for="shipping_city">City</label>
+          <input class="longer-than-short rounded" id="shipping_city" name="shipping[city]" size="30" type="text"
                  value="<%= if Rails.env.development? ; "Cupertino" ; end %>"
           >
         </div>
 
         <div class="fl input-item-text" id="shipping_state_div">
-          <label for="pledge_shipping_state" id="label_shipping_state">State/Province</label>
-          <input class="longer-than-short rounded" id="pledge_shipping_state" name="shipping[state]" size="30" type="text"
+          <label for="shipping_state" id="label_shipping_state">State/Province</label>
+          <input class="longer-than-short rounded" id="shipping_state" name="shipping[state]" size="30" type="text"
                  value="<%= if Rails.env.development? ; "CA" ; end %>"
           >
         </div>
 
         <div class="fl input-item-text">
-          <label for="pledge_shipping_zipcode" id="label_shipping_zipcode">Postal Code</label>
-          <input class="longer-than-short rounded zipcode-field" id="pledge_shipping_zipcode" name="shipping[zip]" size="30" type="text"
+          <label for="shipping_zip" id="label_shipping_zipcode">Zip/Postal Code</label>
+          <input class="longer-than-short rounded zipcode-field" id="shipping_zip" name="shipping[zip]" size="30" type="text"
                  value="<%= if Rails.env.development? ; "95014" ; end %>"
           >
         </div>
       </div>
+      <div id="shipping_error" class="alert alert-error" style="display:none"> </div>
 
       </fieldset>
       </section>
@@ -418,8 +412,8 @@
 
     <div class="clearfix">
       <div class="fl input-item-text">
-        <label for="pledge_firstname">Name</label>
-        <input class="rounded ajax" id="order_user_name" name="billing[name]" size="30" type="text"
+        <label for="billing_name">Name</label>
+        <input class="rounded ajax" id="billing_name" name="billing[name]" size="30" type="text"
                value="<%= if Rails.env.development? ; "John card" ; end %>"
         >
       </div>
@@ -427,16 +421,12 @@
 
     <div class="clearfix">
       <div class="fl input-item-text">
-        <label for="pledge_card_number">Card Number</label>
+        <label for="card_number">Card Number</label>
         <input autocomplete="off" class="rounded no-ajax" id="card_number" size="30" type="text"
                value="<%= if Rails.env.development? ; 4242424242424242 ; end %>">
       </div>
-      <div class="fl paypal_images amex"></div>
-      <div class="fl paypal_images mc"></div>
-      <div class="fl paypal_images visa"></div>
-      <div class="fl paypal_images discover"></div>
       <div class="fl input-item-text">
-        <label for="pledge_cvv2">Security Code or Verification Code</label>
+        <label for="card_code">Security Code or Verification Code</label>
         <input autocomplete="off" class="rounded very-short no-ajax" id="card_code" size="30" type="text"
                value="<%= if Rails.env.development? ; 123 ; end %>">
       </div>
@@ -444,7 +434,7 @@
 
     <div class="clearfix">
       <div class="fl input-item-select">
-        <label for="pledge_card_exp_date_month">Expiration Date</label>
+        <label for="card_month">Expiration Date</label>
         <select class="short no-ajax" id="card_month">
           <option value="">MM</option>
           <option value="1">01 - January</option>
@@ -467,7 +457,7 @@
       </div>
 
       <div class="fl input-item-select">
-        <label for="pledge_card_exp_date_year">&nbsp;</label>
+        <label for="card_year">&nbsp;</label>
         <select class="very-short no-ajax" id="card_year">
           <option value="">YYYY</option>
           <option value="2013">2013</option>
@@ -498,15 +488,15 @@
       </div>
     </div>
 
-    <div class="input-item-checkbox clearfix">
-      <input class="fl no-ajax" id="same_as_my_shipping_address" name="same_as_my_shipping_address" type="checkbox" value="1">
-      <label class="fl" for="same_as_my_shipping_address">Same as my shipping address</label>
+    <div class="input-item-checkbox clearfix" style="margin-top: 10px;">
+      <input class="fl" id="same_as_my_shipping_address" name="same_as_my_shipping_address" type="checkbox" value="1">
+      <label class="fl" for="same_as_my_shipping_address" style="font-size: 22px";>Same as my shipping address</label>
     </div>
 
-    <div class="ajax" id="billing_address">
+    <div id="all_billing_address">
     <div class="input-item-select">
-    <label for="pledge_country">Country</label>
-    <select class="country-selector" id="pledge_country" name="billing[country]">
+    <label for="billing_country">Country</label>
+    <select class="country-selector" id="billing_country" name="billing[country]">
     <option value=""></option>
     <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
             <%= if Rails.env.development? ; 'selected' ; end %>
@@ -749,35 +739,39 @@
     </div>
 
     <div class="input-item-text">
-      <label for="pledge_address">Street Address</label>
-      <input class="very-long rounded" id="pledge_address" name="billing[address]" size="30" type="text"
+      <label for="billing_address">Street Address</label>
+      <input class="rounded" id="billing_address" name="billing[address]" size="30" type="text"
              value="<%= if Rails.env.development? ; '1600 Amphitheatre Pkwy' ; end %>"
       >
     </div>
 
     <div class="clearfix">
       <div class="fl input-item-text">
-        <label for="pledge_city">City</label>
-        <input class="longer-than-short rounded" id="pledge_city" name="billing[city]" size="30" type="text"
+        <label for="billing_city">City</label>
+        <input class="longer-than-short rounded" id="billing_city" name="billing[city]" size="30" type="text"
                value="<%= if Rails.env.development? ; 'Mountain View' ; end %>"
         >
       </div>
 
       <div class="fl input-item-text" id="state_div">
-        <label for="pledge_state" id="label_state">State/Province</label>
-        <input class="longer-than-short rounded" id="pledge_state" name="billing[state]" size="30" type="text"
+        <label for="billing_state" id="label_state">State/Province</label>
+        <input class="longer-than-short rounded" id="billing_state" name="billing[state]" size="30" type="text"
                value="<%= if Rails.env.development? ; 'CA' ; end %>"
         >
       </div>
 
       <div class="fl input-item-text">
-        <label for="pledge_zipcode" id="label_zipcode">Postal Code</label>
-        <input class="longer-than-short rounded zipcode-field" id="pledge_zipcode" name="billing[zip]" size="30" type="text"
+        <label for="billing_zip" id="label_zipcode">Zip/Postal Code</label>
+        <input class="longer-than-short rounded zipcode-field" id="billing_zip" name="billing[zip]" size="30" type="text"
                value="<%= if Rails.env.development? ; "94043" ; end %>"
         >
       </div>
     </div>
+
     </div>
+
+    <div id="billing_error" class="alert alert-error" style="display:none"> </div>
+
     <input id="user_stripe_token" name="user_stripe_token" type="hidden" value="" />
     </fieldset>
     <div id="stripe_error" class="alert alert-error" style="display:none"> </div>
@@ -795,12 +789,75 @@
 <%= if Rails.env.development? ; "(dev_mode) current time: " + Time.now.to_s ; end %>
 
 <script>
+	function validate_email() {
+		if ($('#pledge_email').val().trim() == 0) {
+			$('#email_error').text("Please enter your email.").show();
+			return false;
+		}
+		if ($('#pledge_email').val() != $('#pledge_email_again').val()) {
+			$('#email_error').text("Email is not the same as entered before.").show();
+			return false;
+		}
+
+		return true;
+	}
+
+	function validate_shipping_address() {
+		if ($('#shipping_country').val().trim() == 0) {
+			$('#shipping_error').text("Please enter your shipping country").show();
+			return false;
+		}
+		if ($('#shipping_state').val().trim() == 0) {
+			$('#shipping_error').text("Please enter your shipping state").show();
+			return false;
+		}
+		if ($('#shipping_address').val().trim() == 0) {
+			$('#shipping_error').text("Please enter your shipping street address").show();
+			return false;
+		}
+		if ($('#shipping_city').val().trim() == 0) {
+			$('#shipping_error').text("Please enter your shipping city").show();
+			return false;
+		}
+		if ($('#shipping_zip').val().trim() == 0) {
+			$('#shipping_error').text("Please enter your shipping zip/postal code").show();
+			return false;
+		}
+
+		return true;
+	}
+
+	function validate_billing_address() {
+		if ($('#billing_country').val().trim() == 0) {
+			$('#billing_error').text("Please enter your billing country").show();
+			return false;
+		}
+		if ($('#billing_state').val().trim() == 0) {
+			$('#billing_error').text("Please enter your billing state").show();
+			return false;
+		}
+		if ($('#billing_address').val().trim() == 0) {
+			$('#billing_error').text("Please enter your billing street address").show();
+			return false;
+		}
+		if ($('#billing_city').val().trim() == 0) {
+			$('#billing_error').text("Please enter your billing city").show();
+			return false;
+		}
+		if ($('#billing_zip').val().trim() == 0) {
+			$('#billing_error').text("Please enter your billing zip/postal code").show();
+			return false;
+		}
+
+		return true;
+	}
+
     $(document).ready(function () {
 	    $("#same_as_my_shipping_address").change(function(){
 		    if ($('#same_as_my_shipping_address').is(':checked')) {
-			    $("#billing_address").hide();
+			    $("#all_billing_address").hide();
 		    } else {
-			    $("#billing_address").show();
+			    $("#all_billing_address").show();
 		    }
 	    })
 
@@ -808,6 +865,20 @@
         var subscription = {
             setupForm:function () {
                 $('#new_pledge').submit(function () {
+	                if ( ! validate_email() ) {
+	                  return false;
+	                }
+
+	                if ( ! validate_shipping_address() ) {
+	                  return false;
+	                }
+
+	                if ( ! $('#same_as_my_shipping_address').is(':checked')) {
+	                    if ( ! validate_billing_address() ) {
+		                  return false;
+		                }
+	                }
+
                     $('input[type=submit]').prop('disabled', true);
                     if ($('#card_number').length) {
                         subscription.processCard();

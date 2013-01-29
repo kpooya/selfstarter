@@ -102,6 +102,7 @@ class RewardsController < ApplicationController
                             :user_id => user.id)
 
     token = params[:user_stripe_token]
+
     stripe_customer = Stripe::Customer.create(
         :card => token,
         :description => user.email
