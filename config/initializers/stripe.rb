@@ -1,5 +1,3 @@
-require 'stripe'
-
 if Rails.env.production?
   Stripe.api_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   STRIPE_PUBLISHABLE_KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
