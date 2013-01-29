@@ -11,8 +11,6 @@ Selfstarter::Application.routes.draw do
 
   resources :pledges
 
-  resources :stripes
-
   root :to => 'rewards#index'
   match '/rewards'               => 'rewards#index'
   get 'rewards/select_reward'
