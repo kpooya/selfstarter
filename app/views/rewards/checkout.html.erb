@@ -789,6 +789,13 @@
 <%= if Rails.env.development? ; "(dev_mode) current time: " + Time.now.to_s ; end %>
 
 <script>
+	function clear_error_messages() {
+		$('#email_error').text("").hide();
+		$('#shipping_error').text("").hide();
+		$('#billing_error').text("").hide();
+		$('#stripe_error').text("").hide();
+	}
+
 	function validate_email() {
 		if ($('#pledge_email').val().trim() == 0) {
 			$('#email_error').text("Please enter your email.").show();
@@ -852,66 +859,68 @@
 		return true;
 	}
 
-    $(document).ready(function () {
-	    $("#same_as_my_shipping_address").change(function(){
-		    if ($('#same_as_my_shipping_address').is(':checked')) {
-			    $("#all_billing_address").hide();
-		    } else {
-			    $("#all_billing_address").show();
-		    }
-	    })
+	$(document).ready(function () {
+		$("#same_as_my_shipping_address").change(function () {
+			if ($('#same_as_my_shipping_address').is(':checked')) {
+				$("#all_billing_address").hide();
+			} else {
+				$("#all_billing_address").show();
+			}
+		})
 
-        Stripe.setPublishableKey("<%=STRIPE_PUBLISHABLE_KEY %>");
-        var subscription = {
-            setupForm:function () {
-                $('#new_pledge').submit(function () {
-	                if ( ! validate_email() ) {
-	                  return false;
-	                }
+		Stripe.setPublishableKey("<%=STRIPE_PUBLISHABLE_KEY %>");
+		var subscription = {
+			setupForm:function () {
+				$('#new_pledge').submit(function () {
+					clear_error_messages();
 
-	                if ( ! validate_shipping_address() ) {
-	                  return false;
-	                }
+					if (!validate_email()) {
+						return false;
+					}
 
-	                if ( ! $('#same_as_my_shipping_address').is(':checked')) {
-	                    if ( ! validate_billing_address() ) {
-		                  return false;
-		                }
-	                }
+					if (!validate_shipping_address()) {
+						return false;
+					}
 
-                    $('input[type=submit]').prop('disabled', true);
-                    if ($('#card_number').length) {
-                        subscription.processCard();
-                        return false;
-                    } else {
-                        return true;
-                    }
-                });
-            },
-            processCard:function () {
-                var card;
-                card = {
-                    name:$('#order_user_name').val(),
-                    number:$('#card_number').val(),
-                    cvc:$('#card_code').val(),
-                    expMonth:$('#card_month').val(),
-                    expYear:$('#card_year').val()
-                };
-                Stripe.createToken(card, subscription.handleStripeResponse);
-            },
-            handleStripeResponse:function (status, response) {
-                if (status === 200) {
-                    $('#user_stripe_token').val(response.id);
-                    <%= if Rails.env.development? ; 'console.log(response.id)' ; end %>
+					if (!$('#same_as_my_shipping_address').is(':checked')) {
+						if (!validate_billing_address()) {
+							return false;
+						}
+					}
 
-                    $('#new_pledge')[0].submit();
-                } else {
-                    $('#stripe_error').text(response.error.message).show();
-                    return $('input[type=submit]').prop('disabled', false);
-                }
-            }
-        };
-        subscription.setupForm();
-    });
+					$('input[type=submit]').prop('disabled', true);
+					if ($('#card_number').length) {
+						subscription.processCard();
+						return false;
+					} else {
+						return true;
+					}
+				});
+			},
+			processCard:function () {
+				var card;
+				card = {
+					name:$('#order_user_name').val(),
+					number:$('#card_number').val(),
+					cvc:$('#card_code').val(),
+					expMonth:$('#card_month').val(),
+					expYear:$('#card_year').val()
+				};
+				Stripe.createToken(card, subscription.handleStripeResponse);
+			},
+			handleStripeResponse:function (status, response) {
+				if (status === 200) {
+					$('#user_stripe_token').val(response.id);
+				<%= if Rails.env.development? ; 'console.log(response.id)' ; end %>
+
+					$('#new_pledge')[0].submit();
+				} else {
+					$('#stripe_error').text(response.error.message).show();
+					return $('input[type=submit]').prop('disabled', false);
+				}
+			}
+		};
+		subscription.setupForm();
+	});
 </script>
 
