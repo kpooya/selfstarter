@@ -62,7 +62,7 @@ call_to_action: "Reserve for $25"
 price_human: "It costs money!"
 
 # The paragraph below the price. You'd probably say something about how you're not going to charge them before it ships (so it's less risky).
-dont_give_them_a_reason_to_say_no: "We won’t charge you until we notify you that your Linquet Mini is ready to ship."
+dont_give_them_a_reason_to_say_no: "We won't charge your credit card until your Linquet Mini is ready. Shipping included to the US and Canada."
 
 # Social Stuff
 facebook_app_id: "1234567890"
