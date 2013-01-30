@@ -3,50 +3,112 @@
     <h4>Frequently Asked Questions</h4>
     <ul>
       <li class=''>
-          <span class=''>How do I setup Amazon Payments?</span>
-          <p>You'll need to <a href="https://payments.amazon.com/sdui/sdui/accountstatus">create an Amazon Seller Central account</a>. Afterwards, get your access key and secret key from the "Integration" tab on your AWS account. <a href="https://payments.amazon.com/sdui/sdui/helpTab/Checkout-by-Amazon/Advanced-Integration-Help/Using-Your-Access-Key">Click here for more info</a>.
-          <br />
-          <br />
-          Once you have your access key and secret key, head over to <code>config/settings.yml</code>. Change <code>amazon_access_key</code> and <code>amazon_secret_key</code> appropriately.</p>
+        <details class=''>
+          <summary class=''>How many Linquet Mini can I add (linq) to a phone?</summary>
+          <p>You can linq multiple Linquet Mini’s to your phone,
+            giving you the great ability to track & protect multiple valuables simultaneously.
+            In order to have a fine user experience, we recommend using no more than 10 Linquet Mini's at the same time</p>
+        </details>
       </li>
       <li>
-          <span>Can I use another payments provider?</span>
-          <p>Of course. We haven't built in support for other providers, but we recommend that you take a look at <a href="https://stripe.com">Stripe</a> or <a href="https://wepay.com">WePay</a>.</p>
+        <details class=''>
+          <summary>What Smartphones does Linquet Mini support?</summary>
+          <p>Linquet Mini works with iPhone 4s, iPhone 5, New iPad, iPad mini, New iPod touch.
+            We’re also working on our app for Android devices supporting Bluetooth Low Energy (BLE), running Android 4.0 and higher.</p>
+        </details>
       </li>
       <li>
-          <span>How do I edit the FAQ?</span>
-          <p>The faq is a partial located in <code>app/views/rewards/homepage/_faq.html.erb</code> The <code>summary</code> tag is the title, the <code>p</code> is the body. Make sure to add an <code>li</code> tag for each FAQ entry.</p>
+        <details class=''>
+          <summary>Do I need to add any hardware or adaptor to my phone?</summary>
+          <p>No, you don’t have to attach ANY hardware to your phone. All you need is our free app.</p>
+        </details>
       </li>
       <li>
-          <span>How do I change around the images, product name, etc?</span>
-          <p>The best way is in <code>config/settings.yml</code>. It has variables for several different parts, the video, the product name, the call to action button ("Fork Now"), and several more.
-          </p>
+        <details class=''>
+          <summary>What is the range of Linquet Mini?</summary>
+          <p>Up to 150 feet or about 50 Meters (line of sight).</p>
+        </details>
       </li>
+
+    <li>
+      <details class=''>
+        <summary>How long will the battery last?</summary>
+        <p>Even with constant usage (24/7), the replaceable battery will last up to 1 year.</p>
+      </details>
+    </li>
+    <li class=''>
+      <details class=''>
+        <summary>What can I do with the button?</summary>
+        <p>The Linquet Mini button could be used for many things:
+          Find your phone (even when it’s on silent)
+          Panic button (notify police and your loved ones)
+          Camera controller
+          And we’ll constantly update more functions for it</p>
+      </details>
+    </li>
+    <li class=''>
+      <details class=''>
+        <summary class=''>What are “My Profiles”?</summary>
+        <p>In your cloud-based account, you can customize your experience for different situations. This will turn Linquet into a smart
+          friend who actually knows you. For example, don’t alarm when I’m at work. Or make the alarm louder in the gym and etc.</p>
+      </details>
+    </li>
     </ul>
     <ul class='col2'>
-      <li>
-          <span>How do I change the CSS?</span>
-          <p>Head over to <code>app/assets/stylesheets/variables.css.scss</code>. It makes it easy to change around the elements used throughout the HTML.
-          <br />
-          <br />
-          Alternatively, you can dive right into the CSS, have a look at <code>app/assets/stylesheets/main.css.scss</code>.</p>
+
+      <li class=''>
+        <details class=''>
+          <summary class=''>How do I replace the battery?</summary>
+          <p>Open the top part of the case to replace the battery with a new one.</p>
+        </details>
+      </li>
+
+      <li class=''>
+        <details class=''>
+          <summary class=''>Is the alarm audible?</summary>
+          <p>Yes, the alarm is loud enough that you could even hear it in outdoor environments.</p>
+        </details>
+      </li>
+
+      <li class=''>
+        <details class=''>
+          <summary class=''>What kind of battery does the Linquet Mini use?</summary>
+          <p>The Linquet Mini uses a commonly found coin cell battery.</p>
+        </details>
       </li>
       <li class=''>
-          <span>Why did you release this?</span>
-          <p>Hardware startups are less welcome on Kickstarter than they were 6 months ago. We needed to roll our own kickstarter, so we did. Other hardware startups probably will too, so we made it easier for them by open sourcing our way of doing it.</p>
+        <details class=''>
+          <summary class=''>Is Linquet Mini waterproof?</summary>
+          <p>No, it has open holes for the Buzzer. Please protect it from water. </p>
+        </details>
       </li>
+
+
       <li class=''>
-          <span class=''>What software stack does this use?</span>
-          <p>It's a Ruby on Rails app that makes heavy use of SCSS, Kickstarter's wonderful <code>amazon_flex_pay</code> gem, and a hint of CoffeeScript.</p>
+        <details class=''>
+          <summary class=''>How do you add (linq) Linquet Mini’s to your phone?</summary>
+          <p>You will be able to pair and add them easily inside the Linquet app. No need to go to Bluetooth setting.</p>
+        </details>
       </li>
+
+
       <li class=''>
-          <span class=''>How do I deploy it?</span>
-          <p>We recommend using Heroku. We include a Procfile for you, so all you need to do is:
-          <p>
-            <p>Install the <a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a>
-            <p>Run <code>heroku create</code> in Selfstarter's folder
-            <p>Run <code>git push heroku master</code> in Selfstarter's folder
+        <details class=''>
+          <summary class=''>After adding Linquet to my phone, can I still use my Bluetooth headset or car kit?</summary>
+          <p>Yes.</p>
+        </details>
       </li>
+
+
+      <li class=''>
+        <details class=''>
+          <summary class=''>What if I don’t have a BLE-enabled phone?</summary>
+          <p>Don’t worry, we got you covered! Our current version of Linquet doesn’t have some of the Linqute Mini features, but it works
+            with regular Bluetooth (classic) and works with ALL current Android phones (V 2.3 and higher).</p>
+        </details>
+      </li>
+
+
     </ul>
   </div>
 </div>

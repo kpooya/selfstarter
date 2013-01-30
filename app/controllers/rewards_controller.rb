@@ -131,7 +131,7 @@ class RewardsController < ApplicationController
     if Rails.env.development?
 # charge the Customer instead of the card
       Stripe::Charge.create(
-          :amount => amount_in_cents, # $15.00 this time
+          :amount => amount_in_cents,
           :currency => "usd",
           :customer => stripe_customer_id
       )
