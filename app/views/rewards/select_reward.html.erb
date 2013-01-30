@@ -180,18 +180,17 @@
         </div>
       </form>
 
-      <div class="fr" style="margin-bottom: 5px; margin-top: 10px;">
-        <span style="float:left"><input id="toggle_distributor" type="checkbox"></span>
-        <label for="toggle_distributor" class="shadow rounded">Reserve as a distributor (just a link not a button smaller)</label>
+      <div class="fl" style="margin-bottom: 5px; margin-top: 10px;">
+        <span style="text-decoration: underline;cursor: pointer; font-size: 18px;" id="toggle_distributor" class="rounded">Reserve as a Distributor ▼</span>
       </div>
 
-      <div id="distributor_wrapper" class="rounded fr" style="display: none;width:70%; padding: 0; margin: 0;">
-        <div id="distributorErrorInfo" style="display: none"></div>
+      <div id="distributorErrorInfo" style="display: none"></div>
+      <div id="distributor_wrapper" class="rounded" style="display: none;width:70%; padding: 0; margin: 0;">
         <div>
-          <form action="" method="post" class="stn-form label-inline simple" style="border: solid #add8e6 1px">
+          <form action="" id="distributorForm" method="post" class="stn-form label-inline simple">
 
-            <div class="field contactusfield" style="margin-bottom: 10px; ">
-              <select id="type">
+            <div class="field contactusfield" style="margin-bottom: 10px;">
+              <select id="type"  style="width: 205px; height: 25px; font-size: 18px;">
               <option>Quantity to Reserve:</option>
               <option>1,000</option>
               <option>5,000</option>
@@ -214,7 +213,7 @@
             </div>
 
             <div class="field contactusfield" style="margin-bottom: 10px;">
-              <select class="country-selector" id="country" name="country]">
+              <select class="country-selector" style="width: 205px; height: 25px; font-size: 18px;" id="country" name="country">
               <option value=""></option>
               <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
                       <%= if Rails.env.development? ; 'selected' ; end %>
@@ -459,11 +458,11 @@
 
             <div class="field contactusfield" style="margin-bottom: 10px;">
               <textarea cols="40" id="comment" name="comment" type="text" class="rounded"
-                        onfocus="textElementFocus(this,'Let us know more about you');" onblur="textElementBlur(this,'Let us know more about you');">Enter Your Message Here</textarea>
+                        onfocus="textElementFocus(this,'Let us know more about you');" onblur="textElementBlur(this,'Let us know more about you');">Let us know more about you</textarea>
             </div>
 
             <div class="actionrow" style="margin-bottom: 10px;">
-              <input type="submit" id="submitBtn" class="shadow btn medium">
+              <input type="submit" id="distributorSubmitBtn" class="shadow btn medium">
             </div>
           </form>
           <br>
@@ -478,11 +477,18 @@
 <script type="text/javascript">
 	jQuery(document).ready(function ($) {
 		$('#toggle_distributor').click(function () {
-			$('#distributor_wrapper').toggle(600);
+			$('#distributor_wrapper').toggle(100);
 		})
 
 		<% if request.params[:d] %>
 			$('#toggle_distributor').click();
 		<% end %>
 		})
+
+		$('#distributorForm').submit(function () {
+			$('#distributor_wrapper').toggle(100);
+			<%# TODO, high priority %>
+			$('#distributorErrorInfo').html("Thanks! We will contact you shortly.").show();
+			return false;
+		});
 </script>
