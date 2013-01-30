@@ -33,21 +33,21 @@ ActiveRecord::Schema.define(:version => 20130124000042) do
     t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
     t.string   "user_id"
-    t.decimal  "price"
+    t.decimal  "price",               :precision => 10, :scale => 0
     t.integer  "plan_id"
     t.integer  "tracking_number"
     t.integer  "phone"
     t.date     "expiration"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "plans", :force => true do |t|
     t.string   "description"
-    t.decimal  "price"
+    t.decimal  "price",       :precision => 10, :scale => 0
     t.integer  "number"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "referrals", :force => true do |t|
