@@ -223,7 +223,9 @@
 <form action="" id="distributorForm" method="post" class="stn-form label-inline simple">
 
 <div class="field contactusfield" style="margin-bottom: 10px;">
-  <select id="type" style="width: 205px; height: 25px; font-size: 18px;">
+  <select id="type" style="width: 205px; height: 25px; font-size: 18px;font-family: ProximaNova-Regular, 'Helvetica Neue', Arial;color: #6b6b6b;
+		  text-shadow: 0 1px 0px white;
+		  -webkit-font-smoothing: antialiased;">
     <option>Quantity to Reserve:</option>
     <option>1,000</option>
     <option>5,000</option>
@@ -237,6 +239,10 @@
 </div>
 
 <div class="field contactusfield" style="margin-bottom: 10px;">
+  <input id="company" class="rounded" name="company" value="Company" type="text" onfocus="formElementFocus(this,'Company',false);" onblur="formElementBlur(this,'Company',false);">
+</div>
+
+<div class="field contactusfield" style="margin-bottom: 10px;">
   <input id="phone" class="rounded" name="phone" type="text" value="Phone Number" onfocus="formElementFocus(this,'Phone Number',false);" onblur="formElementBlur(this,'Phone Number',false);">
 </div>
 
@@ -246,15 +252,18 @@
 </div>
 
 <div class="field contactusfield" style="margin-bottom: 10px;">
-<select class="country-selector" style="width: 205px; height: 25px; font-size: 18px;" id="country" name="country">
-<option value=""></option>
+<select class="country-selector" style="width: 205px; height: 25px; font-size: 18px;font-family: ProximaNova-Regular, 'Helvetica Neue', Arial;color: #6b6b6b;
+		text-shadow: 0 1px 0px white;
+		-webkit-font-smoothing: antialiased;" id="country" name="country">
+<option value="Country">Country</option>
 <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
         <%= if Rails.env.development?;
               'selected';
-            end %>
+            end; "" %>
 >United States
 </option>
 <option value="CTRY_CA" data-alternative-spellings="CA" data-relevancy-booster="2.0">Canada</option>
+<option value=""></option>
 <option value="CTRY_AF" data-alternative-spellings="AF" data-relevancy-booster="">Afghanistan</option>
 <option value="CTRY_AX" data-alternative-spellings="AX Aaland Aland" data-relevancy-booster="0.5">Aland Islands</option>
 <option value="CTRY_AL" data-alternative-spellings="AL" data-relevancy-booster="">Albania</option>
@@ -496,14 +505,15 @@
 </select>
 </div>
 
+<% more_about_you="Let us know more about you" %>
 <div class="field contactusfield" style="margin-bottom: 10px;">
   <textarea cols="40" id="comment" name="comment" type="text" class="rounded"
-            onfocus="textElementFocus(this,'Let us know more about you');" onblur="textElementBlur(this,'Let us know more about you');">Let
-    us know more about you</textarea>
+            onfocus="textElementFocus(this,'<%=more_about_you%>');"
+            onblur="textElementBlur(this,'<%=more_about_you%>');"><%=more_about_you%></textarea>
 </div>
 
 <div class="actionrow" style="margin-bottom: 10px;">
-  <input type="submit" id="distributorSubmitBtn" class="shadow btn medium">
+  <input type="submit" id="distributorSubmitBtn" class="shadow btn medium rounded">
 </div>
 </form>
 <br>
