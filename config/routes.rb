@@ -20,6 +20,7 @@ Selfstarter::Application.routes.draw do
   match 'rewards/pledge'
   match 'rewards/share'
   match 'rewards/earlybird'    => 'rewards#select_reward'
+  match 'rewards/distributor'
   match 'rewards/referrals'
   match '/rewards/share/:uuid'   => 'rewards#share', :via => :get
   match '/rewards/ipn'           => 'rewards#ipn', :via => :post

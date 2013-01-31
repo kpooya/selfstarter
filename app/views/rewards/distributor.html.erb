@@ -1,0 +1,168 @@
+<style>
+	h2 {
+		margin-bottom: 10px;
+	}
+
+	.perk {
+		margin-bottom: 15px;
+	}
+
+	.fr {
+		float: right;
+	}
+
+	.dynamic_bg {
+		margin-bottom: 0px;
+	}
+
+	.shadow {
+		background: #d2d2d2;
+		box-shadow: 1px 1px 2px #888;
+	}
+
+	.rounded {
+		border-radius: 6px;
+	}
+
+	.perks-selection input {
+		margin-left: 60px;
+		margin-top: 15px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.perks-selection label {
+		display: inline-block;
+		width: auto;
+		line-height: normal;
+		margin: 0;
+	}
+
+	.perks-selection .perk {
+		width: 380px;
+		font-size: 20px;
+		margin-left: 185px;
+		margin-bottom: 5px;
+		padding-bottom: 5px;
+		margin-top: -25px;
+	}
+
+	.perks-selection .claimed {
+		font-size: 17px;
+		margin: 7px 0px;
+	}
+
+	.perks-selection .money {
+		background: none;
+		color: #222;
+		font-family: SecondaSoft-Bold, Arial, sans-serif;
+		font-size: 22px;
+		line-height: 18px;
+		margin: 15px 10px 0px 9px;
+		padding: 0px;
+		display: inline-block;
+		word-wrap: break-word;
+	}
+
+	.dynamic_bg:hover {
+		background-color: #abd7db !important;
+		-webkit-transition: 500ms linear 0s;
+		-moz-transition: 500ms linear 0s;
+		-o-transition: 500ms linear 0s;
+		transition: 500ms linear 0s;
+		outline: 0 none;
+		transition: .5s;
+		cursor: pointer;
+	}
+
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#check_distributor_code').submit(function () {
+			$("#check_message").hide();
+			if (true) {
+				$("#main_content").show();
+			} else {
+				$('#check_message').text("Not a distributor code.").show();
+			}
+			return false;
+		});
+	});
+</script>
+
+<div class="gray_background">
+
+  <div class="wrapper clearfix">
+
+    <form id="check_distributor_code">
+      <div id="check_message" class="alert alert-error" style="display: none;"> </div>
+      <label for="distributor_code">Distributor code</label>
+      <input class="rounded" style="font-size:20px; margin-bottom: 20px;" id="distributor_code" name="distributor_code" size="10" type="text">
+      <input class="button rounded shadow bold" name="commit" type="submit" value="Apply">
+    </form>
+
+    <div class="main_content" id="main_content" style="width:700px; display: none;">
+
+      <h3>Thanks for reserving Linquet</h3>
+
+
+      <h3 style="font-size: 28px;">How many Linquet Mini do you want to reserve?</h3>
+
+      <form action="checkout" method="post">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+        <div id="perk-menu" class="group perks-selection"><!--
+        graybox -->
+
+          <div class='dynamic_bg shadow rounded'>
+            <input checked="checked" id="pledge_tier_1" name="reward_tier" type="radio" value="1"/>
+            <label for="pledge_tier_1">
+              <div class="money">1,000</div>
+              <div class="perk">
+              </div>
+            </label>
+          </div>
+          <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
+
+          <div class='dynamic_bg shadow rounded'>
+            <input checked="checked" id="pledge_tier_2" name="reward_tier" type="radio" value="1"/>
+            <label for="pledge_tier_1">
+              <div class="money">5,000</div>
+              <div class="perk">
+              </div>
+            </label>
+          </div>
+          <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
+
+          <div class='dynamic_bg shadow rounded'>
+            <input checked="checked" id="pledge_tier_3" name="reward_tier" type="radio" value="1"/>
+            <label for="pledge_tier_1">
+              <div class="money">10,000</div>
+              <div class="perk">
+              </div>
+            </label>
+          </div>
+          <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
+
+          <div class='dynamic_bg shadow rounded'>
+            <input checked="checked" id="pledge_tier_4" name="reward_tier" type="radio" value="1"/>
+            <label for="pledge_tier_1">
+              <div class="money">50,000</div>
+              <div class="perk">
+              </div>
+            </label>
+          </div>
+          <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
+
+        </div>
+        <div class="clearfix input-item-submit" style="margin-top: 10px;">
+          <input class="fr button rounded shadow bold" name="commit" type="submit" value="Continue ▶">
+        </div>
+      </form>
+
+      <br>
+    </div>
+
+  </div>
+</div>

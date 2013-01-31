@@ -107,12 +107,12 @@
 
 	$(document).ready(function () {
 		$('#check_early_bird').submit(function () {
-			$("#wrong_promo").hide();
+			$("#check_message").hide();
 			if (["linq4", "linq5", "linq6", "linq7", "linq12", "linq24", "linqlb", "linqtc", "linqmash", "linqgo", "linqgm", "linqeng"].indexOf($('#early_bird_code').val()) >= 0) {
 				$("#pledge_tier_1").removeAttr('disabled');
-				$('#wrong_promo').text("Early bird option is unlocked! You can select that option now").show();
+				$('#check_message').text("Early bird option is unlocked! You can select that option now").show();
 			} else {
-				$('#wrong_promo').text("Your code is not an early bird code.").show();
+				$('#check_message').text("Not an early bird code.").show();
 			}
 			return false;
 		});
@@ -123,7 +123,7 @@
 <div class="wrapper clearfix">
 <div class="main_content" style="width:700px">
 <form id="check_early_bird">
-  <div id="wrong_promo" class="alert alert-error" style="display: none;">Your code is not an early bird code.</div>
+  <div id="check_message" class="alert alert-error" style="display: none;"> </div>
   <label for="early_bird_code">Early bird code</label>
   <input class="rounded" style="font-size:20px; margin-bottom: 20px;" id="early_bird_code" name="early_bird_code" size="10" type="text">
   <input class="button rounded shadow bold" name="commit" type="submit" value="Apply">
