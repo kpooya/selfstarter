@@ -24,11 +24,11 @@ class RewardsController < ApplicationController
     #end
 
     @counts = {}
-    @counts[1] = 0;
-    @counts[2] = 0;
-    @counts[3] = 0;
-    @counts[4] = 0;
-    @counts[5] = 0;
+    @counts[1] = 0
+    @counts[2] = 0
+    @counts[3] = 0
+    @counts[4] = 0
+    @counts[5] = 0
 
 
     for order in Order.all

@@ -109,9 +109,10 @@
 		$('#check_early_bird').submit(function () {
 			$("#wrong_promo").hide();
 			if (["linq4", "linq5", "linq6", "linq7", "linq12", "linq24", "linqlb", "linqtc", "linqmash", "linqgo", "linqgm", "linqeng"].indexOf($('#early_bird_code').val()) >= 0) {
-				 $("#pledge_tier_1").removeAttr('disabled');
+				$("#pledge_tier_1").removeAttr('disabled');
+				$('#wrong_promo').text("Early bird option is unlocked! You can select that option now").show();
 			} else {
-				$('#wrong_promo').show();
+				$('#wrong_promo').text("Your code is not an early bird code.").show();
 			}
 			return false;
 		});
@@ -122,7 +123,7 @@
 <div class="wrapper clearfix">
 <div class="main_content" style="width:700px">
 <form id="check_early_bird">
-  <div id="wrong_promo" class="alert alert-error" style="display: none;">Early bird code is wrong</div>
+  <div id="wrong_promo" class="alert alert-error" style="display: none;">Your code is not an early bird code.</div>
   <label for="early_bird_code">Early bird code</label>
   <input class="rounded" style="font-size:20px; margin-bottom: 20px;" id="early_bird_code" name="early_bird_code" size="10" type="text">
   <input class="button rounded shadow bold" name="commit" type="submit" value="Apply">
@@ -139,14 +140,14 @@
   <div id="perk-menu" class="group perks-selection"><!--graybox -->
 
     <div class='dynamic_bg shadow rounded'>
-      <input checked="checked" id="pledge_tier_1" name="reward_tier" type="radio" value="1"/>
+      <input checked="checked" id="pledge_tier_1" name="reward_tier" type="radio" value="1" <%= (@counts[1] > 200) ? "disabled" : "" %>  />
       <label for="pledge_tier_1">
         <div class="money">$19 (Early bird)</div>
         <div class="perk">
           (only 200 available)<br>
           You’ll get 1 FREE Linquet and 1 year cloud-based service (which will be $29.99 after this pre-order period). <br> Includes FREE
           registration and shipping to the USA & Canada.
-          <div class="claimed"> <%= @counts[1] %> claimed</div>
+          <div class="claimed"> <%= (@counts[1] > 200) ? 200 : @counts[1] %> claimed</div>
         </div>
       </label>
     </div>
