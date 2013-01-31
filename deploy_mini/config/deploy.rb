@@ -41,7 +41,7 @@ end
 namespace :live do
 	task :restart_rails, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
 	  run "cd ~/selfstarter; git reset --hard HEAD^^; git checkout . ; git pull"
- 	  run "/bin/bash --login ~/bin/restart_ss_production"
+ 	  run "/bin/bash --login -c ~/bin/restart_ss_production"
 	end
 	task :try_rails1, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com"] do
 	  run "cd ~/selfstarter; git pull"
@@ -53,7 +53,7 @@ namespace :dev do
 	task :restart_rails, :hosts => ["epoma.org"] do
 		set :ssh_key, "/Users/qiang/linquet/ssh/john.pem"
 		ssh_options[:keys] = ["/Users/qiang/linquet/ssh/john.pem"] 
-		run "cd ~/selfstarter; git pull"
+		run "cd ~/ss; git pull"
 		run "/bin/bash --login ~/bin/restart_ss_production"
 	end
 end
