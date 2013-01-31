@@ -12,16 +12,7 @@ class RewardsController < ApplicationController
   end
 
   def select_reward
-    #Order.all.inject({}) { |counts, order| if }
-    #
-    #  for order in Order.all
-    #
-    #  end
-    #@counts = {}
-
-    #Order.all.each do |order| begin
-    #   #@counts[Order.plan_id]
-    #end
+    @early_bird = request.path.match(/earlybird/)
 
     @counts = {}
     @counts[1] = 0

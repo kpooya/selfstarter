@@ -105,6 +105,7 @@
 		}
 	}
 
+	<% if @early_bird %>
 	$(document).ready(function () {
 		$('#check_early_bird').submit(function () {
 			$("#check_message").hide();
@@ -117,17 +118,22 @@
 			return false;
 		});
 	});
+	<% end %>
+
 </script>
 
 <div class="gray_background">
 <div class="wrapper clearfix">
 <div class="main_content" style="width:700px">
+
+<% if @early_bird %>
 <form id="check_early_bird">
   <div id="check_message" class="alert alert-error" style="display: none;"> </div>
   <label for="early_bird_code">Early bird code</label>
   <input class="rounded" style="font-size:20px; margin-bottom: 20px;" id="early_bird_code" name="early_bird_code" size="10" type="text">
   <input class="button rounded shadow bold" name="commit" type="submit" value="Apply">
 </form>
+<% end %>
 
 <h3>Thanks for reserving Linquet</h3>
 
