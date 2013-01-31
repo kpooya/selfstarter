@@ -125,7 +125,7 @@
 
       <div class="input-item-select">
       <label for="shipping_country">Country</label>
-      <select id="shipping_country" name="shipping[country]" style="font-size: 18px;">
+      <select id="shipping_country" name="shipping[country]" style="font-size: 18px; width: 285px;">
       <option value=""></option>
       <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
               <%= if Rails.env.development? ; 'selected' ; end %>
@@ -365,6 +365,7 @@
       <option value="CTRY_YE" data-alternative-spellings="YE" data-relevancy-booster="">Yemen</option>
       <option value="CTRY_ZM" data-alternative-spellings="ZM" data-relevancy-booster="">Zambia</option>
       <option value="CTRY_ZW" data-alternative-spellings="ZW" data-relevancy-booster="">Zimbabwe</option></select>
+      <span id="international_charge" class="fr" style="display: none;"> $15 for international shipping.</span>
       </div>
 
       <div class="input-item-text">
@@ -409,6 +410,11 @@
 
 
     <fieldset class="group">
+    <div class="input-item-text">
+      <p> Your contribution:
+      <p> You will be rewarded:
+    </div>
+    <hr style="display: block; color:red;  height: 2px; border: 2; margin: 0; padding: 0; "/>
 
     <div class="clearfix">
       <div class="fl input-item-text">
@@ -426,7 +432,7 @@
                value="<%= if Rails.env.development? ; 4242424242424242 ; end %>">
       </div>
       <div class="fl input-item-text">
-        <label for="card_code">Security Code or Verification Code</label>
+        <label for="card_code">Security or Verification Code</label>
         <input autocomplete="off" class="rounded very-short no-ajax" id="card_code" size="30" type="text"
                value="<%= if Rails.env.development? ; 123 ; end %>">
       </div>
@@ -496,7 +502,7 @@
     <div id="all_billing_address">
     <div class="input-item-select">
     <label for="billing_country">Country</label>
-    <select class="country-selector" id="billing_country" name="billing[country]">
+    <select class="country-selector" id="billing_country" name="billing[country]" style="font-size: 18px; width: 285px;">
     <option value=""></option>
     <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
             <%= if Rails.env.development? ; 'selected' ; end %>
@@ -766,6 +772,7 @@
                value="<%= if Rails.env.development? ; "94043" ; end %>"
         >
       </div>
+
     </div>
 
     </div>
@@ -865,6 +872,14 @@
 				$("#all_billing_address").hide();
 			} else {
 				$("#all_billing_address").show();
+			}
+		})
+
+		$("#shipping_country").change(function() {
+			if ($("#shipping_country").val().match(/CTRY_CA|CTRY_US/)) {
+				$("#international_charge").hide();
+			} else {
+				$("#international_charge").show();
 			}
 		})
 

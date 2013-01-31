@@ -104,12 +104,32 @@
 			$(target).html("");
 		}
 	}
+
+	$(document).ready(function () {
+		$('#check_early_bird').submit(function () {
+			$("#wrong_promo").hide();
+			if (["linq4", "linq5", "linq6", "linq7", "linq12", "linq24", "linqlb", "linqtc", "linqmash", "linqgo", "linqgm", "linqeng"].indexOf($('#early_bird_code').val()) >= 0) {
+				 $("#pledge_tier_1").removeAttr('disabled');
+			} else {
+				$('#wrong_promo').show();
+			}
+			return false;
+		});
+	});
 </script>
 
 <div class="gray_background">
 <div class="wrapper clearfix">
 <div class="main_content" style="width:700px">
+<form id="check_early_bird">
+  <div id="wrong_promo" class="alert alert-error" style="display: none;">Early bird code is wrong</div>
+  <label for="early_bird_code">Early bird code</label>
+  <input class="rounded" style="font-size:20px; margin-bottom: 20px;" id="early_bird_code" name="early_bird_code" size="10" type="text">
+  <input class="button rounded shadow bold" name="commit" type="submit" value="Apply">
+</form>
+
 <h3>Thanks for reserving Linquet</h3>
+
 
 <h3 style="font-size: 28px;">Please select your contribution</h3>
 
