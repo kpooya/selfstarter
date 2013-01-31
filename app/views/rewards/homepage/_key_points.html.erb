@@ -1,5 +1,5 @@
 <div class="big_wrapper">
-  <div class="wrapper" id="one" style="height: 570px;">
+  <div class="wrapper" id="one" style="height: 570px; position:relative;">
     <div class="point_copy">
       <h3>
         Never again misplace or lose your phone, keys, wallet, pet, ...
@@ -11,11 +11,14 @@
         the cloud, enabling you to find your phone and valuables afterwards.
       <p>
     </div>
+    <div style="position: relative; top:-520px; left:470px">
+      <img src="<%= asset_path("never_lose_anything.jpg") %>">
+    </div>
   </div>
 </div>
 
 <div class="big_wrapper">
-  <div class="wrapper" id="two" style="height: 340px;background: url('<%= asset_path("Linquet-app.png") %>') no-repeat bottom left ;">
+  <div class="wrapper" id="two" style="height: 340px;background: url('<%= asset_path("linquet_app.png") %>') no-repeat bottom left ;">
     <div class="point_copy right">
       <h3>
         Linquet provides you with peace of mind
@@ -29,7 +32,7 @@
 </div>
 
 <div class="big_wrapper">
-  <div class="wrapper" id="three"  style="height: 450px;">
+  <div class="wrapper" id="three"  style="height: 400px;">
     <div class="point_copy">
       <h3>
         Cloud-based solution
@@ -41,11 +44,15 @@
         temperature sensor and etc.
       <p>
     </div>
+    <div style="position: relative; top:-380px; left:460px">
+      <img src="<%= asset_path("cloud_based_solution.png") %>">
+    </div>
+  </div>
   </div>
 </div>
 
 <div class="big_wrapper">
-  <div class="wrapper" id="four">
+  <div class="wrapper" id="four" style=" background: url('<%= asset_path("linquet_api_sdk.png") %>') no-repeat bottom left ;">
     <div class="point_copy right">
       <h3>
         We ♥ developers
