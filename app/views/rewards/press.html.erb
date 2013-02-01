@@ -39,9 +39,6 @@
 		min-height: 450px;
 		padding-left: 20px;
 	}
-	#wrapper {
-		margin-bottom: 20px;
-	}
 	.help-body li {
 		line-height: 1.5em;
 	}
@@ -63,7 +60,7 @@
 </style>
 <% end %>
 
-<div id="wrapper" style="background-color: rgb(252, 252, 252);">
+<div id="wrapper" style="background-color: rgb(252, 252, 252); padding-bottom: 20px;">
   <div id="container">
 
     <div id="content" class="content">
@@ -117,14 +114,14 @@
 
           <br/>
           <div>
-          View our introduction video <a href="<%=video_url%>">on YouTube</a> or embed it:<br/><br/>
-          <textarea style="width:510px; height: 60px; font-size: 18px;">
+          View our introduction video <a href="<%=video_url%>">on YouTube</a> or embed it:
+          <textarea style="margin-top:10px;width:510px; height: 60px; font-size: 18px;">
             <iframe width="560" height="315" src="<%=Settings.video_embed_url%>" frameborder="0" allowfullscreen></iframe>
           </textarea>
 
-          <br/>
-          View our demo video <a href="<%=video_url%>">on YouTube</a> or embed it:<br/><br/>
-          <textarea style="width:510px; height: 60px; font-size: 18px;">
+          <br/><br/>
+          View our demo video <a href="<%=video_url%>">on YouTube</a> or embed it:
+          <textarea style="margin-top:10px;width:510px; height: 60px; font-size: 18px;">
             <iframe width="560" height="315" src="<%=Settings.video_embed_url%>" frameborder="0" allowfullscreen></iframe>
           </textarea>
           </div>
