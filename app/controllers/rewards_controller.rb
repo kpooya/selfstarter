@@ -153,4 +153,8 @@ class RewardsController < ApplicationController
 
   def ipn
   end
+
+  def press
+
+  end
 end
