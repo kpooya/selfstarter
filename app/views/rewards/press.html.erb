@@ -1,127 +1,196 @@
-    <ul>
-      <li>
-        <a href="<%= SubPath.getAbsolutePath("rewards/press") %>">Press & Media</a>
-      </li>
-      <li>
-        <a href="http://blog.linquet.com/">Blog</a>
-      </li>
-    </ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+      __               __   _ __
+     / /   ____  _____/ /__(_) /__________  ____
+    / /   / __ \/ ___/ //_/ / __/ ___/ __ \/ __ \
+   / /___/ /_/ / /__/ ,< / / /_/ /  / /_/ / / / /
+  /_____/\____/\___/_/|_/_/\__/_/   \____/_/ /_/
+                                         A Division of Apigy Inc.
 
+  Thanks for checking out Lockitron - if you find something out of place, let us know!
 
-    <div>
-      <ul class="wrapper clearfix">
-        <li id="nyt"><a href="http://www.nytimes.com/2011/07/04/technology/04key.html?pagewanted=all"
-                        style="background: url('http://lockitron.com/assets/nyt-c5e7212a86a9f96fd452f308ce8aa8a8.png')  no-repeat left center;">New York Times</a></li>
-        <li id="ps"><a href="http://www.popsci.com/gadgets/gallery/2011-06/goods-august-2011?image=3">Popular Science</a></li>
-        <li id="wired"><a href="http://www.wired.com/gadgetlab/2011/05/lockitron-unlock-your-home-with-your-cellphone/"
-                          style="background: url('http://lockitron.com/assets/wired-9f9ea9802c7c01d69633763dd108ee90.png') no-repeat left center;
-		                          width: 149px;">Wired</a></li>
-        <li id="techcrunch"><a href="http://techcrunch.com/2011/05/13/lockitron-lets-you-unlock-your-door-with-your-phone/">TechCrunch</a></li>
-        <li id="mashable"><a href="http://mashable.com/2011/05/17/lockitron/">Mashable</a></li>
-        <li id="diy"><a href="http://www.diynetwork.com/i-want-that/lockitron/index.html">DIY Network</a></li>
+  -->
+  <title>Lockitron</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset-min.css">
+
+  <link rel="stylesheet" type="text/css" href="/css/new/main.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/new/header.css"/>
+
+  <link href="/assets/help-6de679037e2c9485fec1a4702eeba8ae.css" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- TODO: all javascript should get moved to the bottom of the page -->
+  <script src="/assets/application-32ed6ebaba49211fc69e08f40c7b97c4.js" type="text/javascript"></script>  <script src="/assets/dashboard-aea3cbb26788be691f8bda10d0acc8a9.js" type="text/javascript"></script>
+
+  <meta content="authenticity_token" name="csrf-param" />
+  <meta content="AZRY/gvFsY0nc8VI6vSnwRYrtazgqlTWgxsBXegbmZ8=" name="csrf-token" />
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" ></script>
+
+</head>
+<body class="apigy lockitron layout_basic help help_media">
+
+<div id="wrapper">
+  <div id="container">
+
+    <div id="header">
+      <ul>
+        <li class="logo"><a href="/">Lockitron</a></li>
+        <li class="profile">
+          <a href="/account/login" class="logout">Sign in</a>
+        </li>
       </ul>
+      <div style="clear:both"></div>
     </div>
 
+    <div id="content">
 
-    <div class="editorial_2col recent_articles partners_content">
-      <div class="partner">
-        <a class="partner-logo press_logo-BusinessInsider" href="http://www.businessinsider.com/gust-streamlines-the-angel-investment-process-2011-9" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://www.businessinsider.com/gust-streamlines-the-angel-investment-process-2011-9" target="_blank">
-              Gust Streamlines the Angel Investment Process
-            </a>
-          </h2>
-          <p>BusinessInsider.com · September 19, 2011</p>
+      <div class="content">
+        <div class="help-controls">
+          <b>FAQ</b>
+          <ul>
+            <li class=""><a href="/faq">General</a></li>
+            <li class=""><a href="/help/requirements">Requirements</a></li>
+            <li class=""><a href="/help/compatibility">Compatibility</a></li>
+          </ul>
+          <b>Guides</b>
+          <ul>
+            <li class=""><a href="/help/dashboard">Dashboard</a></li>
+            <li class=""><a href="/help/mobile">Mobile</a></li>
+          </ul>
+          <b>Documentation</b>
+          <ul>
+            <li class=""><a href="/help/manuals">Manuals</a></li>
+            <li class=""><a href="/terms">Terms and Conditions</a></li>
+            <li class=""><a href="/privacy">Privacy Policy</a></li>
+          </ul>
+          <b>Support &amp; More</b>
+          <ul>
+            <li class=""><a href="/help/troubleshooting">Troubleshooting</a></li>
+            <li class=""><a href="/help/contact">Contact</a></li>
+            <li class=""><a href="/security">Security</a></li>
+            <li class="help_selected"><a href="/account/media">Press Inquiries</a></li>
+            <li class="help_selected"><a href="/help/sales">Sales and Distribution</a></li>
+          </ul>
+        </div>			<div class="help-body">
+        <!-- yield start -->
+        <div class="header"><h3>Press Inquiries</h3></div>
+
+        <div class="lock_line">
+
+          <ul>
+            <li><a href="#overview">Product Overview</a></li>
+            <li><a href="#media">Digital Media</a></li>
+            <li><a href="#external">External Content</a></li>
+            <li><a href="#contact">Media Contact</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-SmartCompany" href="http://www.smartcompany.com.au/start-up/20110915-gust-com-to-link-start-ups-to-international-investors.html" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://www.smartcompany.com.au/start-up/20110915-gust-com-to-link-start-ups-to-international-investors.html" target="_blank">
-              Gust.com to link start-ups to international investors
-            </a>
-          </h2>
-          <p>smartcompany.com.au · September 15, 2011</p>
+
+        <div class="support_segment" id="overview">
+          <div class="header"><h3>Overview</h3></div>
+
+          <div class="body">
+            <p>Lockitron replaces keys with your phone. With Lockitron, you can instantly grant family, friends and guests access to your home or business from anywhere in the world using your internet enabled smartphone.
+              <br /><br />
+              Any internet enabled smartphone can use Lockitron. For a small monthly fee, Lockitron owners can enable text-message access which turns any mobile phone into a virtual key. The Lockitron Android app features NFC capabilities that allows users to unlock or lock their door just by swiping it in front of a Lockitron NFC tag.
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-tnw" href="http://thenextweb.com/insider/2011/09/15/demo-11-gust-wants-to-be-the-wind-in-the-sails-of-global-entrepreneurship/" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://thenextweb.com/insider/2011/09/15/demo-11-gust-wants-to-be-the-wind-in-the-sails-of-global-entrepreneurship/" target="_blank">
-              DEMO ’11: Gust wants to be the wind in the sails of global entrepreneurship
-            </a>
-          </h2>
-          <p>theNextWeb.com · September 15, 2011</p>
+
+        <div class="support_segment" id="media">
+          <div class="header"><h3>Digital Media</h3></div>
+
+          <div class="body">
+            <div class="media"><a href="/press-kit/lockitron_name.png"><img src="/press-kit/lockitron_name.png" width="250" alt="Lockitron Logo" style="padding-top: 34px" /></a></div>
+            <div class="media"><a href="/press-kit/lockitron-unit.png"><img src="/press-kit/lockitron-unit.png" width="250" alt="Lockitron" /></a></div>
+            <div class="media"><a href="/press-kit/iphone-app.png"><img src="/press-kit/iphone-app.png" width="250" alt="Lockitron iPhone Lock" /></a></div>
+            <div class="media"><a href="/press-kit/iphone-users.png"><img src="/press-kit/iphone-users.png" width="250" alt="Lockitron iPhone Users" /></a></div>
+            <div class="media"><a href="/press-kit/android-app.png"><img src="/press-kit/android-app.png" width="250" alt="Lockitron Android App" /></a></div>
+            <div class="media" style="padding-top: 75px; height: 92px"><a href="/press-kit/press-kit-2012.zip">Download the press pack</a></div>
+            <div class="clear"></div>
+
+            <br />
+            View our introduction video <a href="http://www.youtube.com/watch?v=D1L3o88GKew">on YouTube</a> or embed it:<br /><br />
+            <textarea style="width:510px; height: 60px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/D1L3o88GKew?rel=0" frameborder="0" allowfullscreen></iframe>
+            </textarea>
+
+            <br />
+            View our demo video <a href="http://www.youtube.com/watch?v=N9R8KkDkyk4">on YouTube</a> or embed it:<br /><br />
+            <textarea style="width:510px; height: 60px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/N9R8KkDkyk4?rel=0" frameborder="0" allowfullscreen></iframe>
+            </textarea>
+
+          </div>
         </div>
-      </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-VentureBeat" href="http://venturebeat.com/2011/09/13/gust-angelsoft/" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://venturebeat.com/2011/09/13/gust-angelsoft/" target="_blank">
-              Demo: Angelsoft relaunches as Gust, a platform of tools for fundraising &amp; dealflow
-            </a>
-          </h2>
-          <p>VentureBeat.com · September 13, 2011</p>
+
+        <div class="support_segment" id="external">
+          <div class="header"><h3>External Content</h3></div>
+
+          <div class="body">
+            <p>
+              Find out more about Lockitron and its mobile applications from our social and mobile pages:
+              <br />
+              <br />
+            <ul>
+              <li><a href="http://itunes.apple.com/us/app/lockitron/id440597564?mt=8">Lockitron iPhone app</a></li>
+              <li><a href="https://market.android.com/details?id=com.apigy.lockitron">Lockitron Android app</a></li>
+              <li><a href="https://www.facebook.com/lockitron">Lockitron on Facebook</a></li>
+              <li><a href="http://twitter.com/lockitron">Lockitron on Twitter</a></li>
+              <li><a href="http://www.youtube.com/user/lockitron">Lockitron on YouTube</a></li>
+            </ul>
+
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-TechCrunch" href="http://techcrunch.com/2011/09/13/angelsoft-relaunches-as-gust-com-now-connects-startups-to-investors/" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://techcrunch.com/2011/09/13/angelsoft-relaunches-as-gust-com-now-connects-startups-to-investors/" target="_blank">
-              AngelSoft Relaunches as Gust.com, Now Connects Startups To Investors
-            </a>
-          </h2>
-          <p>Techcrunch.com · September 13, 2011</p>
+
+        <div class="support_segment" id="contact">
+          <div class="header"><h3>Media Contact</h3></div>
+
+          <div class="body">
+            We would love to help answer any questions that you might have at <a href="http://www.cloudflare.com/email-protection#acc1c9c8c5cdecc0c3cfc7c5d8dec3c282cfc3c1"><span class="__cf_email__" data-cfemail="cda0a8a9a4ac8da1a2aea6a4b9bfa2a3e3aea2a0">[email&nbsp;protected]</span><script type="text/javascript">
+	          /* <![CDATA[ */
+	          (function(){try{var s,a,i,j,r,c,l,b=document.getElementsByTagName("script");l=b[b.length-1].previousSibling;a=l.getAttribute('data-cfemail');if(a){s='';r=parseInt(a.substr(0,2),16);for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}s=document.createTextNode(s);l.parentNode.replaceChild(s,l);}}catch(e){}})();
+	          /* ]]> */
+          </script></a>. <!-- For urgent inquiries, reach out to us via our customer support line at (872) 222-8717. -->
+          </div>
         </div>
+
+        <!-- yield end -->
       </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-portfolio" href="http://www.portfolio.com/views/blogs/entrepreneurship/2011/09/13/david-rose-connects-investors-and-startups-with-gust" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://www.portfolio.com/views/blogs/entrepreneurship/2011/09/13/david-rose-connects-investors-and-startups-with-gust" target="_blank">
-              Gust Looks for Whirlwind of Cash
-            </a>
-          </h2>
-          <p>Portfolio.com · September 13, 2011</p>
-        </div>
+        <div class="clear"></div>
       </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-xconomy" href="http://www.xconomy.com/new-york/2011/09/13/angelsoft-to-become-gust-rebrands-platform-for-finding-financing/" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://www.xconomy.com/new-york/2011/09/13/angelsoft-to-become-gust-rebrands-platform-for-finding-financing/" target="_blank">
-              Angelsoft to Become Gust, Rebrands Platform for Finding Financing
-            </a>
-          </h2>
-          <p>xconomy.com · September 13, 2011</p>
-        </div>
-      </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-FrankPetersShow" href="http://thefrankpetersshow.com/2011/announcing-gust-com/" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://thefrankpetersshow.com/2011/announcing-gust-com/" target="_blank">
-              Announcing Gust.com
-            </a>
-          </h2>
-          <p>theFrankPetersShow.com · September 13, 2011</p>
-        </div>
-      </div>
-      <div class="partner">
-        <a class="partner-logo press_logo-ScienceBusiness" href="http://sciencebusiness.technewslit.com/?p=6018" target="_blank"></a>
-        <div class="partner-text">
-          <h2>
-            <a href="http://sciencebusiness.technewslit.com/?p=6018" target="_blank">
-              AngelSoft Becomes Gust, Offers Start-Up Funding Platform
-            </a>
-          </h2>
-          <p>ScienceBusiness.Technewslit.com · September 13, 2011</p>
-        </div>
-      </div>
+
     </div>
 
+  </div>
+
+  <div id="footer">
+    <a href="https://lockitron.com/faq">Help &amp; FAQ</a> | <a href="https://lockitron.com/help/media">Press &amp; Media</a> | <a href="http://blog.lockitron.com/">Blog</a> | <a href="https://lockitron.com/privacy">Privacy Policy</a> | <a href="/account/login">Sign In</a>
+    <br />
+    <br />
+    <span id="copyright">&copy; 2009-2013 Apigy Inc. All rights reserved.<span>  </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-17601805-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+
+</script>
+
+<script type="text/javascript">
+	/* <![CDATA[ */
+	(function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&"www.cloudflare.com/email-protection"==a.substr(7 ,35)){s='';j=43;r=parseInt(a.substr(j,2),16);for(j+=2;a.length-j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
+	/* ]]> */
+</script>
+</body>
+</html>
