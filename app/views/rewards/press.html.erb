@@ -1,196 +1,169 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <!--
-      __               __   _ __
-     / /   ____  _____/ /__(_) /__________  ____
-    / /   / __ \/ ___/ //_/ / __/ ___/ __ \/ __ \
-   / /___/ /_/ / /__/ ,< / / /_/ /  / /_/ / / / /
-  /_____/\____/\___/_/|_/_/\__/_/   \____/_/ /_/
-                                         A Division of Apigy Inc.
+<% content_for :page_css do %>
+    <style>
+	.content h3 {
+		font-size: 24px;
+		font-weight: bold;
+		color: #333;
+	}
+	.help-body .lock_line {
+		padding: 10px 3px;
+	}
+	img {
+		display: inline-block;
+	}
+	.media {
+		width: 250px;
+		height: 167px;
+		border: 1px solid #aaa;
+		float: left;
+		margin: 0 10px 10px 0;
+		text-align: center;
+	}
+	#container {
+		background: #fff;
+		width: 720px;
+		margin: 0 auto;
+		zoom: 1;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+		-webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+		overflow: hidden;
+	}
+	.help-body {
+		border-left: 1px solid #eee;
+		float: left;
+		width: 660px;
+		min-height: 450px;
+		padding-left: 20px;
+	}
+	#wrapper {
+		margin-bottom: 20px;
+	}
+	.help-body li {
+		line-height: 1.5em;
+	}
+	.content ul {
+		margin: 0 0 0 20px;
+	}
+	.content li {
+		line-height: 24px;
+		list-style-type: disc;
+		text-align: left;
+	}
+	.content .body {
+		padding: 10px 10px;
+	}
+	.content .header {
+		padding: 4px 10px;
+		border-bottom: 1px solid #eee;
+	}
+</style>
+<% end %>
 
-  Thanks for checking out Lockitron - if you find something out of place, let us know!
-
-  -->
-  <title>Lockitron</title>
-  <link rel="stylesheet" type="text/css" href="/css/reset-min.css">
-
-  <link rel="stylesheet" type="text/css" href="/css/new/main.css"/>
-  <link rel="stylesheet" type="text/css" href="/css/new/header.css"/>
-
-  <link href="/assets/help-6de679037e2c9485fec1a4702eeba8ae.css" media="screen" rel="stylesheet" type="text/css" />
-
-  <!-- TODO: all javascript should get moved to the bottom of the page -->
-  <script src="/assets/application-32ed6ebaba49211fc69e08f40c7b97c4.js" type="text/javascript"></script>  <script src="/assets/dashboard-aea3cbb26788be691f8bda10d0acc8a9.js" type="text/javascript"></script>
-
-  <meta content="authenticity_token" name="csrf-param" />
-  <meta content="AZRY/gvFsY0nc8VI6vSnwRYrtazgqlTWgxsBXegbmZ8=" name="csrf-token" />
-
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" ></script>
-
-</head>
-<body class="apigy lockitron layout_basic help help_media">
-
-<div id="wrapper">
+<div id="wrapper" style="background-color: rgb(252, 252, 252);">
   <div id="container">
 
-    <div id="header">
-      <ul>
-        <li class="logo"><a href="/">Lockitron</a></li>
-        <li class="profile">
-          <a href="/account/login" class="logout">Sign in</a>
-        </li>
-      </ul>
-      <div style="clear:both"></div>
-    </div>
+    <div id="content" class="content">
+      <div class="help-body">
+      <div class="header"><h3>Press Inquiries</h3></div>
+      <div class="lock_line">
 
-    <div id="content">
-
-      <div class="content">
-        <div class="help-controls">
-          <b>FAQ</b>
-          <ul>
-            <li class=""><a href="/faq">General</a></li>
-            <li class=""><a href="/help/requirements">Requirements</a></li>
-            <li class=""><a href="/help/compatibility">Compatibility</a></li>
-          </ul>
-          <b>Guides</b>
-          <ul>
-            <li class=""><a href="/help/dashboard">Dashboard</a></li>
-            <li class=""><a href="/help/mobile">Mobile</a></li>
-          </ul>
-          <b>Documentation</b>
-          <ul>
-            <li class=""><a href="/help/manuals">Manuals</a></li>
-            <li class=""><a href="/terms">Terms and Conditions</a></li>
-            <li class=""><a href="/privacy">Privacy Policy</a></li>
-          </ul>
-          <b>Support &amp; More</b>
-          <ul>
-            <li class=""><a href="/help/troubleshooting">Troubleshooting</a></li>
-            <li class=""><a href="/help/contact">Contact</a></li>
-            <li class=""><a href="/security">Security</a></li>
-            <li class="help_selected"><a href="/account/media">Press Inquiries</a></li>
-            <li class="help_selected"><a href="/help/sales">Sales and Distribution</a></li>
-          </ul>
-        </div>			<div class="help-body">
-        <!-- yield start -->
-        <div class="header"><h3>Press Inquiries</h3></div>
-
-        <div class="lock_line">
-
-          <ul>
-            <li><a href="#overview">Product Overview</a></li>
-            <li><a href="#media">Digital Media</a></li>
-            <li><a href="#external">External Content</a></li>
-            <li><a href="#contact">Media Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="support_segment" id="overview">
-          <div class="header"><h3>Overview</h3></div>
-
-          <div class="body">
-            <p>Lockitron replaces keys with your phone. With Lockitron, you can instantly grant family, friends and guests access to your home or business from anywhere in the world using your internet enabled smartphone.
-              <br /><br />
-              Any internet enabled smartphone can use Lockitron. For a small monthly fee, Lockitron owners can enable text-message access which turns any mobile phone into a virtual key. The Lockitron Android app features NFC capabilities that allows users to unlock or lock their door just by swiping it in front of a Lockitron NFC tag.
-            </p>
-          </div>
-        </div>
-
-        <div class="support_segment" id="media">
-          <div class="header"><h3>Digital Media</h3></div>
-
-          <div class="body">
-            <div class="media"><a href="/press-kit/lockitron_name.png"><img src="/press-kit/lockitron_name.png" width="250" alt="Lockitron Logo" style="padding-top: 34px" /></a></div>
-            <div class="media"><a href="/press-kit/lockitron-unit.png"><img src="/press-kit/lockitron-unit.png" width="250" alt="Lockitron" /></a></div>
-            <div class="media"><a href="/press-kit/iphone-app.png"><img src="/press-kit/iphone-app.png" width="250" alt="Lockitron iPhone Lock" /></a></div>
-            <div class="media"><a href="/press-kit/iphone-users.png"><img src="/press-kit/iphone-users.png" width="250" alt="Lockitron iPhone Users" /></a></div>
-            <div class="media"><a href="/press-kit/android-app.png"><img src="/press-kit/android-app.png" width="250" alt="Lockitron Android App" /></a></div>
-            <div class="media" style="padding-top: 75px; height: 92px"><a href="/press-kit/press-kit-2012.zip">Download the press pack</a></div>
-            <div class="clear"></div>
-
-            <br />
-            View our introduction video <a href="http://www.youtube.com/watch?v=D1L3o88GKew">on YouTube</a> or embed it:<br /><br />
-            <textarea style="width:510px; height: 60px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/D1L3o88GKew?rel=0" frameborder="0" allowfullscreen></iframe>
-            </textarea>
-
-            <br />
-            View our demo video <a href="http://www.youtube.com/watch?v=N9R8KkDkyk4">on YouTube</a> or embed it:<br /><br />
-            <textarea style="width:510px; height: 60px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/N9R8KkDkyk4?rel=0" frameborder="0" allowfullscreen></iframe>
-            </textarea>
-
-          </div>
-        </div>
-
-        <div class="support_segment" id="external">
-          <div class="header"><h3>External Content</h3></div>
-
-          <div class="body">
-            <p>
-              Find out more about Lockitron and its mobile applications from our social and mobile pages:
-              <br />
-              <br />
-            <ul>
-              <li><a href="http://itunes.apple.com/us/app/lockitron/id440597564?mt=8">Lockitron iPhone app</a></li>
-              <li><a href="https://market.android.com/details?id=com.apigy.lockitron">Lockitron Android app</a></li>
-              <li><a href="https://www.facebook.com/lockitron">Lockitron on Facebook</a></li>
-              <li><a href="http://twitter.com/lockitron">Lockitron on Twitter</a></li>
-              <li><a href="http://www.youtube.com/user/lockitron">Lockitron on YouTube</a></li>
-            </ul>
-
-            </p>
-          </div>
-        </div>
-
-        <div class="support_segment" id="contact">
-          <div class="header"><h3>Media Contact</h3></div>
-
-          <div class="body">
-            We would love to help answer any questions that you might have at <a href="http://www.cloudflare.com/email-protection#acc1c9c8c5cdecc0c3cfc7c5d8dec3c282cfc3c1"><span class="__cf_email__" data-cfemail="cda0a8a9a4ac8da1a2aea6a4b9bfa2a3e3aea2a0">[email&nbsp;protected]</span><script type="text/javascript">
-	          /* <![CDATA[ */
-	          (function(){try{var s,a,i,j,r,c,l,b=document.getElementsByTagName("script");l=b[b.length-1].previousSibling;a=l.getAttribute('data-cfemail');if(a){s='';r=parseInt(a.substr(0,2),16);for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}s=document.createTextNode(s);l.parentNode.replaceChild(s,l);}}catch(e){}})();
-	          /* ]]> */
-          </script></a>. <!-- For urgent inquiries, reach out to us via our customer support line at (872) 222-8717. -->
-          </div>
-        </div>
-
-        <!-- yield end -->
-      </div>
-        <div class="clear"></div>
+        <ul>
+          <li><a href="#overview">Product Overview</a></li>
+          <li><a href="#media">Digital Media</a></li>
+          <li><a href="#external">External Content</a></li>
+          <li><a href="#contact">Media Contact</a></li>
+        </ul>
       </div>
 
-    </div>
+      <div class="support_segment" id="overview">
+        <div class="header"><h3>Overview</h3></div>
 
+        <div class="body">
+          <p>Linquet replaces keys with your phone. With Linquet, you can instantly grant family, friends and guests access to your home
+            or business from anywhere in the world using your internet enabled smartphone.
+            <br/><br/>
+            Any internet enabled smartphone can use Linquet. For a small monthly fee, Linquet owners can enable text-message access
+            which turns any mobile phone into a virtual key. The Linquet Android app features NFC capabilities that allows users to unlock
+            or lock their door just by swiping it in front of a Linquet NFC tag.
+          </p>
+        </div>
+      </div>
+
+      <div class="support_segment" id="media">
+        <div class="header"><h3>Digital Media</h3></div>
+
+        <div class="body">
+          <div class="media">
+            <a href="http://lockitron.com/press-kit/lockitron_name.png"><img src="http://lockitron.com/press-kit/lockitron_name.png" width="250" alt="Lockitron Logo" style="padding-top: 34px"/></a>
+          </div>
+          <div class="media">
+            <a href="http://lockitron.com/press-kit/lockitron-unit.png"><img src="http://lockitron.com/press-kit/lockitron-unit.png" width="250" alt="Lockitron"/></a></div>
+          <div class="media">
+            <a href="http://lockitron.com/press-kit/iphone-app.png"><img src="http://lockitron.com/press-kit/iphone-app.png" width="250" alt="Lockitron iPhone Lock"/></a></div>
+          <div class="media">
+            <a href="http://lockitron.com/press-kit/iphone-users.png"><img src="http://lockitron.com/press-kit/iphone-users.png" width="250" alt="Lockitron iPhone Users"/></a>
+          </div>
+          <div class="media">
+            <a href="http://lockitron.com/press-kit/android-app.png"><img src="http://lockitron.com/press-kit/android-app.png" width="250" alt="Lockitron Android App"/></a></div>
+          <div class="media" style="padding-top: 75px; height: 92px"><a href="http://lockitron.com/press-kit/press-kit-2012.zip">Download the press pack</a>
+          </div>
+          <div style="clear:both">
+
+          </div>
+
+          <br/>
+          <div>
+          View our introduction video <a href="<%=video_url%>">on YouTube</a> or embed it:<br/><br/>
+          <textarea style="width:510px; height: 60px; font-size: 18px;">
+            <iframe width="560" height="315" src="<%=Settings.video_embed_url%>" frameborder="0" allowfullscreen></iframe>
+          </textarea>
+
+          <br/>
+          View our demo video <a href="<%=video_url%>">on YouTube</a> or embed it:<br/><br/>
+          <textarea style="width:510px; height: 60px; font-size: 18px;">
+            <iframe width="560" height="315" src="<%=Settings.video_embed_url%>" frameborder="0" allowfullscreen></iframe>
+          </textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="support_segment" id="external">
+        <div class="header"><h3>External Content</h3></div>
+
+        <div class="body">
+          <p>
+            Find out more about Linquet and its mobile applications from our social and mobile pages:
+            <br/>
+            <br/>
+          <ul style="list-style-type: disc;">
+            <li><a href="<%=Settings.android_app_url%>">Linquet Android app</a></li>
+            <li><a href="<%=Settings.linquet_on_youtube%>">Linquet on YouTube</a></li>
+            <li><a href="<%=Settings.linquet_on_facebook_url%>">Linquet on Facebook</a></li>
+            <li><a href="<%=Settings.linquet_on_twitter_url%>">Linquet on Twitter</a></li>
+            <li><a href="<%=Settings.linquet_on_youtube%>">Linquet on Google plus</a></li>
+          </ul>
+          </p>
+        </div>
+      </div>
+
+      <div class="support_segment" id="contact">
+        <div class="header"><h3>Media Contact</h3></div>
+
+        <div class="body">
+          We would love to help answer any questions that you might have at
+            <!-- For urgent inquiries, reach out to us via our customer support line at (872) 222-8717. -->
+        </div>
+      </div>
+
+      <!-- yield end -->
+    </div>
+    <div class="clear"></div>
   </div>
 
-  <div id="footer">
-    <a href="https://lockitron.com/faq">Help &amp; FAQ</a> | <a href="https://lockitron.com/help/media">Press &amp; Media</a> | <a href="http://blog.lockitron.com/">Blog</a> | <a href="https://lockitron.com/privacy">Privacy Policy</a> | <a href="/account/login">Sign In</a>
-    <br />
-    <br />
-    <span id="copyright">&copy; 2009-2013 Apigy Inc. All rights reserved.<span>  </div>
-
+</div>
 </div>
 
-
-<script type="text/javascript">
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-17601805-1']);
-	_gaq.push(['_trackPageview']);
-
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-
-</script>
-
-<script type="text/javascript">
-	/* <![CDATA[ */
-	(function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&"www.cloudflare.com/email-protection"==a.substr(7 ,35)){s='';j=43;r=parseInt(a.substr(j,2),16);for(j+=2;a.length-j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
-	/* ]]> */
-</script>
-</body>
-</html>
