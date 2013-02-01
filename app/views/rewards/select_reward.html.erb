@@ -135,10 +135,9 @@
 </form>
 <% end %>
 
-<h3>Thanks for reserving Linquet</h3>
+<h3>Please reserve your Linquets</h3>
 
-
-<h3 style="font-size: 28px;">Please select your contribution</h3>
+<h3 style="font-size: 28px;">Select your choice of reservation</h3>
 
 <form action="checkout" method="post">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -146,12 +145,12 @@
   <div id="perk-menu" class="group perks-selection"><!--graybox -->
 
     <div class='dynamic_bg shadow rounded'>
-      <input checked="checked" id="pledge_tier_1" name="reward_tier" type="radio" value="1" <%= (@counts[1] > 200) ? "disabled" : "" %>  />
+      <input id="pledge_tier_1" name="reward_tier" type="radio" value="1" <%= (@counts[1] > 200) ? "disabled" : "" %>  />
       <label for="pledge_tier_1">
         <div class="money">$19 (Early bird)</div>
         <div class="perk">
-          (only 200 available)<br>
-          You’ll get 1 FREE Linquet and 1 year cloud-based service (which will be $29.99 after this pre-order period). <br> Includes FREE
+          <span style="font-weight: bolder">(only 200 available)</span><br>
+          You’ll get <span style="font-weight: bolder">1 FREE Linquet and 1 year cloud-based service</span> (which will be $29.99 after this pre-order period). <br> Includes FREE
           registration and shipping to the USA & Canada.
           <div class="claimed"> <%= (@counts[1] > 200) ? 200 : @counts[1] %> claimed</div>
         </div>
@@ -161,11 +160,11 @@
 
 
     <div class='dynamic_bg shadow rounded'>
-      <input checked="checked" id="pledge_tier_2" name="reward_tier" type="radio" value="2"/>
+      <input id="pledge_tier_2" name="reward_tier" type="radio" value="2"/>
       <label for="pledge_tier_2">
         <div class="money">$25 (20% OFF)</div>
         <div class="perk">
-          You’ll get 1 FREE Linquets and 1 year cloud-based service for it. Includes FREE Registration and Shipping to the USA & Canada.
+          You’ll get <span style="font-weight: bolder">1 FREE Linquets and 1 year cloud-based service</span> for it. Includes FREE Registration and Shipping to the USA & Canada.
           <div class="claimed"> <%= @counts[2] %> claimed</div>
         </div>
       </label>
@@ -173,11 +172,11 @@
     <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
 
     <div class='dynamic_bg shadow rounded'>
-      <input checked="checked" id="pledge_tier_3" name="reward_tier" type="radio" value="3"/>
+      <input id="pledge_tier_3" name="reward_tier" type="radio" value="3"/>
       <label for="pledge_tier_3">
         <div class="money">$45 (30% OFF)</div>
         <div class="perk">
-          You’ll get 2 FREE Linquets and 1 year cloud-based service for them. Includes FREE Registration and Shipping to the USA & Canada.
+          You’ll get <span style="font-weight: bolder">2 FREE Linquets and 1 year cloud-based service</span> for them. Includes FREE Registration and Shipping to the USA & Canada.
           <div class="claimed"> <%= @counts[3] %> claimed</div>
         </div>
       </label>
@@ -185,11 +184,11 @@
     <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
 
     <div class='dynamic_bg shadow rounded'>
-      <input checked="checked" id="pledge_tier_22" name="reward_tier" type="radio" value="4"/>
+      <input id="pledge_tier_22" name="reward_tier" type="radio" value="4"/>
       <label for="pledge_tier_4">
         <div class="money">$85 (40% OFF)</div>
         <div class="perk">
-          You’ll get 4 FREE Linquets and 1 year cloud-based service for them. Includes FREE Registration and Shipping to the USA & Canada.
+          You’ll get <span style="font-weight: bolder">4 FREE Linquets and 1 year cloud-based service</span> for them. Includes FREE Registration and Shipping to the USA & Canada.
           <div class="claimed"> <%= @counts[4] %> claimed</div>
         </div>
       </label>
@@ -197,11 +196,11 @@
     <hr style="display: block; height: 2px; border: 0; margin: 0; padding: 0; ">
 
     <div class='dynamic_bg shadow rounded'>
-      <input checked="checked" id="pledge_tier_33" name="reward_tier" type="radio" value="5"/>
+      <input id="pledge_tier_33" name="reward_tier" type="radio" value="5"/>
       <label for="pledge_tier_5">
         <div class="money">$195 (50% OFF)</div>
         <div class="perk">
-          You’ll get 10 FREE Linquets and 1 year cloud-based service for them. Includes FREE Registration and Shipping to the USA & Canada.
+          You’ll get <span style="font-weight: bolder">10 FREE Linquets and 1 year cloud-based service</span> for them. Includes FREE Registration and Shipping to the USA & Canada.
           <div class="claimed"> <%= @counts[5] %> claimed</div>
         </div>
       </label>
