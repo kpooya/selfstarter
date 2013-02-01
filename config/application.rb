@@ -56,17 +56,17 @@ LINQUET_MINI_URL_ENCODED = URI.encode(LINQUET_MINI_URL)
 class SubPath
   if ENV["RAILS_RELATIVE_ROOT"]
     ROOT = ENV["RAILS_RELATIVE_ROOT"]
-    def self.getAbsolutePath(path)
+    def self.getFrontEndPath(path)
       ROOT + path
     end
   else
-    def self.getAbsolutePath(path)
+    def self.get_frontend_path(path)
       path
     end
   end
 
   def self.getUrl(path)
-    LINQUET_SERVER_URL + getAbsolutePath(path)
+    LINQUET_SERVER_URL + get_frontend_path(path)
   end
 end
 
