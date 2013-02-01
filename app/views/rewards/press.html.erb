@@ -54,8 +54,12 @@
 		padding: 10px 10px;
 	}
 	.content .header {
-		padding: 4px 10px;
+		padding: 6px 10px 4px 10px;
 		border-bottom: 1px solid #eee;
+	}
+	.body {
+		font-size: 17px;
+		line-height: 1.3em;
 	}
 </style>
 <% end %>
@@ -68,7 +72,7 @@
       <div class="header"><h3>Press Inquiries</h3></div>
       <div class="lock_line">
 
-        <ul>
+        <ul style="font-size: 17px;">
           <li><a href="#overview">Product Overview</a></li>
           <li><a href="#media">Digital Media</a></li>
           <li><a href="#external">External Content</a></li>
@@ -115,13 +119,13 @@
           <br/>
           <div>
           View our introduction video <a href="<%=video_url%>">on YouTube</a> or embed it:
-          <textarea style="margin-top:10px;width:510px; height: 60px; font-size: 18px;">
+          <textarea style="margin-top:10px;width:510px; height: 60px; font-size: 16px;">
             <iframe width="560" height="315" src="<%=Settings.video_embed_url%>" frameborder="0" allowfullscreen></iframe>
           </textarea>
 
           <br/><br/>
           View our demo video <a href="<%=video_url%>">on YouTube</a> or embed it:
-          <textarea style="margin-top:10px;width:510px; height: 60px; font-size: 18px;">
+          <textarea style="margin-top:10px;width:510px; height: 60px; font-size: 16px;">
             <iframe width="560" height="315" src="<%=Settings.video_embed_url%>" frameborder="0" allowfullscreen></iframe>
           </textarea>
           </div>
@@ -134,7 +138,6 @@
         <div class="body">
           <p>
             Find out more about Linquet and its mobile applications from our social and mobile pages:
-            <br/>
             <br/>
           <ul style="list-style-type: disc;">
             <li><a href="<%=Settings.android_app_url%>">Linquet Android app</a></li>
