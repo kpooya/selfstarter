@@ -40,7 +40,7 @@
     .perks-selection .perk {
         width: 380px;
         font-size: 20px;
-        margin-left: 185px;
+        margin-left: 240px;
 	    margin-bottom: 5px;
         padding-bottom: 5px;
         margin-top: -25px;
@@ -54,8 +54,8 @@
         background: none;
         color: #222;
         font-family: SecondaSoft-Bold,Arial,sans-serif;
-        font-size: 22px;
-        line-height: 18px;
+        font-size: 20px;
+        line-height: 20px;
         margin: 15px 10px 0px 9px;
         padding: 0px;
         display: inline-block;
@@ -124,7 +124,7 @@
 
 <div class="gray_background">
 <div class="wrapper clearfix">
-<div class="main_content" style="width:700px">
+<div class="main_content" style="width:800px">
 
 <% if @early_bird %>
 <form id="check_early_bird">
@@ -147,9 +147,8 @@
     <div class='dynamic_bg shadow rounded'>
       <input id="pledge_tier_1" name="reward_tier" type="radio" value="1" <%= (@counts[1] > 200) ? "disabled" : "" %>  />
       <label for="pledge_tier_1">
-        <div class="money">$19 (Early bird)</div>
-        <div class="perk">
-          <span style="font-weight: bolder">(only 200 available)</span><br>
+        <div class="money">$19 (Early bird)<br><br>(only 200 available)</div>
+        <div class="perk" style="margin-top: -65px;">
           You’ll get <span style="font-weight: bolder">1 FREE Linquet and 1 year cloud-based service</span> (which will be $29.99 after this pre-order period). <br> Includes FREE
           registration and shipping to the USA & Canada.
           <div class="claimed"> <%= (@counts[1] > 200) ? 200 : @counts[1] %> claimed</div>
