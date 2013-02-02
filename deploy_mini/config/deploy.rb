@@ -53,9 +53,7 @@ end
 
 namespace :dev do
 	task :restart_rails, :hosts => ["epoma.org"] do
-		set :ssh_key, "/Users/qiang/linquet/ssh/john.pem"
-		ssh_options[:keys] = ["/Users/qiang/linquet/ssh/john.pem"] 
-		run "cd ~/ss; git pull"
-		run "/bin/bash --login ~/bin/restart_ss_production"
+		run "cd ~/selfstarter; git pull"
+		run "~/bin/restart_ss_development"
 	end
 end
