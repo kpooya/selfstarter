@@ -11,7 +11,7 @@ class RewardsController < ApplicationController
   def checkout
   end
 
-  def select_reward
+  def select
     @early_bird = request.path.match(/earlybird/)
 
     @counts = {}
