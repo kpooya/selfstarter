@@ -12,15 +12,16 @@ module RewardsHelper
     raw "<a href='https://twitter.com/share?url=/' id='tweet_button' class='twitter-share-button twitter-button' data-url=#{request.scheme}//#{request.host}' data-via='#{Settings.product_name}' data-lang='en' data-count='vertical' data-text=\"#{tweet_text}\">Tweet</a>"
   end
 
-  def video_url
-    "#{Settings.video_embed_url}?" + case Settings.video_embed_url
+  def video_embed_url(autoplay=false)
+    autoplay_bit = (autoplay)? "1" : "0"
+    ("#{Settings.video_bare_url}?" + case Settings.video_bare_url
     when /vimeo/
-      'title=0&byline=0&portrait=0&autoplay=0'
+      'title=0&byline=0&portrait=0&autoplay=' + autoplay_bit
     when /youtube/
-      'autohide=1&showinfo=0&rel=0&autoplay=0'
+      'autohide=1&showinfo=0&rel=0&autoplay=' + autoplay_bit
     else
       ''
-    end
+    end).html_safe
   end
 
   def encoded_root_url

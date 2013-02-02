@@ -20,7 +20,9 @@ product_image_path: "my-product-image.png"
 value_proposition: "Never Lose Anything Again"
 
 # YouTube or Vimeo Video URL (The embed URL, without the query string options)
-video_embed_url: "https://www.youtube.com/v/tQJVxk7ggK0"
+# video_embed_url: "https://www.youtube.com/v/tQJVxk7ggK0"
+video_bare_url: "https://www.youtube.com/v/tQJVxk7ggK0"
+
 android_app_url: "https://play.google.com/store/apps/details?id=com.xatash.linquet"
 linquet_on_facebook_url:  "http://www.facebook.com/Linquet"
 linquet_on_twitter_url: "http://twitter.com/linquet"

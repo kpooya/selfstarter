@@ -1,16 +1,15 @@
 <div class="wrapper clearfix">
-  <div id="video" style="width:512px; height:385px; float: left; background: #fff; -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.39);
-		  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.39); box-shadow: 0 2px 6px rgba(0,0,0,0.39);">
-    <div style="width:512px; height:385px">
+    <div id="video">
       <div onclick="thevid=document.getElementById('player'); thevid.style.display='block'; this.style.display='none'">
-              <img alt="Lockitron_video_blue" src="http://lockitron.com/assets/lockitron_video_blue-37ff152ae602e3bf92182040486f5dd7.png" /></div>
-        <div id="player" style="display:none">
-          <object width="512" height="385">
-              <param name="movie" value="https://www.youtube.com/v/tQJVxk7ggK0?autohide=1&showinfo=0&rel=0&autoplay=1"></param>
-              <param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
-            <embed src="https://www.youtube.com/v/tQJVxk7ggK0?autohide=1&showinfo=0&rel=0&autoplay=1" type="application/x-shockwave-flash" width="512" height="385" allowscriptaccess="always" allowfullscreen="true"></embed>
-          </object>
-        </div>
+        <img alt="Lockitron_video_blue" src="/assets/video_still_intro.png" />
+      </div>
+      <div id="player" style="display:none">
+        <object width="512" height="385">
+          <param name="movie" value="<%= video_embed_url true %>"/>
+          <param name="allowFullScreen" value="true"/>
+          <param name="allowscriptaccess" value="always"/>
+          <embed src="<%= video_embed_url true %>" type="application/x-shockwave-flash" width="512" height="385" allowscriptaccess="always" allowfullscreen="true"></embed>
+        </object>
       </div>
     </div>
 
