@@ -77,7 +77,7 @@ facebook_app_id: "1234567890"
 tweet_text: "to crowdfund"
 
 # Google Analytics
-google_id: "1234567890"
+google_analytic_tracking_id: "UA-38176711-1"
 
 # If you want to change the images for the key points (e.g. "Kickstarter is not a store")
 # They're in app/assets/images/#{pointer_number}-background.png
