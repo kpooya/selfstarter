@@ -80,7 +80,7 @@
         <br/>
       </div>
       <p style="font-size:18px;padding-bottom: 50px;"><i>or send this link to your friends </i><br><br>
-        <% referral_link = params[:r];
+        <% referral_link = params[:r] || LINQUET_SERVER_URL;
            logger.info(referral_link + " ------------------");
         %>
 
@@ -223,14 +223,6 @@
 
 	}
 </script>
-
-<!--font replacement-->
-<script src="js/cufon-yui.js" type="text/javascript"></script>
-<script src="js/Myriad_Pro_400.font.js" type="text/javascript"></script>
-<script src="js/regular.js" type="text/javascript"></script>
-<script src="js/Trebuchet_MS_400-1.font.js" type="text/javascript"></script>
-<script src="js/Trebuchet.js" type="text/javascript"></script>
-<!--font replacement-->
 
 </body>
 </html>
