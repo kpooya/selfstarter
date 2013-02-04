@@ -137,8 +137,6 @@
 
 <h3>Please reserve your Linquets</h3>
 
-<h3 style="font-size: 28px;">Select your choice of reservation</h3>
-
 <form action="checkout" method="post">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -147,8 +145,8 @@
     <div class='dynamic_bg shadow rounded'>
       <input id="pledge_tier_1" name="reward_tier" type="radio" value="1" <%= (@counts[1] > 200) ? "disabled" : "" %>  />
       <label for="pledge_tier_1">
-        <div class="money">$19 (Early bird)<br><br><span style="font-size:18px">(only 200 available)</span></div>
-        <div class="perk" style="margin-top: -65px;">
+        <div class="money">$19 - Early bird<br><div style="font-size:18px; margin-top: 8px;">(only 200 available)</div></div>
+        <div class="perk" style="margin-top: -50px;">
           You’ll get <span style="font-weight: bolder">1 FREE Linquet and 1 year cloud-based service</span> (which will be $29.99 after this pre-order period). <br> Includes FREE
           registration and shipping to the USA & Canada.
           <div class="claimed"> <%= (@counts[1] > 200) ? 200 : @counts[1] %> claimed</div>
@@ -163,7 +161,7 @@
       <label for="pledge_tier_2">
         <div class="money">$25 (20% OFF)</div>
         <div class="perk">
-          You’ll get <span style="font-weight: bolder">1 FREE Linquets and 1 year cloud-based service</span> for it. Includes FREE Registration and Shipping to the USA & Canada.
+          You’ll get <span style="font-weight: bolder">1 FREE Linquet and 1 year cloud-based service</span> for it. Includes FREE Registration and Shipping to the USA & Canada.
           <div class="claimed"> <%= @counts[2] %> claimed</div>
         </div>
       </label>
