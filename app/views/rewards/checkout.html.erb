@@ -125,7 +125,7 @@
 
       <div class="input-item-select">
       <label for="shipping_country">Country</label>
-      <select id="shipping_country" name="shipping[country]" style="font-size: 18px; width: 285px;">
+      <select id="shipping_country" name="shipping[country]" style="font-size: 18px; width: 285px;color:#505050">
       <option value=""></option>
       <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
               <%= if Rails.env.development? ; 'selected' ; end %>
@@ -410,9 +410,9 @@
 
 
     <fieldset class="group">
-    <div class="input-item-text">
-      <p> Your contribution:
-      <p> You will be rewarded:
+    <div class="input-item-text" style="font-weight: bold;">
+      <p> Your contribution: <span id="money">$<%=@plan.price.to_i %></span> <span id="money_shipping" style="display: none;">+ $15 (International shipping)</span>
+      <p> You will be rewarded: <%=@plan.description%>
     </div>
     <hr style="display: block; color:red;  height: 2px; border: 2; margin: 0; padding: 0; "/>
 
@@ -502,7 +502,7 @@
     <div id="all_billing_address">
     <div class="input-item-select">
     <label for="billing_country">Country</label>
-    <select class="country-selector" id="billing_country" name="billing[country]" style="font-size: 18px; width: 285px;">
+    <select class="country-selector" id="billing_country" name="billing[country]" style="font-size: 18px; width: 285px;color:#505050">
     <option value=""></option>
     <option value="CTRY_US" data-alternative-spellings="US USA United States of America" data-relevancy-booster="3.0"
             <%= if Rails.env.development? ; 'selected' ; end %>
@@ -880,8 +880,11 @@
 		$("#shipping_country").change(function() {
 			if ($("#shipping_country").val().match(/CTRY_CA|CTRY_US/)) {
 				$("#international_charge").hide();
+				$("#money_shipping").hide();
+
 			} else {
 				$("#international_charge").show();
+				$("#money_shipping").show();
 			}
 		})
 

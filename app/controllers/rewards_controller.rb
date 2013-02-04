@@ -9,7 +9,9 @@ class RewardsController < ApplicationController
   end
 
   def checkout
-
+    session[:reward_tier] = params[:reward_tier]
+    plan_id = (session[:reward_tier] && session[:reward_tier].to_i) || 1;
+    @plan = Plan.find(plan_id)
   end
 
   def select
@@ -144,8 +146,6 @@ class RewardsController < ApplicationController
       @referring_url = LINQUET_MINI_URL
       @referring_url_encoded = URI.escape(LINQUET_MINI_URL)
     end
-
-    @tweet_query_string = "original_referer=" + @referring_url_encoded + "&text=" + URI.escape("Awesome! Never Lose Anything Again With Linquet Mini ") + @referring_url_encoded + " #iwantthis #ReTweet";
   end
 
   def referrals

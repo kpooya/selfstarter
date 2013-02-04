@@ -45,7 +45,7 @@ list-style: none outside;
     <img src="https://epoma.org/images/social-pop-up.png" border="0" usemap="#map1">
     <map id="map1" name="map1">
       <area shape="rect" target="_blank" coords="27,23,123,113" href="http://www.facebook.com/sharer/sharer.php?u=<%= @referring_url_encoded %>" alt="facebook" title="Share on Facebook">
-      <area shape="rect" target="_blank" coords="161,23,257,113" href="http://twitter.com/intent/tweet?<%= @tweet_query_string %>" alt="twitter" title="Follow on Twitter">
+      <area shape="rect" target="_blank" coords="161,23,257,113" href="http://twitter.com/intent/tweet?<%= get_tweet_query_string(@referring_url) %>" alt="twitter" title="Follow on Twitter">
       <area shape="rect" target="_blank" coords="295,22,391,115" href="https://plus.google.com/share?url=<%= @referring_url_encoded %>" alt="Google Plus" title="Share on Google Plus">
     </map>
   </div>
