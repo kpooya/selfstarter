@@ -9,6 +9,7 @@ class RewardsController < ApplicationController
   end
 
   def checkout
+
   end
 
   def select

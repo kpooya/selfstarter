@@ -78,7 +78,7 @@ table {
 #content body, #content input, #content textarea {
     font-size: 22px;
     font-family: "Helvetica Neue", "Helvetica", "Arial";
-    color: #6b6b6b;
+    color: #505050;
     text-shadow: 0 1px 0px #fff;
     -webkit-font-smoothing: antialiased
 }
