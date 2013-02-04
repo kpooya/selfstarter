@@ -45,6 +45,11 @@ namespace :live do
  	  # run "/bin/bash --login -c ~/bin/restart_ss_production"
  	  run "~/bin/restart_ss_production"
 	end
+
+	task :bundle_install, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
+	  run "cd ~/selfstarter; rvm info; rvm gemset use ss; rvm info;"
+	end
+
 	task :try_rails1, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com"] do
 	  run "cd ~/selfstarter; git pull"
  	  run "/bin/bash --login ~/bin/restart_ss_production"
