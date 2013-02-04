@@ -1,81 +1,116 @@
 <style>
-    .heading .title {
-        font-size: 24px;
-        margin: 0;
-        margin-bottom: 15px;
-    }
-    form .group {
-        background: #e8e8e8;
-        border: 1px solid #d5d6d5;
-        width: 640px;
-        padding-top: 20px;
-        padding-left: 0;
-        padding-right: 20px;
-        margin-bottom: 20px;
-    }
-    .shipping-address .input-item-text input, .input-item-select select {
-        margin-bottom: 10px;
-    }
-    section .input-item-select, section .input-item-text, section .input-item-checkbox {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .shipping-address .group {
-        padding-bottom: 15px;
-    }
-    .heading h2 {
-        font-family:Arial,sans-serif;
-        font-weight: bold;
-    }
-    .fl {
-        float: left;
-    }
-    .fr {
-        float: right;
-    }
-    .box {
-        width: 680px;
-        padding: 20px;
-        padding-right: 0;
-        margin-bottom: 20px;
-    }
-    .rounded {
-        border-radius: 6px;
-    }
-    .input-item-text input {
-        width: 276px;
-        max-width: 400px;
-        padding: 5px;
-        border: 1px solid #aeaeae;
-        font-size: 18px;
-    }
-    .input-item-checkbox{
-	    font-size: 18px;
-    }
-    .input-item-select option{
-	    font-size: 18px;
-    }
-    label {
-        cursor: pointer;
-        display: block;
-	    margin-bottom: 3px;
-    }
-    fieldset {
-        display: block;
-    }
-    .main_content {
-        width: 680px;
-        float: left;
-    }
-  .alert-error {
-      color: red;
-  }
+	.heading .title {
+		font-size: 24px;
+		margin: 0;
+		margin-bottom: 15px;
+	}
+
+	form .group {
+		background: #e8e8e8;
+		border: 1px solid #d5d6d5;
+		width: 500px;
+		padding-top: 20px;
+		padding-left: 0;
+		padding-right: 20px;
+		margin-bottom: 20px;
+	}
+
+	.shipping-address .input-item-text input, .input-item-select select {
+		margin-bottom: 10px;
+	}
+
+	section .input-item-select, section .input-item-text, section .input-item-checkbox {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.shipping-address .group {
+		padding-bottom: 15px;
+	}
+
+	.heading h2 {
+		font-family: Arial, sans-serif;
+		font-weight: bold;
+	}
+
+	.fl {
+		float: left;
+	}
+
+	.fr {
+		float: right;
+	}
+
+	.box {
+		width: 500px;
+		padding: 20px;
+		padding-right: 0;
+		margin-bottom: 20px;
+	}
+
+	.rounded {
+		border-radius: 6px;
+	}
+
+	.input-item-text input {
+		width: 276px;
+		max-width: 400px;
+		padding: 5px;
+		border: 1px solid #aeaeae;
+		font-size: 18px;
+	}
+
+	.input-item-checkbox {
+		font-size: 18px;
+	}
+
+	.input-item-select option {
+		font-size: 18px;
+	}
+
+	label {
+		cursor: pointer;
+		display: block;
+		margin-bottom: 3px;
+	}
+
+	fieldset {
+		display: block;
+	}
+
+	.main_content {
+		width: 380px;
+		float: left;
+	}
+
+	.alert-error {
+		color: red;
+	}
+
+	.sidebar {
+		float: right;
+		width: 300px;
+	}
 </style>
 
 <div class="gray_background">
   <div class="wrapper clearfix">
-    <div class="main_content">
-      <h3>Secure Checkout</h3>
+  <div class="sidebar">
+    <h5 style="font-weight: bold;">When will I be charged?</h5>
+    <p>
+      We won't charge your credit card until your Linquet Mini's are ready. Shipping included to the US and Canada.
+    </p>
+    <br>
+    <br>
+
+    <h5 style="font-weight: bold;">Is my credit card secure?</h5>
+    <p>
+      We don't store your credit card information. All the payments are securely done through <a href="https://stripe.com/help/security">STRIPE secure payments</a>, which has the most stringent level of PCI certification.
+    </p>
+  </div>
+
+  <div class="main_content">
+      <h3 style="padding-left: 20px;">Secure Checkout</h3>
     <form accept-charset="UTF-8" action="pledge" class="edit_pledge" id="new_pledge" method="post">
       <div style="margin:0;padding:0;display:inline">
         <input name="utf8" type="hidden" value="✓">
