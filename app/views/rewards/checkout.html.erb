@@ -95,17 +95,16 @@
 
 <div class="gray_background">
   <div class="wrapper clearfix">
-  <div class="sidebar">
-    <h5 style="font-weight: bold;">When will I be charged?</h5>
-    <p>
-      We won't charge your credit card until your Linquet Mini's are ready. Shipping included to the US and Canada.
-    </p>
-    <br>
-    <br>
-
+  <div class="sidebar" style="margin-top: 5px;">
     <h5 style="font-weight: bold;">Is my credit card secure?</h5>
     <p>
       We don't store your credit card information. All the payments are securely done through <a href="https://stripe.com/help/security">STRIPE secure payments</a>, which has the most stringent level of PCI certification.
+    </p>
+    <br>
+
+    <h5 style="font-weight: bold;">When will I be charged?</h5>
+    <p>
+      We won't charge your credit card until your Linquet Mini's are ready. Shipping included to the US and Canada.
     </p>
   </div>
 
@@ -145,7 +144,7 @@
       </section>
 
       <section class="shipping-address box rounded shadow">
-      <div class="heading clearfix">
+      <div class="heading clearfix" style="margin-bottom: 15px;">
         <h2 class="fl title bold">Shipping Information</h2><span class="fl instruction">&nbsp;&nbsp;(This is where we will ship your linquets.)</span>
       </div>
 
@@ -405,7 +404,7 @@
 
       <div class="input-item-text">
         <label for="shipping_address">Street Address</label>
-        <input class="round" id="shipping_address" name="shipping[address]" size="30" type="text"
+        <input class="rounded" id="shipping_address" name="shipping[address]" size="30" type="text"
                value="<%= if Rails.env.development? ; "1 Infinite Loop" ; end %>"
         >
       </div>
@@ -445,9 +444,9 @@
 
 
     <fieldset class="group">
-    <div class="input-item-text" style="font-weight: bold; margin-bottom: 20px;">
+    <div class="input-item-text" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">
       <p> Your contribution: <span id="money">$<%=@plan.price.to_i %></span> <span id="money_shipping" style="display: none;">+ $15 (International shipping)</span>
-      <p> You will be rewarded: <%=@plan.description%>
+      <p> You reward: <%=@plan.description%>
     </div>
 
     <div class="clearfix">
