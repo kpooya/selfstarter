@@ -1,0 +1,9 @@
+https://linquet.com/mini
+https://linquet.com/mini/select
+# Need user intput to access this url
+# https://linquet.com/mini/pledge
+https://linquet.com/mini/checkout
+https://linquet.com/mini/share
+https://linquet.com/mini/referrals
+https://linquet.com/mini/distributor
+https://linquet.com/mini/press
