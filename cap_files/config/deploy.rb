@@ -38,6 +38,10 @@ task :search_libs, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2
   run "ls -x1 /usr/lib | grep -i xml"
 end
 
+task :sleep_5_seconds do
+	sleep 5
+end
+
 namespace :live do
 	task :restart_rails, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
 	  # run "cd ~/selfstarter; git reset --hard HEAD^^; git checkout . ; git pull"
@@ -46,11 +50,24 @@ namespace :live do
 	end
 
 	task :git_pull, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
-	  run "cd ~/selfstarter; git checkout .; git pull"
+	  run "cd ~/selfstarter; git checkout .; git pull; git log -1 --name-status"
 	end
 
-	task :smoke, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
-	  run "curl https://linquet.com/mini; echo ; echo; curl https://linquet.com/mini/checkout"
+	task :git_back_30, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
+	  run "cd ~/selfstarter; git reset --hard HEAD~30; git checkout ."
+	end
+
+	task :smoke do
+	  # system("until curl https://linquet.com/mini/ > /dev/null ; do  echo "Sleep one second" ; sleep 1 ; done ;")
+	  # 8 is the number of links in links.txt
+	  system("siege --concurrent=3 --delay=0 --reps=8 --verbose -f cap_files/links.txt")
+	end
+
+	task :all do
+	  live.git_pull 
+	  live.restart_rails 
+	  sleep_5_seconds 
+	  live.smoke
 	end
 
 	task :bundle_install, :hosts => ["ec2-184-73-110-240.compute-1.amazonaws.com", "ec2-54-234-87-253.compute-1.amazonaws.com"] do
