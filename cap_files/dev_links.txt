@@ -1,0 +1,9 @@
+https://epoma.org/mini
+https://epoma.org/mini/select
+# Need user intput to access this url
+# https://epoma.org/mini/pledge
+https://epoma.org/mini/checkout
+https://epoma.org/mini/share
+https://epoma.org/mini/referrals
+https://epoma.org/mini/distributor
+https://epoma.org/mini/press
