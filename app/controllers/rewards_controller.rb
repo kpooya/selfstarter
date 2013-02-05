@@ -50,7 +50,7 @@ class RewardsController < ApplicationController
     # Then, if they confirm the payment, Amazon POSTs us their shipping details and phone number
     # From there, we save it, and voila, we got ourselves a preorder!
     @pipeline = AmazonFlexPay.multi_use_pipeline(@order.uuid, :transaction_amount => Settings.price, :global_amount_limit => Settings.charge_limit, :collect_shipping_address => "True", :payment_reason => Settings.payment_description)
-    redirect_to @pipeline.url("#{request.scheme}://#{request.host}/rewards/postfill")
+    redirect_to @pipeline.url("#{request.scheme}://#{request.host}/postfill")
   end
 
   def postfill
@@ -133,7 +133,7 @@ class RewardsController < ApplicationController
 
     session.clear
     session[:user] = user.id
-    redirect_to SubPath.getUrl("/rewards/share")
+    redirect_to SubPath.getUrl("/share")
   end
 
   def share
