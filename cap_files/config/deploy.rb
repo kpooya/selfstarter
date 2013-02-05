@@ -9,7 +9,8 @@ set :repository,  "set your repository location here"
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
+role :web, "ec2-184-73-110-240.compute-1.amazonaws.com"
+role :web, "ec2-54-234-87-253.compute-1.amazonaws.com"
 role :app, "your app-server here"                          # This may be the same as your `Web` server
 role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
 role :db,  "your slave db-server here"
@@ -61,6 +62,15 @@ namespace :live do
 	  # system("until curl https://linquet.com/mini/ > /dev/null ; do  echo "Sleep one second" ; sleep 1 ; done ;")
 	  # 8 is the number of links in links.txt
 	  system("siege --concurrent=3 --delay=0 --reps=8 --verbose -f cap_files/links.txt")
+	end
+
+	desc "tail production log files" 
+	task :tail_logs, :roles => :web do
+	  run "tail -f ~/selfstarter/log/production.log" do |channel, stream, data|
+	    puts  # for an extra line break before the host name
+	    puts "#{channel[:host]}: #{data}" 
+	    break if stream == :err    
+	  end
 	end
 
 	task :all do
